@@ -159,7 +159,8 @@ frontApp.controller('categoryController', ['$scope', '$http', '$location', 'orde
 			obj.description = result[i].description;
 			obj.sold = result[i].sold;
 			obj.sale_off = result[i].sale_off;
-			obj.sale_at = result[i].sale_at;
+			obj.salePrice = result[i].salePrice;
+			obj.create_at = result[i].create_at;
 			obj.count = i;
 			products.push(obj);
 		}
@@ -188,6 +189,7 @@ frontApp.controller('categoryController', ['$scope', '$http', '$location', 'orde
 			obj.description = result[i].description;
 			obj.sold = result[i].sold;
 			obj.sale_off = result[i].sale_off;
+			obj.salePrice = result[i].salePrice;
 			obj.count = i;
 			products.push(obj);
 		}
@@ -210,7 +212,8 @@ frontApp.controller('categoryController', ['$scope', '$http', '$location', 'orde
 			obj.description = result[i].description;
 			obj.sold = result[i].sold;
 			obj.sale_off = result[i].sale_off;
-			obj.sale_at = result[i].sale_at;
+			obj.create_at = result[i].create_at;
+			obj.salePrice = result[i].salePrice;
 			obj.count = i;
 			products.push(obj);
 		}
@@ -276,6 +279,7 @@ frontApp.controller('infoController', ['$scope', '$http', function($scope, $http
 	obj.gender = result.gender;
 	obj.address = result.address;
 	obj.mobile = result.mobile;
+	obj.dob = result.dob;
 	obj.dob = result.dob;
 	console.log(result);
 	});

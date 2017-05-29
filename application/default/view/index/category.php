@@ -31,7 +31,7 @@
                 </div>
             </ol>
             
-            <div ng-repeat-start="product in products" class="col-md-3 col-xs-6 wow fadeInUp p5 " data-wow-delay="<?php echo $delay ?>s" ng-cloak>
+            <div ng-repeat-start="product in products" class="col-md-3 col-xs-6 wow fadeInUp p5 " data-wow-delay="0.2s" ng-cloak>
                 <div class="col-md-12 thumbnail product">
                     <div class="view col-md-10 col-md-offset-1 text-center" ng-cloak>
                         <i class="fa fa-eye"> {{product.view}}</i>
@@ -40,7 +40,8 @@
                         <img src="<?=HTP::$resourceUrl . '/'?>{{product.img}}" class="img-responsive">
                         <div class="caption">
                             <p class="name" ng-cloak>{{product.name}}</p>
-                            <p class="price" ng-cloak>{{product.price}} VNĐ</p>
+                            <p class="price" ng-cloak>{{product.salePrice}} VNĐ</p>
+                            <p class="sale-price" ng-if="product.sale_off !== 0"> Giá gốc {{product.price}}</p>
                         </div>
                     </a>
                     <div class="action text-center v-align" data-id="{{product.id}}">
