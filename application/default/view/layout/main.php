@@ -91,6 +91,11 @@
                                         <span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-lock"></i></span>
                                         <input type="password" class="form-control" id="reg-input-pass" name="password" placeholder="Mật khẩu" aria-describedby="basic-addon1">
                                     </div>
+                                    <br>
+                                    <div class="input-group">
+                                        <span class="input-group-addon" id="captcha"><img id="img_captcha" src="<?=HTP::$resourceUrl?>/captcha.php"/></span>
+                                        <input type="text" class="form-control" id="login-input-captcha" name="captcha" placeholder="Mã xác nhận" aria-describedby="basic-addon1" ng-model="captcha">
+                                    </div>
                                     <div class="message reg-message-pass alert alert-warning hide"></div>
                                     <br>
                                     <div class="text-right">

@@ -7,7 +7,18 @@ class Default_Controller_Users extends Default_Controller_Base{
     
 
     public function getInfo($param) {
-    	$result = HTP_User::getInfo();
+    	$model = HTP_User::getInfo();
+    	$result = array('id'=> $model->id,
+            'name'=> $model->name,
+            'email'=> $model->email,
+            'address'=> $model->address,
+            'mobile'=> $model->mobile,
+            'gender'=> $model->gender,
+            'dob'=> $model->dob,
+            'province'=> $model->province,
+            'district'=> $model->district,
+            'ward'=> $model->ward,
+            'status'=>$model->status,);
     	echo json_encode($result , JSON_UNESCAPED_UNICODE);
     }
 
@@ -33,6 +44,18 @@ class Default_Controller_Users extends Default_Controller_Base{
                 echo json_encode($result , JSON_UNESCAPED_UNICODE);
             }
         }
+    }
+
+
+    public function getOrder()
+    {
+        if(HTP_Request::post('order_id'))
+        {
+
+
+        }
+        else
+            $this->redirect(HTP::$baseUrl);
     }
 
 }
