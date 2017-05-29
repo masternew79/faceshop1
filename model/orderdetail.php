@@ -5,7 +5,7 @@
  * Date: 23/05/2017
  * Time: 8:50 AM
  */
-class OrderDetails extends HTP_Model{
+class OrderDetail extends HTP_Model{
 
     public function __construct($scenario = null) {
         $this->scenario = $scenario;

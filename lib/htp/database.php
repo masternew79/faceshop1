@@ -145,26 +145,6 @@ class HTP_Database{
         $this->conn = null;
     }
      
-    public function select($column = '*'){
-        $this->sql = 'select ' . $column;
-        return $this;
-    }
-     
-    public function from($table){
-        $this->sql .= ' from ' . $table;
-        return $this;
-    }
-     
-    public function join($table, $on){
-        $this->sql .= ' join ' . $table . ' on ' . $on;  
-        return $this;
-    }
-     
-    public function where($condition){
-        $this->sql .= $condition != '' ? (' where ' . $condition) : '';
-        return $this;
-    }
-     
     public function searchCondition(){
         $condition = array(
             'condition' => '',
@@ -188,26 +168,10 @@ class HTP_Database{
         }
         return $condition;
     }
-     
-    public function groupBy($group){
-        $this->sql .= ' group by ' . $group;
-        return $this;
-    }
-     
-    public function having($having){
-        $this->sql .= ' having ' . $having;
-        return $this;
-    }
-     
-    public function orderBy($order){
-        $this->sql .= ' order by ' . $order;
-        return $this;
-    }
-     
-    public function limit($offset, $count){
-        $this->sql .= ' limit ' . $offset . ', ' . $count;
-        return $this;
-    }
+
+
+
+
      
     public function execute($param = null){
         try{
@@ -219,11 +183,11 @@ class HTP_Database{
             return null;
         }
     }
-     
+
     public function fetch($fetchMode = PDO::FETCH_OBJ){
         return $this->sth->fetch($fetchMode);
     }
-     
+
     public function fetchAll($fetchMode = PDO::FETCH_OBJ){
         return $this->sth->fetchAll($fetchMode);
     }
