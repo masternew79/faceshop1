@@ -12,10 +12,17 @@ class Default_Controller_Index extends Default_Controller_Base{
         $this->view->render('index');
     }
 
+    public function error($param)
+    {
+        $this->redirect(HTP::$baseUrl);
+//        echo $param['code'] .'<br>' . $param['message'];
+    }
+
     public function category($param) {
         if (isset($param[0])) {
             $cateId = $param[0];
         }
+        $this->view->delay = 0.2;
         $this->view->category = Category::model()->findAllBySql("SELECT * FROM category");
         $this->view->trademarks = Trademark::model()->findAllBySql("SELECT * FROM trademark WHERE cate_id = $cateId");
         $this->view->render('category');
@@ -82,9 +89,4 @@ class Default_Controller_Index extends Default_Controller_Base{
         HTP_Session::delete('ID');
         $this->redirect(HTP::$baseUrl);
     }
-
-
-
-
-
 }
