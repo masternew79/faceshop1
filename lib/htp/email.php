@@ -1,0 +1,99 @@
+<?php
+require HTP::$config['basePath'] . '/lib/phpmailer/class.smtp.php';
+require HTP::$config['basePath'] . '/lib/phpmailer/class.pop3.php';
+require HTP::$config['basePath'] . '/lib/phpmailer/class.phpmailer.php';
+class HTP_Email extends PHPMailer{
+    public $from;
+    public $toMails;
+    public $ccMails;
+    public $bccMails;
+    public function __construct(){
+        $this->isSMTP();
+        $this->SMTPDebug = Config::$php_mailer['SMTPDebug'];
+        $this->Host = Config::$php_mailer['Host'];
+        $this->Port = Config::$php_mailer['Port'];
+        $this->SMTPSecure = Config::$php_mailer['SMTPSecure'];
+        $this->SMTPAuth = Config::$php_mailer['SMTPAuth'];
+        $this->Username = Config::$php_mailer['Username'];
+        $this->Password = Config::$php_mailer['Password'];
+    }
+     
+    public function resetTo(){
+        $this->to = array();
+    }
+     
+    public function resetCC(){
+        $this->cc = array();
+    }
+     
+    public function resetBCC(){
+        $this->bcc = array();
+    }
+     
+    public function sendMail(){
+        if(is_array($this->from)){
+            $this->setFrom($this->from['email'], $this->from['name']);
+        }else{
+            $this->setFrom($this->from);
+        }
+         
+        if($this->toMails != null){
+            if(is_array($this->toMails)){
+                if(isset($this->toMails[0]['email'])){
+                    foreach($this->toMails as $item){
+                        if(is_array($item)){
+                            $this->addAddress($item['email'], $item['name']);
+                        }else{
+                            $this->addAddress($item);
+                        }
+                    }
+                }else{
+                    $this->addAddress($this->toMails['email'], $this->toMails['name']);
+                }
+            }else{
+                $this->addAddress($this->toMails);
+            }
+        }
+         
+        if($this->ccMails != null){
+            if(is_array($this->ccMails)){
+                if(isset($this->ccMails[0]['email'])){
+                    foreach($this->ccMails as $item){
+                        if(is_array($item)){
+                            $this->addCC($item['email'], $item['name']);
+                        }else{
+                            $this->addCC($item);
+                        }
+                    }
+                }else{
+                    $this->addCC($this->ccMails['email'], $this->ccMails['name']);
+                }
+            }else{
+                $this->addCC($this->ccMails);
+            }
+        }
+         
+        if($this->bccMails != null){
+            if(is_array($this->bccMails)){
+                if(isset($this->bccMails[0]['email'])){
+                    foreach($this->bccMails as $item){
+                        if(is_array($item)){
+                            $this->addBCC($item['email'], $item['name']);
+                        }else{
+                            $this->addBCC($item);
+                        }
+                    }
+                }else{
+                    $this->addBCC($this->bccMails['email'], $this->bccMails['name']);
+                }
+            }else{
+                $this->addBCC($this->bccMails);
+            }
+        }
+        if(!$this->send()){
+            return $this->ErrorInfo;
+        }else{
+            return true;
+        }
+    }
+}

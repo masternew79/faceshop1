@@ -1,0 +1,2 @@
+## Tên file = tên class (model)
+## Tên file viết thường
