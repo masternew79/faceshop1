@@ -11,7 +11,7 @@ class Default_Controller_Products extends Default_Controller_Base{
     	if (isset($param[0])) {
 	    	$product = Product::model()->find('id = :id', array(':id' => $param[0]));
             $salePrice = $product->price - ($product->price * $product->sale_off / 100);
-    		$result = array('id' => $product->id, 'name' => $product->name, 'price' => intval($product->price), 'img' => $product->image, 'salePrice' => $salePrice);
+    		$result = array('id' => intval($product->id), 'name' => $product->name, 'price' => intval($product->price), 'img' => $product->image, 'salePrice' => intval($salePrice));
     		echo json_encode($result , JSON_UNESCAPED_UNICODE);
     	}
         else
@@ -41,7 +41,7 @@ class Default_Controller_Products extends Default_Controller_Base{
             $result = array();
             foreach ($products as $product) {
                 $salePrice = $product->price - ($product->price * $product->sale_off / 100);
-                $result[] = array('id' => $product->id, 'name' => $product->name, 'price' => intval($product->price), 'img' => $product->image, 'description' => $product->description, 'view' => $product->view, 'sold' => $product->sold, 'sale_off' => $product->sale_off, 'creat_at' => $product->creat_at, 'salePrice' => $salePrice);
+                $result[] = array('id' => $product->id, 'name' => $product->name, 'price' => intval($product->price), 'img' => $product->image, 'description' => $product->description, 'view' => intval($product->view), 'sold' => intval($product->sold), 'sale_off' => intval($product->sale_off), 'creat_at' => $product->creat_at, 'salePrice' => intval($salePrice));
             }
             echo json_encode($result , JSON_UNESCAPED_UNICODE);
         }
