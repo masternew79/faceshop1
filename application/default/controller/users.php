@@ -32,7 +32,18 @@ class Default_Controller_Users extends Default_Controller_Base{
             if($user->capt == HTP_Session::get("security_code")){
                 if($user->login()){
                 	$model = $user->modelUser;
-                    $result = array('code' => 1, 'message' => 'Đăng nhập thành công', 'name' => $model->name, 'email' => $model->email, 'address' => $model->address, 'mobile' => $model->mobile, 'dob' => $model->dob, 'gender' => $model->gender, );
+                    $result = array(
+                        'code' => 1, 
+                        'message' => 'Đăng nhập thành công', 
+                        'name' => $model->name, 
+                        'email' => $model->email, 
+                        'address' => $model->address, 
+                        'mobile' => $model->mobile, 
+                        'dob' => $model->dob, 
+                        'gender' => $model->gender,
+                        'ward' => $model->ward,
+                        'district' => $model->district,
+                        'province' => $model->province );
                     echo json_encode($result , JSON_UNESCAPED_UNICODE);
                 }else{
                     $result = array('code' => 2, 'message' => $user->errorLogin);
