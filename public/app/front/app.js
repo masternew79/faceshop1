@@ -46,7 +46,7 @@ frontApp.controller('cartController', ['$scope',  '$localStorage', '$http',
         $http.post(baseUrl + '/users/login/' + $scope.email + '/' + $scope.password + '/' + $scope.captcha).success(function(result) {
 	        $scope.name = result.name;
 	        if (result.code == 1) {
-	        	
+	        	angular.element('.modal').modal('toggle');
 	        }
         });
 
@@ -281,6 +281,14 @@ frontApp.controller('infoController', ['$scope', '$http', function($scope, $http
 	});
 	$scope.user = obj;
 
+
+	$scope.range = function(min, max) {
+		var range = [];
+		for (var i = min; i <= max; i++) {
+			range.push(i);
+		}
+		return range;
+	};
 }]);
 
 
