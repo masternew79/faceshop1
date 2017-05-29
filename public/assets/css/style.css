@@ -1082,19 +1082,21 @@ a.detail {
 }
 .user .feature .form-group:not(.out) .form-control {
   font-size: 20px;
-  border: 0;
-  background-image: linear-gradient(#9c27b0, #9c27b0), linear-gradient(#d2d2d2, #d2d2d2);
-  background-size: 0 2px, 100% 1px;
-  background-repeat: no-repeat;
-  background-position: center bottom, center calc(99%);
   background-color: transparent;
-  transition: background 0s ease-out;
   float: none;
+  border: none;
   box-shadow: none;
-  border-radius: 0;
   font-weight: 400;
   color: white;
   padding: 10px;
+}
+.user .feature .form-group:not(.out) .form-control:focus,
+.user .feature .form-group:not(.out) .form-control:focus {
+  outline: none;
+}
+.user .feature .form-group:not(.out) .form-control[disabled],
+.user .feature .form-group:not(.out) fieldset[disabled] .form-control {
+  cursor: -webkit-grabbing !important;
 }
 .user .feature .form-group:not(.out) .control-label {
   text-transform: uppercase;

@@ -23,9 +23,9 @@ class Default_Controller_Address extends Default_Controller_Base{
 
     public function getDistrict()
     {
-        if(HTP_Request::post('province_id'))
+        if(HTP_Request::get('province_id'))
         {
-            $province_id = HTP_Request::post('province_id');
+            $province_id = HTP_Request::get('province_id');
            // $province_id = '01';
             $districts = District::model()->findAll('provinceid = :province_id', array(':province_id' => $province_id));
             $result = array();
@@ -42,9 +42,9 @@ class Default_Controller_Address extends Default_Controller_Base{
 
     public function getWard()
     {
-        if(HTP_Request::post('district_id'))
+        if(HTP_Request::get('district_id'))
         {
-            $district_id = HTP_Request::post('district_id');
+            $district_id = HTP_Request::get('district_id');
             //$district_id = '009';
             $wards = Ward::model()->findAll('districtid = :district_id', array(':district_id' => $district_id));
             $result = array();
