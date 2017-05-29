@@ -15,6 +15,7 @@ class Default_Controller_Address extends Default_Controller_Base{
                 $result [] = array('id' => $province->provinceid, 'name' => $province->name);
             }
             echo json_encode($result , JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+            return;
         }
         else
             $this->redirect(HTP::$baseUrl);
@@ -33,6 +34,7 @@ class Default_Controller_Address extends Default_Controller_Base{
                 $result [] = array('id' => $district->districtid, 'name' => $district->name);
             }
             echo json_encode($result , JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+            return;
         }
         else
             $this->redirect(HTP::$baseUrl);
@@ -51,6 +53,7 @@ class Default_Controller_Address extends Default_Controller_Base{
                 $result [] = array('id' => $ward->wardid, 'name' => $ward->name);
             }
             echo json_encode($result , JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+            return;
         }
         else
             $this->redirect(HTP::$baseUrl);

@@ -281,9 +281,37 @@ frontApp.controller('infoController', ['$scope', '$http', function($scope, $http
 	obj.mobile = result.mobile;
 	obj.dob = result.dob;
 	obj.dob = result.dob;
+	obj.province = result.province;
 	console.log(result);
 	});
 	$scope.user = obj;
+
+	$scope.userProvince = $scope.user.province;
+
+	$http.get(baseUrl + '/address/getProvince', {params: { menu: 1}}).success(function(result) {
+		var provinces = [];
+		for (var i = 0; i < result.length; i++) {
+			var obj = {};
+			obj.id = result[i].id;
+			obj.name = result[i].name;
+			provinces.push(obj);
+		}
+		$scope.provinces = provinces;
+	});
+
+	$http.get(baseUrl + '/address/getDistrict', {params: { province_id : $scope.user.province}}).success(function(result) {
+		// var districts = [];
+		// for (var i = 0; i < result.length; i++) {
+		// 	var obj = {};
+		// 	obj.id = result[i].id;
+		// 	obj.name = result[i].name;
+		// 	districts.push(obj);
+		// }
+		// $scope.districts = districts;
+		console.log(result);
+	});
+
+
 
 
 	$scope.range = function(min, max) {
