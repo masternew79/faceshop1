@@ -32,8 +32,8 @@
             'Debugoutput' => 'html',
             'SMTPSecure' => 'ssl',
             'SMTPAuth' => true,
-            'Username' => 'mousewip@gmail.com',
-            'Password' => 'htpvtkn4878856',
+            'Username' => 'mousewip2@gmail.com',
+            'Password' => 'faceshopnhom01@@!!',
         ),
          
     );

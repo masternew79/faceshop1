@@ -159,14 +159,14 @@ echo 'exists';
     {
         $mail = new HTP_Email(); // create a new object
         $mail->IsSMTP(); // enable SMTP
-        $mail->SMTPDebug = 1; // debugging: 1 = errors and messages, 2 = messages only
+        $mail->SMTPDebug = 0; // debugging: 1 = errors and messages, 2 = messages only
         $mail->SMTPAuth = true; // authentication enabled
         $mail->SMTPSecure = 'ssl'; // secure transfer enabled REQUIRED for Gmail
         $mail->Host = "smtp.gmail.com";
         $mail->Port = 465; // or 587
         $mail->IsHTML(true);
-        $mail->Username = "mousewip@gmail.com";
-        $mail->Password = "htpvtkn4878856";
+        $mail->Username = "mousewip2@gmail.com";
+        $mail->Password = "faceshopnhom01@@!!";
 
         $body = '<h1>FaceShop - Reset pasword</h1><br>';
         $body .= '<p>Quý khách đã cầu reset mật khẩu, hệ thống đã tự động đổi mật khẩu mới cho quý khách</p>';
