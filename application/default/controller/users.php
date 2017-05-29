@@ -134,4 +134,53 @@ class Default_Controller_Users extends Default_Controller_Base{
             $this->redirect(HTP::$baseUrl);
     }
 
+
+    public function resetPassword()
+    {
+        if(HTP_Request::post('email'))
+        {
+            $email = HTP_Request::post('email');
+            if(Helper::checkMailIsExists($email))
+            {
+echo 'exists';
+            }
+            else
+            {
+                echo json_encode(array('code'=>1, 'message'=>'Email không tồn tại, vui lòng nhập email đúng!'), JSON_UNESCAPED_UNICODE);
+            }
+
+        }
+        else
+            $this->redirect(HTP::$baseUrl);
+
+    }
+
+    public function a()
+    {
+        $mail = new HTP_Email(); // create a new object
+        $mail->IsSMTP(); // enable SMTP
+        $mail->SMTPDebug = 1; // debugging: 1 = errors and messages, 2 = messages only
+        $mail->SMTPAuth = true; // authentication enabled
+        $mail->SMTPSecure = 'ssl'; // secure transfer enabled REQUIRED for Gmail
+        $mail->Host = "smtp.gmail.com";
+        $mail->Port = 465; // or 587
+        $mail->IsHTML(true);
+        $mail->Username = "mousewip@gmail.com";
+        $mail->Password = "htpvtkn4878856";
+
+        $body = '<h1>FaceShop - Reset pasword</h1><br>';
+        $body .= '<p>Quý khách đã cầu reset mật khẩu, hệ thống đã tự động đổi mật khẩu mới cho quý khách</p>';
+        $body .= '<p>Vui lòng sử dụng mật khẩu:  <b>123456</b>  để đăng nhập hệ thống</p>';
+        $mail->SetFrom("thanhphong.vtkn@gmail.com");
+        $mail->Subject = "Test";
+        $mail->Body = $body;
+        $mail->AddAddress("thanhphong.vtkn@gmail.com");
+
+        if(!$mail->Send()) {
+            echo "Mailer Error: " . $mail->ErrorInfo;
+        } else {
+            echo "Message has been sent";
+        }
+    }
+
 }

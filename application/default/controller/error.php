@@ -1,7 +1,8 @@
 <?php
 class Default_Controller_Error extends Default_Controller_Base{
     public function index(){
-        $this->view->render('index');
+
+       Helper::sendmail('thanhphong.vtkn@gmail.com', '12345');
     }
 
     public function nodatabase(){

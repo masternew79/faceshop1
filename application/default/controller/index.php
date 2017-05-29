@@ -12,12 +12,6 @@ class Default_Controller_Index extends Default_Controller_Base{
         $this->view->render('index');
     }
 
-    public function error($param)
-    {
-        $this->redirect(HTP::$baseUrl);
-//        echo $param['code'] .'<br>' . $param['message'];
-    }
-
     public function category($param) {
         if (isset($param[0])) {
             $cateId = $param[0];
