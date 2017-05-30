@@ -2,19 +2,11 @@ var frontApp = angular.module('frontApp', ['ngStorage', 'ngRoute']);
 
 
 
-frontApp.controller('cartController', ['$scope',  '$localStorage', '$http', '$sessionStorage', '$window', '$sessionStorage', function($scope,  $localStorage, $http, $window ){
-    $scope.id = $localStorage.id || 0;
+frontApp.controller('cartController', ['$scope',  '$localStorage', '$http', '$sessionStorage', '$window', function($scope,  $localStorage, $http, $sessionStorage, $window ){
+
 	$scope.cart = $localStorage.cart || [];
 	$scope.name = $localStorage.name || '';
-    $scope.email = $localStorage.email || '';
-    $scope.mobile = $localStorage.mobile || '';
-    $scope.dob = $localStorage.dob || '';
-    $scope.address = $localStorage.address || '';
-    $scope.ward = $localStorage.ward || '';
-    $scope.district = $localStorage.district || '';
-    $scope.province = $localStorage.province || '';
-    $scope.gender = $localStorage.gender || '';
-
+    
 	$scope.checkExist = function(id) {
 		if ($scope.cart.length !== 0) {
 			for (var i = 0; i < $scope.cart.length; i++) {
@@ -49,7 +41,6 @@ frontApp.controller('cartController', ['$scope',  '$localStorage', '$http', '$se
 	};
 
 	$scope.login = function() {
-        console.log($scope.email + $scope.password + $scope.captcha);
         $http.post(baseUrl + '/users/login/' + $scope.email + '/' + $scope.password + '/' + $scope.captcha).success(function(result) {
 	        $scope.id = result.id;
 	        $scope.name = result.name;
@@ -61,24 +52,22 @@ frontApp.controller('cartController', ['$scope',  '$localStorage', '$http', '$se
 	        $scope.district = result.district;
 	        $scope.province = result.province;
 	        $scope.gender = result.gender;
-	        console.log(result);
 	        if (result.code == 1) {
 	        	angular.element('.modal').modal('toggle');
 	        }
 	        console.log(result);
         });
-
     };
+
+    console.log($scope.name);
 
     $scope.logout = function() {
-    	$http.post(baseUrl + '/logout').success(function(result) {
-    		$window.location.href = baseUrl;
-	        if (result) {
-	        	$scope.name = '';
-	        }
-        });
+    	$localStorage.$reset();
+    	$scope.name = '';
     };
-    
+    	console.log($scope.name);
+    	console.log($localStorage.name);
+
 	$scope.count = $scope.cart.forEach(function(product) {
 		var i = 0;
 		i++;
@@ -125,35 +114,33 @@ frontApp.controller('cartController', ['$scope',  '$localStorage', '$http', '$se
 		$scope.total = total;
 	}, true);
 
-
 	$scope.$watch(function() {
 		$localStorage.id = $scope.id;
 		$localStorage.name = $scope.name;
-        $localStorage.email = $scope.email;
-        $localStorage.mobile = $scope.mobile;
-        $localStorage.dob = $scope.dob;
-        $localStorage.address = $scope.address;
-        $localStorage.ward = $scope.ward;
-        $localStorage.district = $scope.district;
-        $localStorage.province = $scope.province;
-        $localStorage.gender = $scope.gender;
+        // $localStorage.email = $scope.email;
+        // $localStorage.mobile = $scope.mobile;
+        // $localStorage.dob = $scope.dob;
+        // $localStorage.address = $scope.address;
+        // $localStorage.ward = $scope.ward;
+        // $localStorage.district = $scope.district;
+        // $localStorage.province = $scope.province;
+        // $localStorage.gender = $scope.gender;
 	});
 
 	$scope.$watch(function() {
     return angular.toJson($localStorage);
 	}, function() {
-	    $scope.id = $localStorage.name;
+	    $scope.id = $localStorage.id;
 	    $scope.name = $localStorage.name;
-        $scope.email = $localStorage.email;
-        $scope.mobile = $localStorage.mobile;
-        $scope.dob = $localStorage.dob;
-      	$scope.address = $localStorage.address;
-        $scope.ward = $localStorage.ward;
-        $scope.district = $localStorage.district;
-        $scope.province = $localStorage.province;
-        $scope.gender = $localStorage.gender;
+       //  $scope.email = $localStorage.email;
+       //  $scope.mobile = $localStorage.mobile;
+       //  $scope.dob = $localStorage.dob;
+      	// $scope.address = $localStorage.address;
+       //  $scope.ward = $localStorage.ward;
+       //  $scope.district = $localStorage.district;
+       //  $scope.province = $localStorage.province;
+       //  $scope.gender = $localStorage.gender;
 	});
-
 }]);
 
 frontApp.controller('categoryController', ['$scope', '$http', '$location', 'orderByFilter', function($scope, $http, $location, orderBy){
@@ -162,11 +149,16 @@ frontApp.controller('categoryController', ['$scope', '$http', '$location', 'orde
 	var countSplited = splitedUrl.length;
 	var type = splitedUrl[countSplited - 2];
 	var id = splitedUrl[countSplited - 1];
+
 	$scope.propertyName = 'creat_at';
 	$scope.products = [];
 	$scope.currentPage = 1;
 	$scope.reverse = true;
 	let products = [];
+
+	console.log($scope.name);
+
+
 	$http.post(baseUrl + '/products/getPage/' + id + '/' + $scope.propertyName + '/DESC').success(function(result) {
 		for (var i = 0; i < result.length; i++) {
 			var obj = {};
@@ -183,7 +175,6 @@ frontApp.controller('categoryController', ['$scope', '$http', '$location', 'orde
 			obj.count = i;
 			products.push(obj);
 		}
-		console.log(products);
 		});
 	$scope.products = products;
 
@@ -273,20 +264,7 @@ frontApp.controller('categoryController', ['$scope', '$http', '$location', 'orde
 			}
 		});
 	});
-}]);
 
-frontApp.config(function($routeProvider) {
-	$routeProvider.when('/', {
-		templateUrl: resourceUrl + '/template/default/user/info.php',
-		controller: 'infoController'
-	})
-	.when('/bill' , {
-		templateUrl: resourceUrl + '/template/default/user/bill.php',
-		controller: 'billController'
-	});
-});
-
-frontApp.controller('infoController', ['$scope', '$http' , '$localStorage', function($scope, $http, $localStorage){
 	$scope.updateInfo = false;
 	$scope.updatePass = false;
 
@@ -297,171 +275,190 @@ frontApp.controller('infoController', ['$scope', '$http' , '$localStorage', func
 	$scope.changePass = function () {
 		$scope.updatePass = !$scope.updatePass;
 	};
-
-	$scope.name = $localStorage.name || '';
-    $scope.email = $localStorage.email || '';
-    $scope.mobile = $localStorage.mobile || '';
-    $scope.dob = $localStorage.dob || '';
-    $scope.address = $localStorage.address || '';
-    $scope.ward_id = $localStorage.ward_id || '';
-    $scope.district_id = $localStorage.district_id || '';
-    $scope.province_id = $localStorage.province_id || '';
-    $scope.gender = $localStorage.gender || '';
-    $scope.defaultProvince = $localStorage.defaultProvince || {};
-    $scope.defaultDistrict = $localStorage.defaultDistrict || {};
-    $scope.defaultWard = $localStorage.defaultWard || {};
-    $scope.provinces = $localStorage.provinces || [];
-    $scope.districts = $localStorage.districts || [];
-    $scope.wards = $localStorage.wards || [];
-
-	$http.post(baseUrl + '/users/getInfo').success(function(result) {
-		$scope.name = result.name;
-        $scope.email = result.email;
-        $scope.mobile = result.mobile;
-        $scope.dob = result.dob;
-        $scope.address = result.address;
-        $scope.ward_id = result.ward;
-        $scope.district_id = result.district;
-        $scope.province_id = result.province;
-        $scope.gender = result.gender;
-	});
-
-	var DOB = $scope.dob.split('-');
-
-	$scope.Day = DOB[2];
-	$scope.Month = DOB[1];
-	$scope.Year = DOB[0];
-
-	$http.get(baseUrl + '/address/getProvince', {params: { menu: 1}}).success(function(result) {
-		var provinces = [];
-		for (var i = 0; i < result.length; i++) {
-			var obj = {};
-			obj.id = result[i].id;
-			obj.name = result[i].name;
-			provinces.push(obj);
-			if (result[i].id == $scope.province_id) {
-				$scope.defaultProvince = {'id': result[i].id, 'name': result[i].name};
-			}
-		}
-		$scope.provinces = provinces;
-		console.log($scope.defaultProvince);
-	});
-
-	$scope.changeProvince = function(item) {
-		$http.get(baseUrl + '/address/getDistrict', {params: { province_id : item}}).success(function(result) {
-		var districts = [];
-		for (var i = 0; i < result.length; i++) {
-			var obj = {};
-			obj.id = result[i].id;
-			obj.name = result[i].name;
-			districts.push(obj);
-			if (i == 0) {
-				$scope.defaultDistrict = {'id': result[i].id, 'name': result[i].name};
-			}
-		}
-		$scope.districts = districts;
-	});
-	};
-
-	$http.get(baseUrl + '/address/getDistrict', {params: { province_id : $scope.province_id}}).success(function(result) {
-		var districts = [];
-		for (var i = 0; i < result.length; i++) {
-			var obj = {};
-			obj.id = result[i].id;
-			obj.name = result[i].name;
-			districts.push(obj);
-			if (result[i].id == $scope.district_id) {
-				$scope.defaultDistrict = {'id': result[i].id, 'name': result[i].name};
-			}
-		}
-		$scope.districts = districts;
-	});
-
-	$scope.changeDistrict = function(item) {
-		$http.get(baseUrl + '/address/getWard', {params: { district_id : item}}).success(function(result) {
-		var wards = [];
-		for (var i = 0; i < result.length; i++) {
-			var obj = {};
-			obj.id = result[i].id;
-			obj.name = result[i].name;
-			wards.push(obj);
-			if (i === 0) {
-				$scope.defaultWard = {'id': result[i].id, 'name': result[i].name};
-			}
-		}
-		$scope.wards = wards;
-	});
-	};
-
-	$http.get(baseUrl + '/address/getWard', {params: { district_id : $scope.district_id	}}).success(function(result) {
-		var wards = [];
-		for (var i = 0; i < result.length; i++) {
-			var obj = {};
-			obj.id = result[i].id;
-			obj.name = result[i].name;
-			wards.push(obj);
-			if (result[i].id == $scope.ward_id) {
-				$scope.defaultWard = {'id': result[i].id, name: result[i].name};
-			}
-		}
-		$scope.wards = wards;
-	});
-
-	$scope.range = function(min, max) {
-		var range = [];
-		for (var i = min; i <= max; i++) {
-			range.push(i);
-		}
-		return range;
-	};
-
-
-	$scope.$watch(function() {
-		$localStorage.name = $scope.name;
-        $localStorage.email = $scope.email;
-        $localStorage.mobile = $scope.mobile;
-        $localStorage.dob = $scope.dob;
-        $localStorage.address = $scope.address;
-        $localStorage.ward_id = $scope.ward_id;
-        $localStorage.district_id = $scope.district_id;
-        $localStorage.province_id = $scope.province_id;
-        $localStorage.gender = $scope.gender;
-        $localStorage.defaultProvince = $scope.defaultProvince;
-        $localStorage.defaultDistrict = $scope.defaultDistrict;
-        $localStorage.defaultWard = $scope.defaultWard;
-        $localStorage.districts = $scope.districts;
-        $localStorage.provinces = $scope.provinces;
-        $localStorage.wards = $scope.wards;
-	});
-
-	$scope.$watch(function() {
-    return angular.toJson($localStorage);
-	}, function() {
-	    $scope.name = $localStorage.name;
-        $scope.email = $localStorage.email;
-        $scope.mobile = $localStorage.mobile;
-        $scope.dob = $localStorage.dob;
-      	$scope.address = $localStorage.address;
-        $scope.ward_id = $localStorage.ward_id;
-        $scope.district_id = $localStorage.district_id;
-        $scope.province_id = $localStorage.province_id;
-        $scope.gender = $localStorage.gender;
-        $scope.defaultProvince = $localStorage.defaultProvince;
-        $scope.defaultDistrict = $localStorage.defaultDistrict;
-        $scope.defaultWard = $localStorage.defaultWard;
-        $scope.provinces = $localStorage.provinces;
-        $scope.districts = $localStorage.districts;
-        $scope.wards = $localStorage.wards;
-	});
 }]);
+
+// frontApp.config(function($routeProvider) {
+// 	$routeProvider.when('/', {
+// 		templateUrl: resourceUrl + '/template/default/user/info.php',
+// 		controller: 'infoController'
+// 	})
+// 	.when('/bill' , {
+// 		templateUrl: resourceUrl + '/template/default/user/bill.php',
+// 		controller: 'billController'
+// 	});
+// });
+
+// frontApp.controller('infoController', ['$scope', '$http' , '$localStorage', function($scope, $http, $localStorage){
+	
+
+// 	$scope.name = $localStorage.name || '';
+//     $scope.email = $localStorage.email || '';
+//     $scope.mobile = $localStorage.mobile || '';
+//     $scope.dob = $localStorage.dob || '';
+//     $scope.address = $localStorage.address || '';
+//     $scope.ward_id = $localStorage.ward_id || '';
+//     $scope.district_id = $localStorage.district_id || '';
+//     $scope.province_id = $localStorage.province_id || '';
+//     $scope.gender = $localStorage.gender || '';
+//     $scope.defaultProvince = $localStorage.defaultProvince || {};
+//     $scope.defaultDistrict = $localStorage.defaultDistrict || {};
+//     $scope.defaultWard = $localStorage.defaultWard || {};
+//     $scope.provinces = $localStorage.provinces || [];
+//     $scope.districts = $localStorage.districts || [];
+//     $scope.wards = $localStorage.wards || [];
+
+// 	$http.post(baseUrl + '/users/getInfo').success(function(result) {
+// 		$scope.name = result.name;
+//         $scope.email = result.email;
+//         $scope.mobile = result.mobile;
+//         $scope.dob = result.dob;
+//         $scope.address = result.address;
+//         $scope.ward_id = result.ward;
+//         $scope.district_id = result.district;
+//         $scope.province_id = result.province;
+//         $scope.gender = result.gender;
+// 	});
+
+// 	var DOB = $scope.dob.split('-');
+
+// 	$scope.Day = DOB[2];
+// 	$scope.Month = DOB[1];
+// 	$scope.Year = DOB[0];
+
+// 	$http.get(baseUrl + '/address/getProvince', {params: { menu: 1}}).success(function(result) {
+// 		var provinces = [];
+// 		for (var i = 0; i < result.length; i++) {
+// 			var obj = {};
+// 			obj.id = result[i].id;
+// 			obj.name = result[i].name;
+// 			provinces.push(obj);
+// 			if (result[i].id == $scope.province_id) {
+// 				$scope.defaultProvince = {'id': result[i].id, 'name': result[i].name};
+// 			}
+// 		}
+// 		$scope.provinces = provinces;
+// 		console.log($scope.defaultProvince);
+// 	});
+
+// 	$scope.changeProvince = function(item) {
+// 		$http.get(baseUrl + '/address/getDistrict', {params: { province_id : item}}).success(function(result) {
+// 		var districts = [];
+// 		for (var i = 0; i < result.length; i++) {
+// 			var obj = {};
+// 			obj.id = result[i].id;
+// 			obj.name = result[i].name;
+// 			districts.push(obj);
+// 			if (i == 0) {
+// 				$scope.defaultDistrict = {'id': result[i].id, 'name': result[i].name};
+// 			}
+// 		}
+// 		$scope.districts = districts;
+// 	});
+// 	};
+
+// 	$http.get(baseUrl + '/address/getDistrict', {params: { province_id : $scope.province_id}}).success(function(result) {
+// 		var districts = [];
+// 		for (var i = 0; i < result.length; i++) {
+// 			var obj = {};
+// 			obj.id = result[i].id;
+// 			obj.name = result[i].name;
+// 			districts.push(obj);
+// 			if (result[i].id == $scope.district_id) {
+// 				$scope.defaultDistrict = {'id': result[i].id, 'name': result[i].name};
+// 			}
+// 		}
+// 		$scope.districts = districts;
+// 	});
+
+// 	$scope.changeDistrict = function(item) {
+// 		$http.get(baseUrl + '/address/getWard', {params: { district_id : item}}).success(function(result) {
+// 		var wards = [];
+// 		for (var i = 0; i < result.length; i++) {
+// 			var obj = {};
+// 			obj.id = result[i].id;
+// 			obj.name = result[i].name;
+// 			wards.push(obj);
+// 			if (i === 0) {
+// 				$scope.defaultWard = {'id': result[i].id, 'name': result[i].name};
+// 			}
+// 		}
+// 		$scope.wards = wards;
+// 	});
+// 	};
+
+// 	$http.get(baseUrl + '/address/getWard', {params: { district_id : $scope.district_id	}}).success(function(result) {
+// 		var wards = [];
+// 		for (var i = 0; i < result.length; i++) {
+// 			var obj = {};
+// 			obj.id = result[i].id;
+// 			obj.name = result[i].name;
+// 			wards.push(obj);
+// 			if (result[i].id == $scope.ward_id) {
+// 				$scope.defaultWard = {'id': result[i].id, name: result[i].name};
+// 			}
+// 		}
+// 		$scope.wards = wards;
+// 	});
+
+// 	$scope.range = function(min, max) {
+// 		var range = [];
+// 		for (var i = min; i <= max; i++) {
+// 			range.push(i);
+// 		}
+// 		return range;
+// 	};
+
+
+// 	$scope.$watch(function() {
+// 		$localStorage.name = $scope.name;
+//         $localStorage.email = $scope.email;
+//         $localStorage.mobile = $scope.mobile;
+//         $localStorage.dob = $scope.dob;
+//         $localStorage.address = $scope.address;
+//         $localStorage.ward_id = $scope.ward_id;
+//         $localStorage.district_id = $scope.district_id;
+//         $localStorage.province_id = $scope.province_id;
+//         $localStorage.gender = $scope.gender;
+//         $localStorage.defaultProvince = $scope.defaultProvince;
+//         $localStorage.defaultDistrict = $scope.defaultDistrict;
+//         $localStorage.defaultWard = $scope.defaultWard;
+//         $localStorage.districts = $scope.districts;
+//         $localStorage.provinces = $scope.provinces;
+//         $localStorage.wards = $scope.wards;
+// 	});
+
+// 	$scope.$watch(function() {
+//     return angular.toJson($localStorage);
+// 	}, function() {
+// 	    $scope.name = $localStorage.name;
+//         $scope.email = $localStorage.email;
+//         $scope.mobile = $localStorage.mobile;
+//         $scope.dob = $localStorage.dob;
+//       	$scope.address = $localStorage.address;
+//         $scope.ward_id = $localStorage.ward_id;
+//         $scope.district_id = $localStorage.district_id;
+//         $scope.province_id = $localStorage.province_id;
+//         $scope.gender = $localStorage.gender;
+//         $scope.defaultProvince = $localStorage.defaultProvince;
+//         $scope.defaultDistrict = $localStorage.defaultDistrict;
+//         $scope.defaultWard = $localStorage.defaultWard;
+//         $scope.provinces = $localStorage.provinces;
+//         $scope.districts = $localStorage.districts;
+//         $scope.wards = $localStorage.wards;
+// 	});
+// }]);
 
 
 frontApp.controller('billController', ['$scope', '$localStorage', '$http',function($scope, $localStorage, $http){
 
-	$http.get(baseUrl + '/users/getOrder', {params: {user_id: loginID}}).success(function(result) {
+	$http.get(baseUrl + '/order/getOrder', {params: {user_id: loginID}}).success(function(result) {
 		$scope.bills = result;
 		console.log(result);
 	});
+	
+	$scope.cancelBill = function(id) {
+		console.log(id);
+	};
 }]);
 
 

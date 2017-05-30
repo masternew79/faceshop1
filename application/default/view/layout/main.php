@@ -114,6 +114,47 @@
 </div>
 <!-- /.modal -->
 
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand navbar-link" href="<?php echo HTP::$baseUrl; ?>"><img class="img-responsive" src="<?=HTP::$resourceUrl?>/assets/img/logo.png" width="160" id="logo"></a>
+            <button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+        </div>
+        <div class="collapse navbar-collapse" id="navcol-1">
+            <ul class="nav navbar-nav">
+                <?php 
+                    $category = $this->category; 
+                    foreach ($category as $category) :
+                ?>
+                <li role="presentation"><a href="<?php echo HTP::$baseUrl; ?>/category/<?php echo $category->id ?>"><?php echo ucfirst($category->name) ?></a></li>
+                <?php endforeach; ?>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown nav-logout" ng-cloak ng-if="name !== ''">
+                    <a class="dropdown-toggle" data-toggle="dropdown">{{name}} <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="<?php echo HTP::$baseUrl . '/userInfo/' ?>">Thông tin cá nhân</a></li>
+                        <li><a href="<?php echo HTP::$baseUrl . '/userBill/' ?>">Danh sách hóa đơn</a></li>
+                        <li><a href="<?php echo HTP::$baseUrl .'/logout'; ?>" class="navbar-btn btn-logout" ng-click="logout()" >Đăng xuất</a></li>
+                    </ul>
+                </li>
+                <li><a data-toggle="modal" data-target="#myModal" class="navbar-btn nav-login" ng-if="name == ''">Đăng nhập</a></li>
+                <li>
+                    <div class="cart v-align" ng-cloak>
+                        <i class="glyphicon glyphicon-shopping-cart"></i>  <span class="badge">{{filtered.length}}</span>
+                    </div>
+                </li>
+            </ul>
+            <form class="navbar-form" role="search">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Tìm kiếm" size="40">
+                </div>
+                <button type="submit" class="btn btn-danger"><b class="glyphicon glyphicon-search"></b></button>
+            </form>
+        </div>
+    </div>
+</nav>
+
 <!-- cart list -->
 <div class="cart-list hidden animated">
     <div>
@@ -152,45 +193,6 @@
     
 </div>
 <!-- .add success -->
-<nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand navbar-link" href="<?php echo HTP::$baseUrl; ?>"><img class="img-responsive" src="<?=HTP::$resourceUrl?>/assets/img/logo.png" width="160" id="logo"></a>
-            <button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
-        </div>
-        <div class="collapse navbar-collapse" id="navcol-1">
-            <ul class="nav navbar-nav">
-                <?php 
-                    $category = $this->category; 
-                    foreach ($category as $category) :
-                ?>
-                <li role="presentation"><a href="<?php echo HTP::$baseUrl; ?>/category/<?php echo $category->id ?>"><?php echo ucfirst($category->name) ?></a></li>
-                <?php endforeach; ?>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown nav-logout" ng-if="name !== ''">
-                    <a class="dropdown-toggle" data-toggle="dropdown">{{name}} <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="<?php echo HTP::$baseUrl . '/user#/' ?>">Thông tin</a></li>
-                        <li><a class="navbar-btn btn-logout" ng-click="logout()" ng-if="name != ''">Đăng xuất</a></li>
-                    </ul>
-                </li>
-                <li><a data-toggle="modal" data-target="#myModal" class="navbar-btn nav-login" ng-if="name == ''">Đăng nhập</a></li>
-                <li>
-                    <div class="cart v-align" ng-cloak>
-                        <i class="glyphicon glyphicon-shopping-cart"></i>  <span class="badge">{{filtered.length}}</span>
-                    </div>
-                </li>
-            </ul>
-            <form class="navbar-form" role="search">
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Tìm kiếm" size="40">
-                </div>
-                <button type="submit" class="btn btn-danger"><b class="glyphicon glyphicon-search"></b></button>
-            </form>
-        </div>
-    </div>
-</nav>
 
 <?=$this->placeholder();?>
 
@@ -237,6 +239,7 @@
     <script src="<?=HTP::$resourceUrl?>/assets/js/script.js"></script>
     <script src="<?=HTP::$resourceUrl?>/assets/js/data-tranfer.js"></script>
     <script src="<?=HTP::$resourceUrl?>/assets/js/validate.js"></script>
+    <script src="<?=HTP::$resourceUrl?>/assets/js/user.js"></script>
     <!-- angular -->
     <!-- <script src="<?=HTP::$resourceUrl?>/assets/js/angular/angular.min.js" type="text/javascript"></script> -->
     <script src="https://code.angularjs.org/1.4.9/angular.min.js" type="text/javascript"></script>

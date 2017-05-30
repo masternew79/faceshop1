@@ -72,7 +72,7 @@ class Default_Controller_Users extends Default_Controller_Base{
                     $products = Product::model()->findBySql('select name from product where id = :pid', array(':pid'=>$detail->product_id));
                     array_push($listProductName, $products->name);
                 }
-                $result [] = array('name' => $listProductName, 'total' => $order->total, 'status' => $order->status, 'create_at' => $order->create_date);
+                $result [] = array('name' => $listProductName, 'total' => $order->total, 'status' => $order->status, 'create_at' => $order->create_date, 'id_bill' => $order->id);
                 $listProductName = array();
             }
             echo json_encode($result, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) ;
