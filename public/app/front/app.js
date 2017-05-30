@@ -518,11 +518,7 @@ frontApp.controller('billController', ['$scope', '$localStorage', '$http',functi
 	};
 }]);
 
-=======
-// frontApp.controller('billController', ['$scope', function($scope){
-	
-// }]);
->>>>>>> mouse
+
 
 
 
