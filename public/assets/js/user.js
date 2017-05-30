@@ -70,12 +70,12 @@ $(document).ready(function() {
 		$('button.cancel').toggleClass('hide');
 
 
-		$('[name=name]').val();
-		$('[name=mobile]').val();
-		$('[name=day]').val();
-		$('[name=month]').val();
-		$('[name=year]').val();
-		$('[name=address]').val();
+		var name = $('[name=name]').val();
+		var mobile = $('[name=mobile]').val();
+		var day = $('[name=day]').val();
+		var month = $('[name=month]').val();
+		var month = $('[name=year]').val();
+		var address = $('[name=address]').val();
 		$('[name=gender]').val();
 		$('[name=province]').val();
 		$('[name=district]').val();
