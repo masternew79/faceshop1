@@ -74,14 +74,17 @@ $(document).ready(function() {
 		var mobile = $('[name=mobile]').val();
 		var day = $('[name=day]').val();
 		var month = $('[name=month]').val();
-		var month = $('[name=year]').val();
+		var year = $('[name=year]').val();
+		var dob = year+'-'+month+'-'+day;
 		var address = $('[name=address]').val();
-		$('[name=gender]').val();
-		$('[name=province]').val();
-		$('[name=district]').val();
-		$('[name=ward]').val();
-
+		var gender = $('[name=gender]').val();
+		var province = $('[name=province]').val();
+		var district = $('[name=district]').val();
+		var ward = $('[name=ward]').val();
 		
+		$.post(baseUrl+'/users/updateInfo', {'User[name]': name, 'User[mobile]': mobile, 'User[dob]': dob, 'User[address]': address, 'User[gender]': gender, 'User[province]': province, 'User[district]': district, 'User[ward]': ward}, function(result) {
+			console.log(result);
+		});
 	});
 
 
