@@ -1,0 +1,9 @@
+diff a/public/app/front/app.js b/public/app/front/app.js	(rejected hunks)
+@@ -265,7 +265,6 @@
+ 		});
+ 	});
+ 
+-
+ 	$scope.updateInfo = false;
+ 	$scope.updatePass = false;
+ 
