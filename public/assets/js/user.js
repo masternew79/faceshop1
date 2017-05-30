@@ -45,6 +45,17 @@ $(document).ready(function() {
 		$('button.confirm').toggleClass('hide');
 		$(this).toggleClass('hide');
 		$('button.updatepass').toggleClass('hide');
+		$('').prop("disabled", false);
+		$('[name=name]').prop("disabled", false);
+		$('[name=mobile]').prop("disabled", false);
+		$('[name=day]').prop("disabled", false);
+		$('[name=month]').prop("disabled", false);
+		$('[name=year]').prop("disabled", false);
+		$('[name=address]').prop("disabled", false);
+		$('[name=gender]').prop("disabled", false);
+		$('[name=province]').prop("disabled", false);
+		$('[name=district]').prop("disabled", false);
+		$('[name=ward]').prop("disabled", false);
 	});
 	$('button.cancel').click(function() {
 		$('button.updatepass').toggleClass('hide');
@@ -57,6 +68,9 @@ $(document).ready(function() {
 		$('button.updateinfo').toggleClass('hide');
 		$(this).toggleClass('hide');
 		$('button.cancel').toggleClass('hide');
+
+
+		
 	});
 
 
