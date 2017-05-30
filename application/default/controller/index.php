@@ -32,9 +32,14 @@ class Default_Controller_Index extends Default_Controller_Base{
         $this->view->render('product');
     }
 
-    public function user() {
+    public function userInfo() {
         $this->view->category = Category::model()->findAllBySql("SELECT * FROM category");
-        $this->view->render('user');
+        $this->view->render('userInfo');
+    }
+
+    public function userBill() {
+        $this->view->category = Category::model()->findAllBySql("SELECT * FROM category");
+        $this->view->render('userBill');
     }
 
     public function bill() {

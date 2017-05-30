@@ -1000,7 +1000,7 @@ a.detail {
 }
 .user {
   background-color: rgba(0, 0, 0, 0.5);
-  min-height: 500px;
+  min-height: 800px;
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
@@ -1008,6 +1008,7 @@ a.detail {
 }
 .user .sub-wrap {
   margin: 0 1px;
+  min-height: 800px;
 }
 .user .user-sidebar {
   padding: 0;
@@ -1051,7 +1052,7 @@ a.detail {
 }
 .user .feature table thead {
   border: 1px solid #fff;
-  background-color: #444;
+  background-color: transparent;
 }
 .user .feature table thead th {
   font-size: 18px;
@@ -1082,12 +1083,12 @@ a.detail {
 }
 .user .feature .form-group:not(.out) .form-control {
   font-size: 20px;
-  background-color: transparent;
+  background-color: rgba(255, 255, 255, 0.7);
   float: none;
   border: none;
   box-shadow: none;
   font-weight: 400;
-  color: white;
+  color: #333;
   padding: 10px;
 }
 .user .feature .form-group:not(.out) .form-control:focus,
@@ -1100,4 +1101,12 @@ a.detail {
 }
 .user .feature .form-group:not(.out) .control-label {
   text-transform: uppercase;
+}
+option:empty {
+  display: none;
+}
+[ng\:cloak],
+[ng-cloak],
+.ng-cloak {
+  display: none !important;
 }

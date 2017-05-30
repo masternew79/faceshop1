@@ -5,7 +5,7 @@
 		<div class="form-group">
 			<label class="control-label col-md-2">Tên </label>
 			<div class="col-md-10">
-				<input type="text" class="form-control" id="name" name="name" value="{{name}}" ng-disabled="!updateInfo">
+				<input type="text" class="form-control" id="name" name="name" value="{{name}}">
 			</div>
 		</div>
 		<div class="form-group">
@@ -52,29 +52,28 @@
 				<div style="margin: 5px"></div>
 				<div class="col-md-3">
 					Thành phố:
-					<select name="day" ng-disabled="!updateInfo" ng-model='currentProvince'>
-						<option ng-repeat="province in provinces" ng-value="province.id" ng-selected="province.id == province_id">{{province.name}} </option>
+					<select ng-model="defaultProvince" ng-options="province.id as province.name for province in provinces track by province.id"  ng-disabled="!updateInfo" ng-change="changeProvince(defaultProvince)">
+					<option value="">Tỉnh/Thành Phố</option>
 					</select>
 				</div>
 				<div class="col-md-3">
 					Quận/Huyện:
-					<select name="day" ng-disabled="!updateInfo">
-						<option value="0">Quận / Huyện</option>
-						<option ng-repeat="district in districts" value="district.id" ng-selected="district.id == district_id">{{district.name}}</option>
+					<select ng-model="defaultDistrict" ng-options="district.id as district.name for district in districts track by district.id"  ng-disabled="!updateInfo" ng-change="changeDistrict(defaultDistrict)">
+						<option value="">Quận/huyên</option>
 					</select>
 				</div>
 				<div class="col-md-3">
 					Phường/Xã: 
-					<select name="day" ng-disabled="!updateInfo">
-						<option value="0">Phường/Xã</option>
-						<option ng-repeat="ward in wards" value="ward.id" ng-selected="ward.id == ward_id">{{ward.name}}</option>
+					<select ng-model="defaultWard" ng-options="ward.id as ward.name for ward in wards track by ward.id"  ng-disabled="!updateInfo">
+						<option value="">Phường/xã</option>
 					</select>
 				</div>
 			</div>
 		</div>
 		<div class="text-right">
 			<button type="button" class="btn btn-warning" ng-if="!updateInfo && !updatePass" ng-click="changePass()">Thay đổi mật khẩu</button>
-			<button type="button" class="btn btn-success" ng-click="changeInfo()" ng-show="!updateInfo">Cập nhật thông tin</button>
+			<button type="button" class="btn btn-success" ng-click="changeInfo()" ng-show="!updateInfo" ng-if="!updatePass">Cập nhật thông tin</button>
+			<button type="button" class="btn btn-danger"  ng-if="updateInfo" ng-click="changeInfo()">Hủy</button>
 			<button type="button" class="btn btn-success"  ng-if="updateInfo" ng-click="changeInfo()">Xác nhận</button>
 		</div>
 	</form>
@@ -82,23 +81,24 @@
 		<div class="form-group">
 			<label class="control-label col-md-2">Mật khẩu hiện tại </label>
 			<div class="col-md-10">
-				<input type="text" class="form-control" id="name" name="name" value="" ng-disabled="!update">
+				<input type="text" class="form-control" id="name" name="name" value="">
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="control-label col-md-2">Mật khẩu mới </label>
 			<div class="col-md-10">
-				<input type="text" class="form-control" id="price" name="price" value="" ng-disabled="!update">
+				<input type="text" class="form-control" id="price" name="price" value="">
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="control-label col-md-2">Nhập lại mật khẩu </label>
 			<div class="col-md-10">
-				<input type="text" class="form-control" id="price" name="price" value="" ng-disabled="!update">
+				<input type="text" class="form-control" id="price" name="price" value="">
 			</div>
 		</div>
 		<div class="text-right">
-			<button type="button" class="btn btn-success" ng-click="changePass()">Thay đổi</button>
+			<button type="button" class="btn btn-success" ng-click="changePass()">Hủy</button>
+			<button type="button" class="btn btn-success" ng-click="changePass()">Xác nhận</button>
 		</div>
 	</form>
 

@@ -56,9 +56,6 @@ class Default_Controller_Users extends Default_Controller_Base{
     }
 
 
-
-
-
     public function checkPassword()
     {
         if(HTP_Request::post('password') && HTP_Request::post('id'))
