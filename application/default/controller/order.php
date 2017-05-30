@@ -117,32 +117,6 @@ class Default_Controller_Order extends Default_Controller_Base
     }
 
 
-    public function getOrder()
-    {
-        if(HTP_Request::post('user_id'))
-        {
-            $user_id = intval(HTP_Request::post('user_id'));
-            $result = array();
-            $orders = Order::model()->findAllBySql('SELECT id, status, total FROM `order` WHERE user_id = :uid', array(':uid' => $user_id));
-            $listProductName = array();
-            foreach ($orders as $order)
-            {
-                $details = OrderDetail::model()->findAllBySql('select product_id from order_detail where order_id = :oid', array(':oid' => $order->id));
-                foreach ($details as $detail)
-                {
-                    $products = Product::model()->findBySql('select name from product where id = :pid', array(':pid'=>$detail->product_id));
-                    array_push($listProductName, $products->name);
-                }
-                $result [] = array('name' => $listProductName, 'total' => $order->total, 'status' => $order->status);
-                $listProductName = array();
-            }
-            echo '<pre>'.json_encode($result, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT).'</pre>' ;
-        }
-        else
-            $this->redirect(HTP::$baseUrl);
-    }
-
-
     public function test()
     {
         $p = new Order();
