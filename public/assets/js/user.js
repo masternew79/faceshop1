@@ -22,6 +22,18 @@ $(document).ready(function() {
 		loadWard($(this).val());
 	});
 
+	$('.btn-register').click(function() {
+		var Name = $('[ng-model=regName]').val();
+		var Email = $('[ng-model=regEmail]').val();
+		var Mobile = $('[ng-model=regMobile]').val();
+		var Pass = $('[ng-model=regPass]').val();
+		$.post(baseUrl+'/users/register',{'User[name]': Name, 'User[mobile]': Mobile,  'User[email]': Email, 'User[password]': Pass}, function(result) {
+			if (result.code == 1) {
+
+			}
+		});
+	});
+
 	//hide show button
 	
 	$('button.updatepass').click(function() {
@@ -45,29 +57,21 @@ $(document).ready(function() {
 		$('button.confirm').toggleClass('hide');
 		$(this).toggleClass('hide');
 		$('button.updatepass').toggleClass('hide');
-		$('').prop("disabled", false);
-		$('[name=name]').prop("disabled", false);
-		$('[name=mobile]').prop("disabled", false);
-		$('[name=day]').prop("disabled", false);
-		$('[name=month]').prop("disabled", false);
-		$('[name=year]').prop("disabled", false);
-		$('[name=address]').prop("disabled", false);
-		$('[name=gender]').prop("disabled", false);
-		$('[name=province]').prop("disabled", false);
-		$('[name=district]').prop("disabled", false);
-		$('[name=ward]').prop("disabled", false);
+		Disable(false);		
 	});
 	$('button.cancel').click(function() {
 		$('button.updatepass').toggleClass('hide');
 		$('button.updateinfo').toggleClass('hide');
 		$(this).toggleClass('hide');
 		$('button.confirm').toggleClass('hide');
+		Disable(true);	
 	});
 	$('button.confirm').click(function() {
 		$('button.updatepass').toggleClass('hide');
 		$('button.updateinfo').toggleClass('hide');
 		$(this).toggleClass('hide');
 		$('button.cancel').toggleClass('hide');
+		Disable(true);	
 
 
 		var name = $('[name=name]').val();
@@ -81,16 +85,42 @@ $(document).ready(function() {
 		var province = $('[name=province]').val();
 		var district = $('[name=district]').val();
 		var ward = $('[name=ward]').val();
-		console.log(loginID);
 
 		$.post(baseUrl+'/users/updateInfo',{'User[id]': loginID, 'User[name]': name, 'User[mobile]': mobile, 'User[dob]': dob, 'User[address]': address, 'User[gender]': gender, 'User[province]': province, 'User[district]': district, 'User[ward]': ward}, function(result) {
 			console.log(result);
 		});
 	});
 
+	$('button.confirmpass').click(function() {
+		var currentPass = $('[name=current-password]').val();
+		var newPass = $('[name=new-password]').val();
+		var reEnter = $('[name=re-enter]').val();
 
+		if (newPass == reEnter) {
+			$.post(baseUrl+'/users/checkPassword',{'password': currentPass, 'id': loginID}, function(result) {
+				if (result) {
+					$.post(baseUrl+'/users/updateInfo',{'User[password]': newPass}, function(result) {
+						console.log(result);
+					});
+				}
+			});
+		}
+	});
 
 });
+
+function Disable(bool) {
+	$('[name=name]').prop("disabled", bool);
+	$('[name=mobile]').prop("disabled", bool);
+	$('[name=day]').prop("disabled", bool);
+	$('[name=month]').prop("disabled", bool);
+	$('[name=year]').prop("disabled", bool);
+	$('[name=address]').prop("disabled", bool);
+	$('[name=gender]').prop("disabled", bool);
+	$('[name=province]').prop("disabled", bool);
+	$('[name=district]').prop("disabled", bool);
+	$('[name=ward]').prop("disabled", bool);
+}
 
 
 
@@ -126,7 +156,6 @@ function loadWard(districtID) {
 
 function loadUserInfo() {
 	$.getJSON(baseUrl + '/users/getInfo', function(result) {
-		console.log(result);
 		var DOB = result.dob.split('-');
 		var Day = parseInt(DOB[2]);
 		var Month = parseInt(DOB[1]);
@@ -146,3 +175,4 @@ function loadUserInfo() {
 		$('[name=ward]').val(result.ward);
 	});
 }
+

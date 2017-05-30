@@ -69,32 +69,47 @@ class Default_Controller_Order extends Default_Controller_Base
 
     public function add()
     {
-        if(HTP_Request::post('Order'))
+        if(HTP_Request::post('Order') && HTP_Request::post('detail'))
         {
             $order = new Order();
             $order->load(HTP_Request::post('Order'));
             $order->status = 0;
             $order->hash = md5(rand(1, 1000000));
             $order->id = $order->insert();
+
+            $data = json_decode(HTP_Request::post('detail'), true);
+            $data1 = $data['product'];
+            foreach ($data1 as $a) {
+                $orderDetail = new OrderDetail();
+                foreach ($a as $key => $value) {
+                    $orderDetail->$key = $value;
+                }
+                $orderDetail->order_id = $order->id;
+                $orderDetail->total = $orderDetail->count * $orderDetail->price;
+
+                $orderDetail->insert();
+            }
+
             $body = '<h1>FaceShop - Xác nhận đơn hàng</h1><br>';
-            $body .= '<p>Quý khách vừa đặt hàng trên hệ thống FaceShop</p>';
+            $body .= '<p><h2>Quý khách vừa đặt hàng trên hệ thống FaceShop</h2></p>';
             $body .= '<br><p><h2>Chi tiết đơn hàng</h2></p>';
             $i = 1;
             $body .= '<table>';
-            $details = OrderDetail::model()->findAllBySql('select product_id, price, "count", total from order_detail where order_id = :oid', array(':oid' => $order->id));
+            $body .= '<tr><th>STT</th><th>Tên sản phẩm</th><th>Đơn giá</th><th>Số lượng</th><th>Tổng tiền</th></tr>';
+            $details = OrderDetail::model()->findAllBySql('select product_id, price, `count`, total from order_detail where order_id = :oid', array(':oid' => $order->id));
             foreach ($details as $detail)
             {
                 $body .= '<tr>';
                 $products = Product::model()->findBySql('select name, price  from product where id = :pid', array(':pid'=>$detail->product_id));
-                $body .= '<td> $i++ </td>';
-                $body .= '<td> $products->name </td>';
-                $body .= '<td> $products->price </td>';
-                $body .= '<td> $detail->count </td>';
-                $body .= '<td> $detail->total </td>';
+                $body .= '<td>'. $i++ .'</td>';
+                $body .= '<td>'. $products->name .'</td>';
+                $body .= '<td>'. $detail->price.' </td>';
+                $body .= '<td>'. $detail->count .'</td>';
+                $body .= '<td>'. $detail->total .'</td>';
                 $body .= '</tr>';
             }
             $body .= '</table>';
-            $body .= '<p>Qúy khách vui lòng <a href="' . HTP::$baseUrl .'/order/verify/'.$order->id.'/'.$order->hash.'">Xác nhận đơn hàng tại đây</a></p>>';
+            $body .= '<p>Qúy khách vui lòng <a href="' . HTP::$baseUrl .'/order/verify/'.$order->id.'/'.$order->hash.'">Xác nhận đơn hàng tại đây</a></p>';
 
             $subject = 'FaceShop - Xác nhận đơn hàng';
 
@@ -103,8 +118,6 @@ class Default_Controller_Order extends Default_Controller_Base
         else
             $this->redirect(HTP::$baseUrl);
     }
-
-
 
     public function delete()
     {

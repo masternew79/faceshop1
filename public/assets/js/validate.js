@@ -18,7 +18,10 @@ btnLogin.on('click', function(event) {
 var regEmail = $('#reg-input-email');
 var regPass = $('#reg-input-pass');
 var regName = $('#reg-input-name');
+var regMobile = $('#reg-input-mobile');
+var regCapt = $('#reg-input-captcha');
 var btnReg = $('.btn-register');
+
 btnReg.on('click', function(event) {
     event.preventDefault();
     if (regEmail.val() === '') {
@@ -30,6 +33,13 @@ btnReg.on('click', function(event) {
     if (regName.val() === '') {
         showMes('reg', 'name');
     }
+    if (regMobile.val() === '') {
+        showMes('reg', 'mobile');
+    }
+    if (regCapt.val() === '') {
+        showMes('reg', 'capt');
+    }
+
 });
 
 function showMes(action, type) {
@@ -38,6 +48,8 @@ function showMes(action, type) {
         mess = 'mật khẩu';
     } else if (type == 'name') {
         mess = 'họ và tên';
+    } else if (type == 'mobile') {
+        mess = 'số điện thoại';
     } else {
         mess = 'email';
     }
@@ -103,10 +115,22 @@ regEmail.blur(function() {
 });
 
 regPass.blur(function() {
-    console.log(1);
     var pass = $(this).val();
-    console.log(pass);
     var message = $('.reg-message-pass');
+    if (pass === '') {
+        message.addClass('show').html('<i class="fa fa-exclamation-triangle"></i> Vui lòng nhập mật khẩu!').removeClass('hide');
+    } else {
+        if (pass.length < 5) {
+            message.addClass('show').html('<i class="fa fa-exclamation-triangle"></i> Mật khẩu có ít nhất 5 kí tự!');
+        } else {
+            message.addClass('hide').removeClass('show');
+        }
+    }
+});
+
+regMobile.blur(function() {
+    var pass = $(this).val();
+    var message = $('.reg-message-mobile');
     if (pass === '') {
         message.addClass('show').html('<i class="fa fa-exclamation-triangle"></i> Vui lòng nhập mật khẩu!').removeClass('hide');
     } else {
@@ -125,6 +149,20 @@ regName.blur(function() {
         message.addClass('show').html('<i class="fa fa-exclamation-triangle"></i> Vui lòng nhập họ và tên!').removeClass('hide');
     } else {
         message.addClass('hide').removeClass('show');
+    }
+});
+
+regCapt.blur(function() {
+    var captcha = $(this).val();
+    var message = $('.reg-message-capt');
+    if (captcha === '') {
+        message.addClass('show').html('<i class="fa fa-exclamation-triangle"></i> Vui lòng nhập mã xác nhận!').removeClass('hide');
+    } else {
+        if (captcha.length != 5) {
+            message.addClass('show').html('<i class="fa fa-exclamation-triangle"></i> Mã xác nhận phải có đúng 5 kí tự!');
+        } else {
+            message.addClass('hide').removeClass('show');
+        }
     }
 });
 

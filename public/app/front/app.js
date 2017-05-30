@@ -49,6 +49,19 @@ frontApp.controller('cartController', ['$scope',  '$localStorage', '$http', '$se
 		}
 	};
 
+	$scope.register = function() {
+		$http.post(baseUrl + '/users/register', {'User[name]': $scope.regName, 'User[email]': $scope.regEmail, 'User[password]': $scope.regPass, 'User[mobile]':$scope.regMobile}).success(function(result) {
+	        console.log(result);
+	        // if (result.code == 1) {
+	        // 	angular.element('.modal').modal('toggle');
+	        // }
+	        // if (result.code != 1) {
+		       //  messageModel(result.message);
+	        	
+	        // }
+        });
+	}
+
 	$scope.login = function() {
         $http.post(baseUrl + '/users/login/' + $scope.email + '/' + $scope.password + '/' + $scope.captcha).success(function(result) {
 	        $scope.id = result.id;
@@ -64,7 +77,10 @@ frontApp.controller('cartController', ['$scope',  '$localStorage', '$http', '$se
 	        if (result.code == 1) {
 	        	angular.element('.modal').modal('toggle');
 	        }
-	        console.log(result);
+	        if (result.code != 1) {
+		        messageModel(result.message);
+	        	
+	        }
         });
     };
 

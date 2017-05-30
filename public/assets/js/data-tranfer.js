@@ -17,7 +17,7 @@ function messageModel(message) {
 	$('.message-model').removeClass('hide');
 	setTimeout(function() {
 		$('.message-model').addClass('hide');
-	}, 2000);
+	}, 3000);
 }
 
 
