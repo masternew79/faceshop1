@@ -265,7 +265,6 @@ frontApp.controller('categoryController', ['$scope', '$http', '$location', 'orde
 		});
 	});
 
-
 	$scope.updateInfo = false;
 	$scope.updatePass = false;
 
