@@ -66,28 +66,16 @@ class Default_Controller_Order extends Default_Controller_Base
             $this->redirect(HTP::$baseUrl);
     }
 
+
     public function add()
     {
         if(HTP_Request::post('Order'))
         {
             $order = new Order();
             $order->load(HTP_Request::post('Order'));
-        //    $order = Order::model()->find('id = 1');
             $order->status = 0;
             $order->hash = md5(rand(1, 1000000));
-          //  Order::model()->insert();
-           // try
-          //  {
-               $order->id = $order->insert();
-          //  }
-//            catch (Exception $ex)
-//            {
-//                echo 'fail';
-//                return;
-//                //$this->redirect(HTP::$baseUrl.'/order/fail');
-//            }
-
-
+            $order->id = $order->insert();
             $body = '<h1>FaceShop - Xác nhận đơn hàng</h1><br>';
             $body .= '<p>Quý khách vừa đặt hàng trên hệ thống FaceShop</p>';
             $body .= '<br><p><h2>Chi tiết đơn hàng</h2></p>';
@@ -116,11 +104,33 @@ class Default_Controller_Order extends Default_Controller_Base
             $this->redirect(HTP::$baseUrl);
     }
 
+<<<<<<< HEAD
 
     public function test()
     {
         $p = new Order();
         $p->load(HTP_Request::post('Order'));
         $p->insert();
+=======
+    public function delete()
+    {
+        if(HTP_Request::post('order_id'))
+        {
+            $id = HTP_Request::post('order_id');
+
+            if(OrderDetail::model()->delete('id = :id', array(':id'=>$id)) && Order::model()->delete('id = :id', array(':id'=>$id)))
+            {
+                echo json_encode(array('code'=>1, 'message'=>'Hủy đơn hàng thành công'), JSON_UNESCAPED_UNICODE);
+                return;
+            }
+            else
+            {
+                echo json_encode(array('code'=>1, 'message'=>'Hủy đơn hàng thất bại'), JSON_UNESCAPED_UNICODE);
+                return;
+            }
+        }
+        else
+            $this->redirect(HTP::$baseUrl);
+>>>>>>> face/mousewip
     }
 }

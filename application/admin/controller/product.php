@@ -17,8 +17,8 @@ class Admin_Controller_Product extends Admin_Controller_Base{
         $x = ($page - 1) * $sodong;
         $sql = "select * from product limit $x, $sodong";
         $this->view->products = Product::model()->findBySql($sql);
-
-
+        $this->view->page = $page;
+        $this->view->sodong = $sodong;
         $this->view->totalPage = Product::model()->getCount();
         $this->view->setLayout('main');
         $this->view->render('index');
