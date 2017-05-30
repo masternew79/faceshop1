@@ -56,32 +56,6 @@ class Default_Controller_Users extends Default_Controller_Base{
     }
 
 
-    public function getOrder()
-    {
-        if(HTP_Request::get('user_id'))
-        {
-            $user_id = intval(HTP_Request::get('user_id'));
-            $result = array();
-            $orders = Order::model()->findAllBySql('SELECT id, status, total, create_date FROM `order` WHERE user_id = :uid', array(':uid' => $user_id));
-            $listProductName = array();
-            foreach ($orders as $order)
-            {
-                $details = OrderDetail::model()->findAllBySql('select product_id from order_detail where order_id = :oid', array(':oid' => $order->id));
-                foreach ($details as $detail)
-                {
-                    $products = Product::model()->findBySql('select name from product where id = :pid', array(':pid'=>$detail->product_id));
-                    array_push($listProductName, $products->name);
-                }
-                $result [] = array('name' => $listProductName, 'total' => $order->total, 'status' => $order->status, 'create_at' => $order->create_date, 'id_bill' => $order->id);
-                $listProductName = array();
-            }
-            echo json_encode($result, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) ;
-        }
-        else
-            $this->redirect(HTP::$baseUrl);
-    }
-
-
     public function checkPassword()
     {
         if(HTP_Request::post('password') && HTP_Request::post('id'))

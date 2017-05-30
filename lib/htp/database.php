@@ -239,7 +239,8 @@ class HTP_Database{
         $values = substr($values, 0, strlen($values) - 1);
         $sql .= ')values(' . $values . ')';
         $sth = $this->conn->prepare($sql);
-        return $sth->execute($param);
+        $sth->execute($param);
+        return $this->conn->lastInsertId();
     }
 
     public function update($condition = null, $param = array()){
