@@ -172,7 +172,7 @@
                     <a class="dropdown-toggle" data-toggle="dropdown">{{name}} <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="<?php echo HTP::$baseUrl . '/user#/' ?>">Thông tin</a></li>
-                        <li><a class="navbar-btn btn-logout" ng-click="logout()" ng-if="name != "">Đăng xuất</a></li>
+                        <li><a class="navbar-btn btn-logout" ng-click="logout()" ng-if="name != ''">Đăng xuất</a></li>
                     </ul>
                 </li>
                 <li><a data-toggle="modal" data-target="#myModal" class="navbar-btn nav-login" ng-if="name == ''">Đăng nhập</a></li>

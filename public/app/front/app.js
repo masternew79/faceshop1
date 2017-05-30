@@ -72,6 +72,7 @@ frontApp.controller('cartController', ['$scope',  '$localStorage', '$http', '$se
 
     $scope.logout = function() {
     	$http.post(baseUrl + '/logout').success(function(result) {
+    		$window.location.href = baseUrl;
 	        if (result) {
 	        	$scope.name = '';
 	        }
@@ -384,7 +385,7 @@ frontApp.controller('infoController', ['$scope', '$http' , '$localStorage', func
 			obj.id = result[i].id;
 			obj.name = result[i].name;
 			wards.push(obj);
-			if (i == 0) {
+			if (i === 0) {
 				$scope.defaultWard = {'id': result[i].id, 'name': result[i].name};
 			}
 		}
@@ -413,7 +414,6 @@ frontApp.controller('infoController', ['$scope', '$http' , '$localStorage', func
 		}
 		return range;
 	};
-
 
 
 	$scope.$watch(function() {
@@ -463,6 +463,7 @@ frontApp.controller('billController', ['$scope', '$localStorage', '$http',functi
 		console.log(result);
 	});
 }]);
+
 
 
 
