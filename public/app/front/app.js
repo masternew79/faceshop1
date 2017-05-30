@@ -266,6 +266,9 @@ frontApp.controller('categoryController', ['$scope', '$http', '$location', 'orde
 	});
 
 
+
+
+
 	$scope.updateInfo = false;
 	$scope.updatePass = false;
 
@@ -277,6 +280,8 @@ frontApp.controller('categoryController', ['$scope', '$http', '$location', 'orde
 		$scope.updatePass = !$scope.updatePass;
 	};
 }]);
+
+
 
 
 frontApp.controller('billController', ['$scope', '$localStorage', '$http',function($scope, $localStorage, $http){

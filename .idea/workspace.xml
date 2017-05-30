@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="429a5b7e-e84d-4546-913c-6ab78ab3fa92" name="Default" comment="" />
+    <list default="true" id="429a5b7e-e84d-4546-913c-6ab78ab3fa92" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/app/front/app.js.rej" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/app/front/app.js" afterPath="$PROJECT_DIR$/public/app/front/app.js" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -38,23 +41,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="order.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="order.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/default/controller/order.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="328">
-              <caret line="106" column="8" lean-forward="true" selection-start-line="106" selection-start-column="8" selection-end-line="106" selection-end-column="8" />
+              <caret line="106" column="8" lean-forward="false" selection-start-line="106" selection-start-column="8" selection-end-line="106" selection-end-column="8" />
               <folding>
                 <element signature="n#index#0;n#Default_Controller_Order#0;n#!!top" expanded="false" />
                 <element signature="n#getOrder#0;n#Default_Controller_Order#0;n#!!top" expanded="false" />
                 <element signature="n#verify#0;n#Default_Controller_Order#0;n#!!top" expanded="false" />
                 <element signature="n#add#0;n#Default_Controller_Order#0;n#!!top" expanded="false" />
                 <element signature="e#4230#4870#0#PHP" expanded="false" />
-                <marker date="1496159181278" expanded="true" signature="467:538" ph="SELECT id, s... order" />
-                <marker date="1496159181278" expanded="true" signature="726:783" ph="select produ... order_detail" />
-                <marker date="1496159181278" expanded="true" signature="941:981" ph="select name product" />
-                <marker date="1496159181278" expanded="true" signature="3146:3226" ph="select produ... order_detail" />
-                <marker date="1496159181278" expanded="true" signature="3405:3453" ph="select name,... product" />
-                <marker date="1496159181278" expanded="true" signature="4868:4877" ph="..." />
+                <marker date="1496159954850" expanded="true" signature="467:538" ph="SELECT id, s... order" />
+                <marker date="1496159954850" expanded="true" signature="726:783" ph="select produ... order_detail" />
+                <marker date="1496159954850" expanded="true" signature="941:981" ph="select name product" />
+                <marker date="1496159954850" expanded="true" signature="3146:3226" ph="select produ... order_detail" />
+                <marker date="1496159954850" expanded="true" signature="3405:3453" ph="select name,... product" />
+                <marker date="1496159954850" expanded="true" signature="4868:4877" ph="..." />
               </folding>
             </state>
           </provider>
@@ -64,11 +67,11 @@
         <entry file="file://$PROJECT_DIR$/application/admin/controller/product.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="400">
-              <caret line="20" column="38" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="20" selection-end-column="38" />
+              <caret line="20" column="38" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="20" selection-end-column="38" />
               <folding>
-                <marker date="1496159041837" expanded="true" signature="419:447" ph="select * fro... product" />
-                <marker date="1496159041837" expanded="true" signature="419:451" ph="select * fro... product" />
-                <marker date="1496159041837" expanded="true" signature="419:458" ph="select * fro... product" />
+                <marker date="1496159954846" expanded="true" signature="419:447" ph="select * fro... product" />
+                <marker date="1496159954846" expanded="true" signature="419:451" ph="select * fro... product" />
+                <marker date="1496159954846" expanded="true" signature="419:458" ph="select * fro... product" />
               </folding>
             </state>
           </provider>
@@ -95,17 +98,17 @@
                 <element signature="n#style#0;n#a#1;n#p#0;n#tbody#0;n#table#0;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#a#2;n#p#0;n#tbody#0;n#table#0;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#a#3;n#p#0;n#tbody#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-                <marker date="1496159041951" expanded="true" signature="3700:3707" ph="..." />
+                <marker date="1496159954848" expanded="true" signature="3700:3707" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="app.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/app/front/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1532">
-              <caret line="267" column="0" lean-forward="true" selection-start-line="267" selection-start-column="0" selection-end-line="267" selection-end-column="0" />
+            <state relative-caret-position="112">
+              <caret line="285" column="0" lean-forward="true" selection-start-line="285" selection-start-column="0" selection-end-line="285" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -734,7 +737,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="185797000" />
+    <option name="totallyTimeSpent" value="186473000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -1157,11 +1160,11 @@
     <entry file="file://$PROJECT_DIR$/application/admin/controller/product.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="400">
-          <caret line="20" column="38" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="20" selection-end-column="38" />
+          <caret line="20" column="38" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="20" selection-end-column="38" />
           <folding>
-            <marker date="1496159041837" expanded="true" signature="419:447" ph="select * fro... product" />
-            <marker date="1496159041837" expanded="true" signature="419:451" ph="select * fro... product" />
-            <marker date="1496159041837" expanded="true" signature="419:458" ph="select * fro... product" />
+            <marker date="1496159954846" expanded="true" signature="419:447" ph="select * fro... product" />
+            <marker date="1496159954846" expanded="true" signature="419:451" ph="select * fro... product" />
+            <marker date="1496159954846" expanded="true" signature="419:458" ph="select * fro... product" />
           </folding>
         </state>
       </provider>
@@ -1177,26 +1180,6 @@
             <element signature="n#checkPassword#0;n#Default_Controller_Users#0;n#!!top" expanded="false" />
             <marker date="1496158694508" expanded="false" signature="3047:3736" ph="{...}" />
             <marker date="1496158694508" expanded="false" signature="3774:6069" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/default/controller/order.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="328">
-          <caret line="106" column="8" lean-forward="true" selection-start-line="106" selection-start-column="8" selection-end-line="106" selection-end-column="8" />
-          <folding>
-            <element signature="n#index#0;n#Default_Controller_Order#0;n#!!top" expanded="false" />
-            <element signature="n#getOrder#0;n#Default_Controller_Order#0;n#!!top" expanded="false" />
-            <element signature="n#verify#0;n#Default_Controller_Order#0;n#!!top" expanded="false" />
-            <element signature="n#add#0;n#Default_Controller_Order#0;n#!!top" expanded="false" />
-            <element signature="e#4230#4870#0#PHP" expanded="false" />
-            <marker date="1496159181278" expanded="true" signature="467:538" ph="SELECT id, s... order" />
-            <marker date="1496159181278" expanded="true" signature="726:783" ph="select produ... order_detail" />
-            <marker date="1496159181278" expanded="true" signature="941:981" ph="select name product" />
-            <marker date="1496159181278" expanded="true" signature="3146:3226" ph="select produ... order_detail" />
-            <marker date="1496159181278" expanded="true" signature="3405:3453" ph="select name,... product" />
-            <marker date="1496159181278" expanded="true" signature="4868:4877" ph="..." />
           </folding>
         </state>
       </provider>
@@ -1219,7 +1202,7 @@
             <element signature="n#style#0;n#a#1;n#p#0;n#tbody#0;n#table#0;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#a#2;n#p#0;n#tbody#0;n#table#0;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#a#3;n#p#0;n#tbody#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <marker date="1496159041951" expanded="true" signature="3700:3707" ph="..." />
+            <marker date="1496159954848" expanded="true" signature="3700:3707" ph="..." />
           </folding>
         </state>
       </provider>
@@ -1242,9 +1225,29 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/app/front/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1532">
-          <caret line="267" column="0" lean-forward="true" selection-start-line="267" selection-start-column="0" selection-end-line="267" selection-end-column="0" />
+        <state relative-caret-position="112">
+          <caret line="285" column="0" lean-forward="true" selection-start-line="285" selection-start-column="0" selection-end-line="285" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/default/controller/order.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="328">
+          <caret line="106" column="8" lean-forward="false" selection-start-line="106" selection-start-column="8" selection-end-line="106" selection-end-column="8" />
+          <folding>
+            <element signature="n#index#0;n#Default_Controller_Order#0;n#!!top" expanded="false" />
+            <element signature="n#getOrder#0;n#Default_Controller_Order#0;n#!!top" expanded="false" />
+            <element signature="n#verify#0;n#Default_Controller_Order#0;n#!!top" expanded="false" />
+            <element signature="n#add#0;n#Default_Controller_Order#0;n#!!top" expanded="false" />
+            <element signature="e#4230#4870#0#PHP" expanded="false" />
+            <marker date="1496159954850" expanded="true" signature="467:538" ph="SELECT id, s... order" />
+            <marker date="1496159954850" expanded="true" signature="726:783" ph="select produ... order_detail" />
+            <marker date="1496159954850" expanded="true" signature="941:981" ph="select name product" />
+            <marker date="1496159954850" expanded="true" signature="3146:3226" ph="select produ... order_detail" />
+            <marker date="1496159954850" expanded="true" signature="3405:3453" ph="select name,... product" />
+            <marker date="1496159954850" expanded="true" signature="4868:4877" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
