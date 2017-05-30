@@ -172,7 +172,7 @@
                     <a class="dropdown-toggle" data-toggle="dropdown">{{name}} <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="<?php echo HTP::$baseUrl . '/user#/' ?>">Thông tin</a></li>
-                        <li><a class="navbar-btn btn-logout" ng-click="logout()">Đăng xuất</a></li>
+                        <li><a class="navbar-btn btn-logout" ng-click="logout()" ng-if="name != "">Đăng xuất</a></li>
                     </ul>
                 </li>
                 <li><a data-toggle="modal" data-target="#myModal" class="navbar-btn nav-login" ng-if="name == ''">Đăng nhập</a></li>
@@ -238,8 +238,11 @@
     <script src="<?=HTP::$resourceUrl?>/assets/js/data-tranfer.js"></script>
     <script src="<?=HTP::$resourceUrl?>/assets/js/validate.js"></script>
     <!-- angular -->
-    <script src="<?=HTP::$resourceUrl?>/assets/js/angular/angular.min.js" type="text/javascript"></script>
-    <script src="<?=HTP::$resourceUrl?>/assets/js/angular/angular-route.min.js" type="text/javascript"></script>
+    <!-- <script src="<?=HTP::$resourceUrl?>/assets/js/angular/angular.min.js" type="text/javascript"></script> -->
+    <script src="https://code.angularjs.org/1.4.9/angular.min.js" type="text/javascript"></script>
+
+    <!-- <script src="<?=HTP::$resourceUrl?>/assets/js/angular/angular-route.min.js" type="text/javascript"></script> -->
+    <script src="https://code.angularjs.org/1.4.9/angular-route.min.js" type="text/javascript"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.6/ngStorage.min.js"></script>
 
     <script src="<?=HTP::$resourceUrl?>/app/front/app.js" type="text/javascript"></script>

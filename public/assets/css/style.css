@@ -1101,3 +1101,6 @@ a.detail {
 .user .feature .form-group:not(.out) .control-label {
   text-transform: uppercase;
 }
+option:empty {
+  display: none;
+}

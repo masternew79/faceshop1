@@ -1116,6 +1116,7 @@ a.detail {
         border: none;
         border-radius: 4px;
         background-color: #f1f1f1;
+        
       }
 
       .form-control {
@@ -1131,7 +1132,6 @@ a.detail {
           outline: none;
         }
       }
-
       .form-control[disabled], fieldset[disabled] .form-control {
         cursor: -webkit-grabbing !important;
       }
@@ -1141,3 +1141,8 @@ a.detail {
     }
   }
 }
+option:empty { display:none }
+
+// [ng\:cloak], [ng-cloak], .ng-cloak {
+//   display: none !important;
+// }
