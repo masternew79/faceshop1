@@ -70,6 +70,17 @@ $(document).ready(function() {
 		$('button.cancel').toggleClass('hide');
 
 
+		$('[name=name]').val();
+		$('[name=mobile]').val();
+		$('[name=day]').val();
+		$('[name=month]').val();
+		$('[name=year]').val();
+		$('[name=address]').val();
+		$('[name=gender]').val();
+		$('[name=province]').val();
+		$('[name=district]').val();
+		$('[name=ward]').val();
+
 		
 	});
 

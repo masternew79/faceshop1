@@ -104,14 +104,8 @@ class Default_Controller_Order extends Default_Controller_Base
             $this->redirect(HTP::$baseUrl);
     }
 
-<<<<<<< HEAD
 
-    public function test()
-    {
-        $p = new Order();
-        $p->load(HTP_Request::post('Order'));
-        $p->insert();
-=======
+
     public function delete()
     {
         if(HTP_Request::post('order_id'))
@@ -131,6 +125,5 @@ class Default_Controller_Order extends Default_Controller_Base
         }
         else
             $this->redirect(HTP::$baseUrl);
->>>>>>> face/mousewip
     }
 }
