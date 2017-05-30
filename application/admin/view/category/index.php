@@ -23,37 +23,7 @@
                 <a href="" class="btn btn-warning btn-xs">Sửa</a>
                 <a href="" class="btn btn-info btn-xs">Chi tiết</a>
             </td>
-        </tr>
-        <tr class="text-center">
-            <td>1</td>
-            <td>Apple</td>
-            <td>Điện thoại</td>
-            <td>
-                <a href="" class="btn btn-default btn-xs">Xóa</a>
-                <a href="" class="btn btn-warning btn-xs">Sửa</a>
-                <a href="" class="btn btn-info btn-xs">Chi tiết</a>
-            </td>
-        </tr>
-        <tr class="text-center">
-            <td>1</td>
-            <td>Apple</td>
-            <td>Điện thoại</td>
-            <td>
-                <a href="" class="btn btn-default btn-xs">Xóa</a>
-                <a href="" class="btn btn-warning btn-xs">Sửa</a>
-                <a href="" class="btn btn-info btn-xs">Chi tiết</a>
-            </td>
-        </tr>
-        <tr class="text-center">
-            <td>1</td>
-            <td>Apple</td>
-            <td>Điện thoại</td>
-            <td>
-                <a href="" class="btn btn-default btn-xs">Xóa</a>
-                <a href="" class="btn btn-warning btn-xs">Sửa</a>
-                <a href="" class="btn btn-info btn-xs">Chi tiết</a>
-            </td>
-        </tr>
+
 
 
         </tbody>

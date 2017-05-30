@@ -2,7 +2,7 @@
 class Admin_Controller_Order extends Admin_Controller_Base{
 
     public function init(){
-        //$this->allowAccessAction = array('login');
+        $this->allowAccessAction = array('login');
         parent::init();
     }
 
