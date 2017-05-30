@@ -86,7 +86,7 @@ class Config
             'SMTPSecure' => 'ssl',
             'SMTPAuth' => true,
             'Username' => 'mousewip@gmail.com',
-            'Password' => '****',
+            'Password' => 'htpvtkn4878856',
         );
     }
 }

@@ -26,14 +26,14 @@
         'pagePerGroup' => 10,
 
         'mail' => array(
-            'Host' => 'smtp.zoho.com',
+            'Host' => 'smtp.gmail.com',
             'Port' => 465,
-            'SMTPDebug' => 0,
+            'SMTPDebug' => 1,
             'Debugoutput' => 'html',
             'SMTPSecure' => 'ssl',
             'SMTPAuth' => true,
-            'Username' => 'mousewip@gmail.com',
-            'Password' => '****',
+            'Username' => 'mousewip2@gmail.com',
+            'Password' => 'faceshopnhom01@@!!',
         ),
          
     );

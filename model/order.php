@@ -9,7 +9,7 @@ class Order extends HTP_Model{
 
     public function __construct($scenario = null) {
         $this->scenario = $scenario;
-        parent::__construct('[order]');
+        parent::__construct('`order`');
     }
 
     public function maps(){
@@ -23,7 +23,8 @@ class Order extends HTP_Model{
             'create_date' => array('create_date'),
             'payment_type' => array('payment_type'),
             'delivery_type' => array('delivery_type'),
-            'status' => array('status')
+            'status' => array('status'),
+            'hash' => array('hash')
         );
     }
 
