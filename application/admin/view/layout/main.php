@@ -46,7 +46,7 @@
                 </a>
             </div>
             <div class="col-md-11 item trademark">
-                <a href="<?=HTP::$baseUrl?>/category">
+                <a href="<?=HTP::$baseUrl?>/order">
                     <div class="col-md-3 icon" style="font-size: 3em;"><i class="glyphicon glyphicon-tags"></i></div>
                     <div class="col-md-9">
                         <div class="row text-right" style="font-size: 25px">13</div>

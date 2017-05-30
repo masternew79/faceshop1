@@ -24,7 +24,7 @@
         </tr>
         </thead>
         <tbody>
-
+        <?php foreach ($this->products as $item) echo $item->price .'<br>'; ?>
 
 
 
@@ -113,7 +113,7 @@
                 <a href="" class="btn btn-info btn-xs">Chi tiết</a>
             </td>
         </tr>
-        <?=$this->totalPage ?>
+
 
 
 
