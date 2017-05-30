@@ -100,10 +100,10 @@
                 <div class="view col-md-10 col-md-offset-1 text-center">
                     <i class="fa fa-eye"> <?php echo $selling->view ?></i>
                 </div>
-                <a href="">
+                <a href="<?php echo HTP::$baseUrl . '/product/' . $selling->id ?>">
                     <img src="<?=HTP::$resourceUrl . '/' . $selling->image?>">
                     <div class="caption">
-                        <p class="name"><?php echo substr($selling->name, 0, 30) . '...'; ?></p>
+                        <p class="name"><?php echo $selling->name; ?></p>
                         <p class="price"><?php echo $selling->price; ?> VNĐ</p>
                     </div>
                 </a>

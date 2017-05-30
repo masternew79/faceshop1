@@ -45,6 +45,10 @@
                         </ul>
                     </div>
                     <div class="panel-body">
+                        <div class="alert alert-danger alert-dismissable message-model hide">
+                          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            <div class="content-message-model"></div>
+                        </div>
                         <div class="tab-content">
                             <div class="tab-pane fade  in active" id="tab1success">
                                 <form>
@@ -145,9 +149,9 @@
                     </div>
                 </li>
             </ul>
-            <form class="navbar-form" role="search">
+            <form class="navbar-form" role="search" action="<?=HTP::$baseUrl.'/search'?>" method="get">
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Tìm kiếm" size="40">
+                    <input type="text" class="form-control" name="search" placeholder="Tìm kiếm" size="40">
                 </div>
                 <button type="submit" class="btn btn-danger"><b class="glyphicon glyphicon-search"></b></button>
             </form>
@@ -185,7 +189,7 @@
         
     </ul>
     <div class="total-price text-center">Tổng tiền: {{total}} VNĐ</div>
-    <div class="text-center"><button type="button" class="btn btn-danger">Thanh toán</button></div>
+    <div class="text-center"><a href="" class="btn btn-danger" ng-click="checkout()">Thanh toán</a></div>
 </div>
 <!-- .cart -->
 <!-- add success -->

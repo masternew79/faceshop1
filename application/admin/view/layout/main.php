@@ -50,7 +50,7 @@
                     <div class="col-md-3 icon" style="font-size: 3em;"><i class="glyphicon glyphicon-tags"></i></div>
                     <div class="col-md-9">
                         <div class="row text-right" style="font-size: 25px">13</div>
-                        <div class="row text-right">Hãng</div>
+                        <div class="row text-right">Hóa Đơn</div>
                     </div>
                 </a>
             </div>

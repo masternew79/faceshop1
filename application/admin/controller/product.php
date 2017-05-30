@@ -26,6 +26,14 @@ class Admin_Controller_Product extends Admin_Controller_Base{
     }
 
     public function add(){
+        if(HTP_Request::post('Product'))
+        {
+            $product = new Product();
+            $product->load(HTP_Request::post('Product'));
+            $product->insert();
+            $this->redirect(HTP::$baseUrl);
+        }
+        else
         $this->view->render('add');
     }
 
@@ -40,8 +48,22 @@ class Admin_Controller_Product extends Admin_Controller_Base{
         }
     }
 
-    public function update()
+    public function update($param)
     {
-        $this->view->render('update');
+        if(isset($param[0]))
+        {
+            $id = intVal($param[0]);
+            $product = Product::model()->find('id = :id', array(':id'=>$id));
+            $this->view->product = $product;
+            $this->view->render('update');
+        }
+        if(HTP_Request::post('Product'))
+        {
+            $product = new Product();
+            $product->load(HTP_Request::post('Product'));
+            $product->update('id = :id', array(':id'=>$product->id));
+        }
+        else
+            $this->redirect(HTP::$baseUrl);
     }
 }

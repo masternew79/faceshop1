@@ -32,6 +32,12 @@ class Default_Controller_Index extends Default_Controller_Base{
         $this->view->render('product');
     }
 
+    public function checkout()
+    {
+        $this->view->category = Category::model()->findAllBySql("SELECT * FROM category");
+        $this->view->render('checkout');
+    }
+
     public function userInfo() {
         $this->view->category = Category::model()->findAllBySql("SELECT * FROM category");
         $this->view->render('userInfo');
@@ -43,6 +49,7 @@ class Default_Controller_Index extends Default_Controller_Base{
     }
 
     public function bill() {
+
         $this->view->render('bill');
     }
 
@@ -83,6 +90,35 @@ class Default_Controller_Index extends Default_Controller_Base{
         //     $this->redirect(HTP::$baseUrl);
         // }
     }
+
+    public function search($param)
+    {
+        if(isset($param[0]))
+            $page = intVal($param[0]) == 0 ? 1 : intVal($param[0]);
+        else
+            $page = 1;
+
+        $sodong = HTP::$config['recordPerPage'];
+        $x = ($page - 1) * $sodong;
+        if(HTP_Request::get('search'))
+        {
+            $key = HTP_Request::get('search');
+            $this->view->category = Category::model()->findAllBySql("SELECT * FROM category");
+            $product = Product::model()->findAllBySql("select * from product where name LIKE N'$key%' limit ".$x.", ".$sodong);
+            $this->view->products = $product;
+            $this->view->key = $key;
+            $this->view->page = $page;
+            $this->view->sodong = $sodong;
+            $this->view->totalPage = Product::model()->getCount('*', "name like N'$key%'");
+            $this->view->render('search');
+        }
+        else
+            $this->redirect(HTP::$baseUrl);
+
+
+    }
+
+
 
     public function logout() {
         HTP_Session::delete('ID');

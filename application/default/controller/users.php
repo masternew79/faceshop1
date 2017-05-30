@@ -89,10 +89,15 @@ class Default_Controller_Users extends Default_Controller_Base{
             //scenario : kịch bản để check rules khi validate model
             $user = new User();
             $user->load(HTP_Request::post('User'));
+            if(isset($user->password))
+                $user->password = sha1($user->password);
+
+
             if($user->validate())
             {
                 $user->name = Helper::strip_tags_content($user->name);
                 $user->address = Helper::strip_tags_content($user->address);
+
 
                 $user->update('id = :id', array(':id'=>$user->id));
                 echo json_encode($user, JSON_UNESCAPED_UNICODE);
@@ -167,6 +172,7 @@ class Default_Controller_Users extends Default_Controller_Base{
             {
                 $user->name = Helper::strip_tags_content($user->name);
                 $user->address = Helper::strip_tags_content($user->address);
+                $user->password = sha1($user->password);
                 try
                 {
                     $id = $user->insert();
