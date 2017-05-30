@@ -21,7 +21,7 @@ class Helper{
         return preg_replace('/(?:<|&lt;)\/?([a-zA-Z]+) *[^<\/]*?(?:>|&gt;)/', '', $text);
     }
 
-    public static function checkMailIsExists($email)
+    public static function checkMailExists($email)
     {
         $sender = 'mousewip@gmail.com';
         $SMTP_Validator = new SMTP_validateEmail();
@@ -35,13 +35,10 @@ class Helper{
         }
     }
 
-    public static function sendmail($email, $pass){
+    public static function sendmail($email, $body, $subject){
         $mail = new HTP_Email();
-        $mail->Subject = '=?UTF-8?B?'.base64_encode('FaceShop - Reset pasword').'?=';
+        $mail->Subject = '=?UTF-8?B?'.base64_encode($subject).'?=';
         $mail->isHTML(true);
-        $body = '<h1>FaceShop - Reset pasword</h1><br>';
-        $body .= '<p>Quý khách đã cầu reset mật khẩu, hệ thống đã tự động đổi mật khẩu mới cho quý khách</p>';
-        $body .= '<p>Vui lòng sử dụng mật khẩu:  <b>' .$pass . '</b>  để đăng nhập hệ thống</p>';
 
         $mail->Body = $body;
         $mail->SetFrom('mousewip@gmail.com');
@@ -50,7 +47,7 @@ class Helper{
         $send = $mail->sendMail();
 
         if($send){
-            echo $send;
+            return true;
         }else{
             return false;
         }

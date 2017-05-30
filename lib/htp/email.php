@@ -9,13 +9,13 @@ class HTP_Email extends PHPMailer{
     public $bccMails;
     public function __construct(){
         $this->isSMTP();
-        $this->SMTPDebug = Config::$php_mailer['SMTPDebug'];
-        $this->Host = Config::$php_mailer['Host'];
-        $this->Port = Config::$php_mailer['Port'];
-        $this->SMTPSecure = Config::$php_mailer['SMTPSecure'];
-        $this->SMTPAuth = Config::$php_mailer['SMTPAuth'];
-        $this->Username = Config::$php_mailer['Username'];
-        $this->Password = Config::$php_mailer['Password'];
+        $this->SMTPDebug = HTP::$config['mail']['SMTPDebug'];
+        $this->Host = HTP::$config['mail']['Host'];
+        $this->Port = HTP::$config['mail']['Port'];
+        $this->SMTPSecure = HTP::$config['mail']['SMTPSecure'];
+        $this->SMTPAuth = HTP::$config['mail']['SMTPAuth'];
+        $this->Username = HTP::$config['mail']['Username'];
+        $this->Password = HTP::$config['mail']['Password'];
     }
      
     public function resetTo(){

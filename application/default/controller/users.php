@@ -4,8 +4,6 @@ class Default_Controller_Users extends Default_Controller_Base{
     public function index(){
         $this->view->setLayout('other');
     }
-    
-
     public function getInfo($param) {
     	$model = HTP_User::getInfo();
     	$result = array('id'=> $model->id,
@@ -137,50 +135,52 @@ class Default_Controller_Users extends Default_Controller_Base{
 
     public function resetPassword()
     {
-        if(HTP_Request::post('email'))
+//        echo  HTP_Request::post('email') . HTP_Request::post('captcha') . HTP_Session::get("security_code");
+//        return;
+        if(HTP_Request::post('email') && HTP_Request::post('captcha'))
         {
             $email = HTP_Request::post('email');
-            if(Helper::checkMailIsExists($email))
+            if(HTP_Request::post('captcha') == HTP_Session::get("security_code"))
             {
-echo 'exists';
+                if(Helper::checkMailExists($email))
+                {
+                    $md5_hash = md5(rand(0, 999));
+                    $pass = substr($md5_hash, 0, 10);
+
+                    $body = '<h1>FaceShop - Reset pasword</h1><br>';
+                    $body .= '<p>Quý khách đã cầu reset mật khẩu, hệ thống đã tự động đổi mật khẩu mới cho quý khách</p>';
+                    $body .= '<p>Vui lòng sử dụng mật khẩu:  <b>' .$pass . '</b>  để đăng nhập hệ thống</p>';
+                    $body .= '<p>Để đảm bảo an toàn, sau khi đăng nhập hệ thống, quý khách vui lòng cập nhật mật khẩu của mình.</p>';
+
+                    $subject = 'FaceShop - Reset pasword';
+                    $user = new User();
+                    $user->password = sha1($pass);
+                    $user->update('email = :email', array(':email' => $email));
+                    if(Helper::sendmail($email, $body, $subject))
+                    {
+                        echo json_encode(array('code'=>'success', 'message'=>'Reset mật khẩu thành công. Vui lòng kiểm tra email để nhận mật khẩu mới.'), JSON_UNESCAPED_UNICODE);
+                        return;
+                    }
+                    else
+                    {
+                        echo json_encode(array('code'=>'fail', 'message'=>'Reset mật khẩu thất bại, vui lòng thử lại'), JSON_UNESCAPED_UNICODE);
+                        return;
+                    }
+                }
+                else
+                {
+                    echo json_encode(array('code'=>'fail', 'message'=>'Email không tồn tại, vui lòng nhập email đúng!'), JSON_UNESCAPED_UNICODE);
+                    return;
+                }
             }
             else
             {
-                echo json_encode(array('code'=>1, 'message'=>'Email không tồn tại, vui lòng nhập email đúng!'), JSON_UNESCAPED_UNICODE);
+                echo json_encode(array('code'=>'error', 'message'=>'Mã bảo mật không đúng!'), JSON_UNESCAPED_UNICODE);
+                return;
             }
-
         }
         else
             $this->redirect(HTP::$baseUrl);
-
-    }
-
-    public function a()
-    {
-        $mail = new HTP_Email(); // create a new object
-        $mail->IsSMTP(); // enable SMTP
-        $mail->SMTPDebug = 0; // debugging: 1 = errors and messages, 2 = messages only
-        $mail->SMTPAuth = true; // authentication enabled
-        $mail->SMTPSecure = 'ssl'; // secure transfer enabled REQUIRED for Gmail
-        $mail->Host = "smtp.gmail.com";
-        $mail->Port = 465; // or 587
-        $mail->IsHTML(true);
-        $mail->Username = "mousewip2@gmail.com";
-        $mail->Password = "faceshopnhom01@@!!";
-
-        $body = '<h1>FaceShop - Reset pasword</h1><br>';
-        $body .= '<p>Quý khách đã cầu reset mật khẩu, hệ thống đã tự động đổi mật khẩu mới cho quý khách</p>';
-        $body .= '<p>Vui lòng sử dụng mật khẩu:  <b>123456</b>  để đăng nhập hệ thống</p>';
-        $mail->SetFrom("thanhphong.vtkn@gmail.com");
-        $mail->Subject = "Test";
-        $mail->Body = $body;
-        $mail->AddAddress("thanhphong.vtkn@gmail.com");
-
-        if(!$mail->Send()) {
-            echo "Mailer Error: " . $mail->ErrorInfo;
-        } else {
-            echo "Message has been sent";
-        }
     }
 
 }

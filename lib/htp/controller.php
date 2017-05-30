@@ -1,5 +1,4 @@
 <?php
-require_once 'config/config.php';
     class HTP_Controller{
         public $view;
          
