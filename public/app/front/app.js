@@ -20,6 +20,15 @@ frontApp.controller('cartController', ['$scope',  '$localStorage', '$http', '$se
 		}
 	};
 
+	$scope.checkout = function() {
+		if ($scope.name == '') {
+			angular.element('.modal').modal('toggle');
+			messageModel('Vui lòng đăng nhập');
+		} else {
+			$window.location.href = baseUrl + '/checkout';
+		}
+	};
+
 	$scope.addCart = function(item) {
 		var obj = {};
 
@@ -28,7 +37,7 @@ frontApp.controller('cartController', ['$scope',  '$localStorage', '$http', '$se
 		obj.qty = 1;
 
 		$http.post(baseUrl + '/products/get/' + obj.id).success(function(result) {
-			obj.name = result.name.substring(0, 30) + '...';
+			obj.name = result.name;
 			obj.price = result.price;
 			obj.img = result.img;
 		});
@@ -117,7 +126,7 @@ frontApp.controller('cartController', ['$scope',  '$localStorage', '$http', '$se
 	$scope.$watch(function() {
 		$localStorage.id = $scope.id;
 		$localStorage.name = $scope.name;
-        // $localStorage.email = $scope.email;
+        $localStorage.cart = $scope.cart;
         // $localStorage.mobile = $scope.mobile;
         // $localStorage.dob = $scope.dob;
         // $localStorage.address = $scope.address;
@@ -132,7 +141,7 @@ frontApp.controller('cartController', ['$scope',  '$localStorage', '$http', '$se
 	}, function() {
 	    $scope.id = $localStorage.id;
 	    $scope.name = $localStorage.name;
-       //  $scope.email = $localStorage.email;
+        $scope.cart = $localStorage.cart;
        //  $scope.mobile = $localStorage.mobile;
        //  $scope.dob = $localStorage.dob;
       	// $scope.address = $localStorage.address;
@@ -163,7 +172,7 @@ frontApp.controller('categoryController', ['$scope', '$http', '$location', 'orde
 		for (var i = 0; i < result.length; i++) {
 			var obj = {};
 			obj.id = result[i].id;
-			obj.name = result[i].name.substring(0, 30) + '...';
+			obj.name = result[i].name;
 			obj.price = result[i].price;
 			obj.img = result[i].img;
 			obj.view = result[i].view;
@@ -177,6 +186,7 @@ frontApp.controller('categoryController', ['$scope', '$http', '$location', 'orde
 		}
 		});
 	$scope.products = products;
+	console.log($scope.products);
 
 	$scope.sortBy = function(propertyName) {
 		$scope.reverse = ($scope.propertyName === propertyName) ? !$scope.reverse : false;
@@ -192,7 +202,7 @@ frontApp.controller('categoryController', ['$scope', '$http', '$location', 'orde
 		for (var i = 0; i < result.length; i++) {
 			var obj = {};
 			obj.id = result[i].id;
-			obj.name = result[i].name.substring(0, 30) + '...';
+			obj.name = result[i].name;
 			obj.price = result[i].price;
 			obj.img = result[i].img;
 			obj.view = result[i].view;
@@ -215,7 +225,7 @@ frontApp.controller('categoryController', ['$scope', '$http', '$location', 'orde
 		for (var i = 0; i < result.length; i++) {
 			var obj = {};
 			obj.id = result[i].id;
-			obj.name = result[i].name.substring(0, 30) + '...';
+			obj.name = result[i].name;
 			obj.price = result[i].price;
 			obj.img = result[i].img;
 			obj.view = result[i].view;
@@ -226,11 +236,12 @@ frontApp.controller('categoryController', ['$scope', '$http', '$location', 'orde
 			obj.salePrice = result[i].salePrice;
 			obj.count = i;
 			products.push(obj);
-		}
+		}P
 		});
 		$scope.products = products;
 		console.log($scope.products);
 	};
+
 
 	$scope.$watch('currentPage', function(newValue, oldValue, scope) {
 		$scope.itemPerPage= 28;

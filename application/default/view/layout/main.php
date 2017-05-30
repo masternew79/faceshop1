@@ -45,6 +45,10 @@
                         </ul>
                     </div>
                     <div class="panel-body">
+                        <div class="alert alert-danger alert-dismissable message-model hide">
+                          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            <div class="content-message-model"></div>
+                        </div>
                         <div class="tab-content">
                             <div class="tab-pane fade  in active" id="tab1success">
                                 <form>
@@ -185,7 +189,7 @@
         
     </ul>
     <div class="total-price text-center">Tổng tiền: {{total}} VNĐ</div>
-    <div class="text-center"><button type="button" class="btn btn-danger">Thanh toán</button></div>
+    <div class="text-center"><a href="" class="btn btn-danger" ng-click="checkout()">Thanh toán</a></div>
 </div>
 <!-- .cart -->
 <!-- add success -->

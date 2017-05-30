@@ -32,6 +32,12 @@ class Default_Controller_Index extends Default_Controller_Base{
         $this->view->render('product');
     }
 
+    public function checkout()
+    {
+        $this->view->category = Category::model()->findAllBySql("SELECT * FROM category");
+        $this->view->render('checkout');
+    }
+
     public function userInfo() {
         $this->view->category = Category::model()->findAllBySql("SELECT * FROM category");
         $this->view->render('userInfo');
@@ -43,6 +49,7 @@ class Default_Controller_Index extends Default_Controller_Base{
     }
 
     public function bill() {
+
         $this->view->render('bill');
     }
 

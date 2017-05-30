@@ -81,11 +81,13 @@ $(document).ready(function() {
 		var province = $('[name=province]').val();
 		var district = $('[name=district]').val();
 		var ward = $('[name=ward]').val();
-		
-		$.post(baseUrl+'/users/updateInfo', {'User[name]': name, 'User[mobile]': mobile, 'User[dob]': dob, 'User[address]': address, 'User[gender]': gender, 'User[province]': province, 'User[district]': district, 'User[ward]': ward}, function(result) {
+		console.log(loginID);
+
+		$.post(baseUrl+'/users/updateInfo',{'User[id]': loginID, 'User[name]': name, 'User[mobile]': mobile, 'User[dob]': dob, 'User[address]': address, 'User[gender]': gender, 'User[province]': province, 'User[district]': district, 'User[ward]': ward}, function(result) {
 			console.log(result);
 		});
 	});
+
 
 
 });

@@ -36,12 +36,11 @@
                     <div class="view col-md-10 col-md-offset-1 text-center" ng-cloak>
                         <i class="fa fa-eye"> {{product.view}}</i>
                     </div>
-                    <a href="">
+                    <a href="<?php echo HTP::$baseUrl . '/product/'; ?>{{product.id}}">
                         <img src="<?=HTP::$resourceUrl . '/'?>{{product.img}}" class="img-responsive">
                         <div class="caption">
                             <p class="name" ng-cloak>{{product.name}}</p>
                             <p class="price" ng-cloak>{{product.salePrice}} VNĐ</p>
-                            <p class="sale-price" ng-if="product.sale_off !== 0"> Giá gốc {{product.price}}</p>
                         </div>
                     </a>
                     <div class="action text-center v-align" data-id="{{product.id}}">
