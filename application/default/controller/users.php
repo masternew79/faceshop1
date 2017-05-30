@@ -157,4 +157,11 @@ class Default_Controller_Users extends Default_Controller_Base{
             $this->redirect(HTP::$baseUrl);
     }
 
+    public function register()
+    {
+        
+    }
+    
+    
+
 }
