@@ -195,7 +195,4 @@ class Default_Controller_Users extends Default_Controller_Base{
         else
             $this->redirect(HTP::$baseUrl);
     }
-    
-    
-
 }

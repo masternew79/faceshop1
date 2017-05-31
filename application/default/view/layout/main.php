@@ -81,29 +81,36 @@
                                 <form action="" method="POST" role="form">
                                     <div class="input-group">
                                         <span class="input-group-addon" id="basic-addon1"><i class="fa fa-user-o"></i></span>
-                                        <input type="text" class="form-control" placeholder="Họ Tên" aria-describedby="basic-addon1" id="reg-input-name" name="name">
+                                        <input type="text" class="form-control" placeholder="Họ Tên" aria-describedby="basic-addon1" id="reg-input-name" name="reg-name" ng-model="regName">
                                     </div>
                                     <div class="message reg-message-name alert alert-warning hide"></div>
                                     <br>
                                     <div class="input-group">
                                         <span class="input-group-addon" id="basic-addon1"><i class="fa fa-envelope-o"></i></span>
-                                        <input type="email" class="form-control" id="reg-input-email" name="email" placeholder="Email" aria-describedby="basic-addon1">
+                                        <input type="email" class="form-control" id="reg-input-email" name="email" placeholder="Email" aria-describedby="basic-addon1" ng-model="regEmail">
                                     </div>
                                     <div class="message reg-message-email alert alert-warning hide"></div>
                                     <br>
                                     <div class="input-group">
                                         <span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-lock"></i></span>
-                                        <input type="password" class="form-control" id="reg-input-pass" name="password" placeholder="Mật khẩu" aria-describedby="basic-addon1">
-                                    </div>
-                                    <br>
-                                    <div class="input-group">
-                                        <span class="input-group-addon" id="captcha"><img id="img_captcha" src="<?=HTP::$resourceUrl?>/captcha.php"/></span>
-                                        <input type="text" class="form-control" id="login-input-captcha" name="captcha" placeholder="Mã xác nhận" aria-describedby="basic-addon1" ng-model="captcha">
+                                        <input type="password" class="form-control" id="reg-input-pass" name="password" placeholder="Mật khẩu" aria-describedby="basic-addon1" ng-model="regPass">
                                     </div>
                                     <div class="message reg-message-pass alert alert-warning hide"></div>
                                     <br>
+                                    <div class="input-group">
+                                        <span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-phone"></i></span>
+                                        <input type="text" class="form-control" id="reg-input-mobile" name="reg-mobile" placeholder="Số điện thoại" aria-describedby="basic-addon1" ng-model="regMobile">
+                                    </div>
+                                    <div class="message reg-message-mobile alert alert-warning hide"></div>
+                                    <br>
+                                    <div class="input-group">
+                                        <span class="input-group-addon" id="captcha"><img id="img_captcha" src="<?=HTP::$resourceUrl?>/captcha.php"/></span>
+                                        <input type="text" class="form-control" id="reg-input-captcha" name="captcha" placeholder="Mã xác nhận" aria-describedby="basic-addon1" ng-model="regCaptcha">
+                                    </div>
+                                    <div class="message reg-message-capt alert alert-warning hide"></div>
+                                    <br>
                                     <div class="text-right">
-                                        <button type="submit" class="btn btn-success btn-register">Đăng kí</button>
+                                        <button type="submit" class="btn btn-success btn-register" ng-click="">Đăng kí</button>
                                     </div>
                                 </form>
                             </div>
@@ -189,7 +196,7 @@
         
     </ul>
     <div class="total-price text-center">Tổng tiền: {{total}} VNĐ</div>
-    <div class="text-center"><a href="" class="btn btn-danger" ng-click="checkout()">Thanh toán</a></div>
+    <div class="text-center"><a href="" class="btn btn-danger" ng-click="checkout()">Đặt hàng</a></div>
 </div>
 <!-- .cart -->
 <!-- add success -->
