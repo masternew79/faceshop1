@@ -1169,6 +1169,8 @@ button.btn.btn-link.updatepass:focus {
   color: #ccc;
 }
 .checkout {
+  margin-bottom: 30px;
+  padding-bottom: 20px;
   margin-top: 30px;
   border-left: 1px solid #ddd;
 }

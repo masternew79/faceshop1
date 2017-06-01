@@ -4,10 +4,10 @@ class Default_Controller_Index extends Default_Controller_Base{
     public function index(){
         $this->view->bestSelling = Product::model()->findBySql('SELECT * FROM product ORDER BY sold DESC LIMIT 1');
         $this->view->sellings = Product::model()->findAllBySql('SELECT * FROM product ORDER BY sold DESC LIMIT 2, 6');
-        // $this->view->newest = Product::model()->findBySql('SELECT * FROM product ORDER BY creat_at DESC LIMIT 1');
-        // $this->view->news = Product::model()->findAllBySql('SELECT * FROM product ORDER BY creat_at DESC LIMIT 2, 6');
-        // $this->view->biggestDiscount = Product::model()->findBySql('SELECT * FROM product ORDER BY sale_off DESC LIMIT 1');
-        // $this->view->discounts = Product::model()->findAllBySql('SELECT * FROM product ORDER BY sale_off DESC LIMIT 2, 6');
+        $this->view->newest = Product::model()->findBySql('SELECT * FROM product ORDER BY creat_at DESC LIMIT 1');
+        $this->view->news = Product::model()->findAllBySql('SELECT * FROM product ORDER BY creat_at DESC LIMIT 2, 6');
+        $this->view->biggestDiscount = Product::model()->findBySql('SELECT * FROM product ORDER BY sale_off DESC LIMIT 1');
+        $this->view->discounts = Product::model()->findAllBySql('SELECT * FROM product ORDER BY sale_off DESC LIMIT 2, 6');
         $this->view->category = Category::model()->findAllBySql("SELECT * FROM category");
         $this->view->render('index');
     }
@@ -90,6 +90,35 @@ class Default_Controller_Index extends Default_Controller_Base{
         //     $this->redirect(HTP::$baseUrl);
         // }
     }
+
+    public function search($param)
+    {
+        if(isset($param[0]))
+            $page = intVal($param[0]) == 0 ? 1 : intVal($param[0]);
+        else
+            $page = 1;
+
+        $sodong = HTP::$config['recordPerPage'];
+        $x = ($page - 1) * $sodong;
+        if(HTP_Request::get('search'))
+        {
+            $key = HTP_Request::get('search');
+            $this->view->category = Category::model()->findAllBySql("SELECT * FROM category");
+            $product = Product::model()->findAllBySql("select * from product where name LIKE N'$key%' limit ".$x.", ".$sodong);
+            $this->view->products = $product;
+            $this->view->key = $key;
+            $this->view->page = $page;
+            $this->view->sodong = $sodong;
+            $this->view->totalPage = Product::model()->getCount('*', "name like N'$key%'");
+            $this->view->render('search');
+        }
+        else
+            $this->redirect(HTP::$baseUrl);
+
+
+    }
+
+
 
     public function logout() {
         HTP_Session::delete('ID');

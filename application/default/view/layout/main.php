@@ -72,7 +72,7 @@
                                     <br>
                                     <div class="text-right">
                                         <span id="error_mesage" style="color: red"></span>
-                                        <button type="button" class="btn btn-link forgot" id="test">Quên mật khẩu</button>
+                                        <button type="button" class="btn btn-link forgot" id="test" ng-click="forget()">Quên mật khẩu</button>
                                         <button type="button" class="btn btn-success btn-login" ng-click="login()">Đăng nhập</button>
                                     </div>
                                 </form>
@@ -156,9 +156,9 @@
                     </div>
                 </li>
             </ul>
-            <form class="navbar-form" role="search">
+            <form class="navbar-form" role="search" action="<?=HTP::$baseUrl.'/search'?>" method="get">
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Tìm kiếm" size="40">
+                    <input type="text" class="form-control" name="search" placeholder="Tìm kiếm" size="40">
                 </div>
                 <button type="submit" class="btn btn-danger"><b class="glyphicon glyphicon-search"></b></button>
             </form>

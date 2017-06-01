@@ -15,79 +15,45 @@
         <tr>
             <th>STT</th>
             <th>Tên thành viên</th>
-            <th>Ngày tạo</th>
+            <th>Ngày sinh</th>
             <th>SDT</th>
             <th>Tùy chọn</th>
         </tr>
         </thead>
         <tbody>
+        <?php $stt = 1;foreach ($this->user as $item){?>
+
+
         <tr class="text-center">
-            <td>1</td>
-            <td>Lorem ipsum dolor sit amet.</td>
-            <td>10/12/12</td>
-            <td>1023761283</td>
+            <td><?php $stt++;?></td>
+            <td><?php $item->name?></td>
+            <td><?php $item->dob?></td>
+            <td><?php $item->mobile?></td>
             <td>
-                <a href="" class="btn btn-default btn-xs">Xóa</a>
+                <button class="btn btn-default btn-xs" id="<?php echo $item->id;?>">Xóa</button>
                 <a href="" class="btn btn-warning btn-xs">Sửa</a>
                 <a href="" class="btn btn-info btn-xs">Chi tiết</a>
             </td>
         </tr>
-        <tr class="text-center">
-            <td>1</td>
-            <td>Lorem ipsum dolor sit amet.</td>
-            <td>10/12/12</td>
-            <td>1023761283</td>
-            <td>
-                <a href="" class="btn btn-default btn-xs">Xóa</a>
-                <a href="" class="btn btn-warning btn-xs">Sửa</a>
-                <a href="" class="btn btn-info btn-xs">Chi tiết</a>
-            </td>
-        </tr>
-        <tr class="text-center">
-            <td>1</td>
-            <td>Lorem ipsum dolor sit amet.</td>
-            <td>10/12/12</td>
-            <td>1023761283</td>
-            <td>
-                <a href="" class="btn btn-default btn-xs">Xóa</a>
-                <a href="" class="btn btn-warning btn-xs">Sửa</a>
-                <a href="" class="btn btn-info btn-xs">Chi tiết</a>
-            </td>
-        </tr>
-        <tr class="text-center">
-            <td>1</td>
-            <td>Lorem ipsum dolor sit amet.</td>
-            <td>10/12/12</td>
-            <td>1023761283</td>
-            <td>
-                <a href="" class="btn btn-default btn-xs">Xóa</a>
-                <a href="" class="btn btn-warning btn-xs">Sửa</a>
-                <a href="" class="btn btn-info btn-xs">Chi tiết</a>
-            </td>
-        </tr>
-        <tr class="text-center">
-            <td>1</td>
-            <td>Lorem ipsum dolor sit amet.</td>
-            <td>10/12/12</td>
-            <td>1023761283</td>
-            <td>
-                <a href="" class="btn btn-default btn-xs">Xóa</a>
-                <a href="" class="btn btn-warning btn-xs">Sửa</a>
-                <a href="" class="btn btn-info btn-xs">Chi tiết</a>
-            </td>
-        </tr>
-        <tr class="text-center">
-            <td>1</td>
-            <td>Lorem ipsum dolor sit amet.</td>
-            <td>10/12/12</td>
-            <td>1023761283</td>
-            <td>
-                <a href="" class="btn btn-default btn-xs">Xóa</a>
-                <a href="" class="btn btn-warning btn-xs">Sửa</a>
-                <a href="" class="btn btn-info btn-xs">Chi tiết</a>
-            </td>
-        </tr>
+        <?php }?>
+
 
         </tbody>
     </table>
 </div>
+
+</div>
+<script>
+    $(document).ready(function(){
+        $(document).on("click","button",function(){
+            var result = confirm("Bạn có muốn xóa Nhân viên" + this.id);
+            if(result)
+            {
+                $.get("<?=HTP::$baseUrl;?>" + "/user/delete/" + this.id, function(data, status){
+                    alert("Xóa thành công");
+                });
+            }
+        });
+    });
+
+</script>

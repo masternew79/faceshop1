@@ -8,139 +8,73 @@
                 <button type="submit" class="btn btn-info"><b class="glyphicon glyphicon-search"></b></button>
             </form>
         </div>
-        <div class="col-md-4 text-right"><a href="#/addProduct" class="btn btn-success"><i class="fa fa-plus-square-o"></i> Thêm sản phẩm</a></div>
+        <!--        <div class="col-md-4 text-right"><a href="#/addProduct" class="btn btn-success"><i class="fa fa-plus-square-o"></i> Thêm sản phẩm</a></div>-->
     </div>
     <table class="table table-responsive">
         <thead>
         <tr>
             <th>STT</th>
-            <th>Hình</th>
+            <th>Mã khách hàng</th>
             <th>Tên</th>
-            <th>Giá</th>
-            <th>Giảm giá</th>
-            <th width="250px">Thông tin</th>
-            <th>Lượt xem</th>
+            <th>SDT</th>
+            <th>Email</th>
+            <th width="250px">Tổng cộng</th>
+            <th>Status</th>
             <th>Tùy chọn</th>
         </tr>
         </thead>
         <tbody>
-        <?php foreach ($this->products as $item) echo $item->price .'<br>'; ?>
 
+        <?php
+        $stt = 1;
+        foreach ($this->order as $item)
+        {
+            ?>
 
+            <tr class="text-center" ng-hide="appear1">
+                <td><?php echo $stt++;?></td>
+                <td><?php echo $item->user_id;?></td>
+                <td><?php echo $item->name;?></td>
+                <td><?php echo $item->mobile;?></td>
+                <td><?php echo $item->email;?></td>
+                <td><?php echo $item->total;?></td>
+                <td><?php
+                    switch ($item->status)
+                    {
+                        case 0 : echo 'Mới đặt'; break;
+                        case 1: echo 'Đã xác nhận'; break;
+                        case 2: echo 'Đang giao'; break;
+                        case 3: echo 'Hoàn tất'; break;
+                        default : echo 'Đã Hủy'; break;
+                    }
+                    ?></td>
+                <td>
+                    <button class="btn btn-default btn-xs" id="<?php echo $item->id;?>">Xóa</button>
+                    <a href="<?=HTP::$baseUrl .'/order/update/'.$item->id;?>" class="btn btn-warning btn-xs">Sửa</a>
+                    <a href="<?=HTP::$baseUrl .'/order/detail/'.$item->id;?>" class="btn btn-info btn-xs">Chi tiết</a>
+                </td>
+            </tr>
+            <?php
+        }
 
-        <tr class="text-center" ng-hide="appear1">
-            <td>1</td>
-            <td class="image"><img src="../assets/img/acer1.png" alt="" class="img-responsive"></td>
-            <td>Lorem ipsum dolor sit amet.</td>
-            <td>1000000</td>
-            <td>100000</td>
-            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro, architecto.</td>
-            <td>1200</td>
-            <td>
-                <a href="" class="btn btn-default btn-xs" ng-click="appear1 = delete()">Xóa</a>
-                <a href="" class="btn btn-warning btn-xs">Sửa</a>
-                <a href="" class="btn btn-info btn-xs">Chi tiết</a>
-            </td>
-        </tr>
-        <tr class="text-center" ng-hide="appear2">
-            <td>2</td>
-            <td class="image"><img src="../assets/img/acer1.png" alt="" class="img-responsive"></td>
-            <td>Lorem ipsum dolor sit amet.</td>
-            <td>1000000</td>
-            <td>100000</td>
-            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro, architecto.</td>
-            <td>1200</td>
-            <td>
-                <a href="" class="btn btn-default btn-xs" ng-click="appear2 = delete()">Xóa</a>
-                <a href="" class="btn btn-warning btn-xs">Sửa</a>
-                <a href="" class="btn btn-info btn-xs">Chi tiết</a>
-            </td>
-        </tr>
-
-        <tr class="text-center" ng-hide="appear3">
-            <td>3</td>
-            <td class="image"><img src="../assets/img/acer1.png" alt="" class="img-responsive"></td>
-            <td>Lorem ipsum dolor sit amet.</td>
-            <td>1000000</td>
-            <td>100000</td>
-            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro, architecto.</td>
-            <td>1200</td>
-            <td>
-                <a href="" class="btn btn-default btn-xs" ng-click="appear3 = delete()">Xóa</a>
-                <a href="" class="btn btn-warning btn-xs">Sửa</a>
-                <a href="" class="btn btn-info btn-xs">Chi tiết</a>
-            </td>
-        </tr>
-        <tr class="text-center" ng-hide="appear3">
-            <td>3</td>
-            <td class="image"><img src="../assets/img/acer1.png" alt="" class="img-responsive"></td>
-            <td>Lorem ipsum dolor sit amet.</td>
-            <td>1000000</td>
-            <td>100000</td>
-            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro, architecto.</td>
-            <td>1200</td>
-            <td>
-                <a href="" class="btn btn-default btn-xs" ng-click="appear3 = delete()">Xóa</a>
-                <a href="" class="btn btn-warning btn-xs">Sửa</a>
-                <a href="" class="btn btn-info btn-xs">Chi tiết</a>
-            </td>
-        </tr>
-        <tr class="text-center" ng-hide="appear3">
-            <td>3</td>
-            <td class="image"><img src="../assets/img/acer1.png" alt="" class="img-responsive"></td>
-            <td>Lorem ipsum dolor sit amet.</td>
-            <td>1000000</td>
-            <td>100000</td>
-            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro, architecto.</td>
-            <td>1200</td>
-            <td>
-                <a href="" class="btn btn-default btn-xs" ng-click="appear3 = delete()">Xóa</a>
-                <a href="" class="btn btn-warning btn-xs">Sửa</a>
-                <a href="" class="btn btn-info btn-xs">Chi tiết</a>
-            </td>
-        </tr>
-        <tr class="text-center" ng-hide="appear3">
-            <td>3</td>
-            <td class="image"><img src="../assets/img/acer1.png" alt="" class="img-responsive"></td>
-            <td>Lorem ipsum dolor sit amet.</td>
-            <td>1000000</td>
-            <td>100000</td>
-            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro, architecto.</td>
-            <td>1200</td>
-            <td>
-                <a href="" class="btn btn-default btn-xs" ng-click="appear3 = delete()" id="btn_delete">Xóa</a>
-                <a href="" class="btn btn-warning btn-xs">Sửa</a>
-                <a href="" class="btn btn-info btn-xs">Chi tiết</a>
-            </td>
-        </tr>
-
-
-
+        ?>
 
 
         </tbody>
     </table>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <script>
-    $('#btn_delete').click(function () {
-        console.log(1);
-        $.post('<?=HTP::$baseUrl?>/product/add/1', function (data) {
-            alert(data);
+    $(document).ready(function(){
+        $(document).on("click","button",function(){
+            var result = confirm("Bạn có muốn xóa Hóa Đơn" + this.id);
+            if(result)
+            {
+                $.get("<?=HTP::$baseUrl;?>" + "/order/delete/" + this.id, function(data, status){
+                    alert("Xóa thành công");
+                });
+            }
         });
     });
 
 </script>
+

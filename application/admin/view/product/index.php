@@ -37,7 +37,7 @@
             <td><?php echo $item->sale_off;?></td>
             <td><?php echo $item->view?></td>
             <td>
-                <a href="<?=HTP::$baseUrl .'/product/delete/'. $item->id?>" class="btn btn-default btn-xs" ng-click="appear1 = delete()">Xóa</a>
+                <button class="btn btn-default btn-xs" id="<?php echo $item->id?>">Xóa</button>
                 <a href="<?=HTP::$baseUrl .'/product/update/'. $item->id?>" class="btn btn-warning btn-xs">Sửa</a>
                 <a href="<?=HTP::$baseUrl .'/product/detail/'. $item->id?>" class="btn btn-info btn-xs">Chi tiết</a>
             </td>
@@ -113,23 +113,16 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 <script>
-    $('#btn_delete').click(function () {
-        console.log(1);
-        $.post('<?=HTP::$baseUrl?>/product/add/1', function (data) {
-            alert(data);
+    $(document).ready(function(){
+        $(document).on("click","button",function(){
+            var result = confirm("Bạn có muốn xóa sản phẩm" + this.id);
+            if(result)
+            {
+                $.get("<?=HTP::$baseUrl?>" + "/product/delete/" + this.id, function(data, status){
+                    alert("Xóa thành công");
+                });
+            }
         });
     });
 

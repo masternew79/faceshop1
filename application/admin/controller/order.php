@@ -8,7 +8,7 @@ class Admin_Controller_Order extends Admin_Controller_Base{
 
     public function index()
     {
-        $this->view->products = Product::model()->findAll();
+        $this->view->order = Order::model()->findAll();
         $this->view->setLayout('main');
         $this->view->render('index');
     }
@@ -20,5 +20,20 @@ class Admin_Controller_Order extends Admin_Controller_Base{
         {
             echo 'fail';
         }
+    }
+
+
+    public function delete($param)
+    {
+        if(isset($param[0]))
+        {
+            $id = intval($param[0]);
+            $page = isset($param[1]) ? intval($param[1]) : 1;
+            OrderDetail::model()->delete('id = :id', array(':id'=>$id));
+            Order::model()->delete('id = :id', array(':id'=>$id));
+            $this->redirect(HTP::$baseUrl.'/product/'. $page);
+        }
+        else
+            $this->redirect(HTP::$baseUrl);
     }
 }

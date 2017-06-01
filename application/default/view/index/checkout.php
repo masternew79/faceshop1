@@ -37,11 +37,11 @@
                 </div>
                 <div class="col-md-12">
                     <div class="col-md-5  title-check text-left">Phí vận chuyển:</div>
-                    <div class="col-md-5 price text-right">50000 VNĐ</div>
+                    <div class="col-md-5 price text-right">{{ship}} VNĐ</div>
                 </div>
                 <div class="col-md-12">
                     <div class="col-md-5 total text-left">Tổng tiền:</div>
-                    <div class="col-md-5 price text-right">{{total}} VNĐ</div>
+                    <div class="col-md-5 price text-right">{{thanhtien}} VNĐ</div>
                 </div>
             </div>
             <div class="border-bot row">
@@ -88,11 +88,14 @@
             <div class="col-md-12">
                 <div class="col md-3 title-check">Hình thức thanh toán</div>
                 <div class="col md-9">
-                    <div class="col-md-6">
-                        <button class="btn btn-warning">Thanh toán tiền mặt (trực tiếp)</button>
+                    <div class="col-md-3">
+                        <button class="btn btn-success" ng-click="checkout()">Đặt hàng</button>
                     </div>
-                    <div class="col-md-6">
-                        <a href="" class="btn btn-danger">Thanh toán trực tuyến (online)</a>
+                    <div class="col-md-3">
+                        <button class="btn btn-warning">Thanh toán tiền mặt</button>
+                    </div>
+                    <div class="col-md-3 col-md-offset-1">
+                        <a href="" class="btn btn-danger">Thanh toán trực tuyến</a>
                     </div>
                 </div>
             </div>

@@ -6,7 +6,8 @@ frontApp.controller('cartController', ['$scope',  '$localStorage', '$http', '$se
 
 	$scope.cart = $localStorage.cart || [];
 	$scope.name = $localStorage.name || '';
-    
+    $scope.ship = 50000;
+    $scope.thanhtien = $scope.total + $scope.ship;
 	$scope.checkExist = function(id) {
 		if ($scope.cart.length !== 0) {
 			for (var i = 0; i < $scope.cart.length; i++) {
@@ -19,6 +20,16 @@ frontApp.controller('cartController', ['$scope',  '$localStorage', '$http', '$se
 			return true;
 		}
 	};
+
+
+
+	// $scope.forget = function() {
+	// 	$http.post(baseUrl + '/users/resetPassword', {email: $scope.email, captcha: $scope.captcha}).success(function(result) {
+	// 		console.log(result);
+	// 		console.log($scope.email);
+	// 		console.log($scope.captcha);
+	// 	})
+	// }
 
 	$scope.checkout = function() {
 		if ($scope.name == '') {
@@ -79,19 +90,15 @@ frontApp.controller('cartController', ['$scope',  '$localStorage', '$http', '$se
 	        }
 	        if (result.code != 1) {
 		        messageModel(result.message);
-	        	
 	        }
         });
     };
 
-    console.log($scope.name);
 
     $scope.logout = function() {
     	$localStorage.$reset();
     	$scope.name = '';
     };
-    	console.log($scope.name);
-    	console.log($localStorage.name);
 
 	$scope.count = $scope.cart.forEach(function(product) {
 		var i = 0;
@@ -137,7 +144,25 @@ frontApp.controller('cartController', ['$scope',  '$localStorage', '$http', '$se
 			total += item.price * item.qty;
 		});
 		$scope.total = total;
+		if ($scope.total > 500000) {
+			$scope.ship = 0;
+		} else {
+			$scope.ship = 50000;
+		}
+		$scope.thanhtien = $scope.total + $scope.ship;
 	}, true);
+
+	$scope.checkout = function() {
+		var product = [];
+		for (var i = 0; i < $scope.cart.length; i++) {
+			var pro = {};
+			pro.id = $scope.cart[i].id;
+			pro.price = $scope.cart[i].price;
+			pro.qty = $scope.cart[i].qty;
+			product.push(pro);
+		}
+		console.log(product);
+	}
 
 	$scope.$watch(function() {
 		$localStorage.id = $scope.id;

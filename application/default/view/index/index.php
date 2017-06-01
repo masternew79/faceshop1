@@ -84,7 +84,7 @@
                 </a>
                 <div class="clearfix" style="margin-bottom: 20px"></div>
                 <div class="action text-center v-align" data-id="<?php echo $bestSelling->id ?>" >
-                    <div class="col-md-6 buy"><a href=""><i class="fa fa-credit-card"></i> MUA NGAY</a></div>
+                    <div class="col-md-6 buy"><a href=""><i class="fa fa-credit-card"  ng-click="addCart($event)"></i> MUA NGAY</a></div>
                     <div class="col-md-6 add" ng-click="addCart($event)"><i class="fa fa-cart-plus fa-2x"></i></div>
                 </div>
             </div>
@@ -109,7 +109,157 @@
                 </a>
                 <div class="action text-center v-align" data-id="<?php echo $selling->id ?>">
                     <div class="col-md-6 buy">
-                        <a href=""><i class="fa fa-credit-card"></i> MUA NGAY</a>
+                        <a href=""  ng-click="addCart($event)"><i class="fa fa-credit-card"></i> MUA NGAY</a>
+                    </div>
+                    <div class="col-md-6 add" ng-click="addCart($event)">
+                        <i class="fa fa-cart-plus fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php
+            if ($i == 1):
+                $delay = 0;
+            ?>
+        <div class="clearfix"></div>
+             <?php   
+            endif;
+            $i++;
+            $delay += 0.3;
+        endforeach; 
+        ?>
+    </div>
+    <!-- end hot -->
+    <!-- hot -->
+    <div class="hot container">
+        <div class="title"><a href="">Sản phẩm mới nhất <i class="fa fa-sign-in none"></i></a></div>
+        <?php 
+        $bestSelling = $this->newest;
+         ?>
+        <div class="col-md-6 col-xs-6 wow fadeInLeft p5" data-wow-delay="0.3s">
+            <div class="col-md-12 thumbnail product">
+                <div class="view col-md-6 col-md-offset-3  text-center">
+                    <i class="fa fa-eye"></i> <?php echo $bestSelling->view; ?>
+                </div>
+                <a href="<?php echo HTP::$baseUrl.'/product/'.$bestSelling->id ?>" class="detail">
+                    <div class="row top" style="margin: 15px;">
+                        <div class="col-md-5" style="padding: 0"><img src="<?=HTP::$resourceUrl . '/' . $bestSelling->image?>" class="img-responsive"></div>
+                        <div class="col-md-7">
+                            <div class="caption">
+                                <p class="name"><?php echo $bestSelling->name ?></p>
+                                <p class="price"><?php echo $bestSelling->price ?> VNĐ</p>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="col-md-12 bottom">
+                        <p class="label label-info out"><i class="glyphicon glyphicon-align-left"></i></p>
+                        <?php echo $bestSelling->description ?>
+                    </div>
+                </a>
+                <div class="clearfix" style="margin-bottom: 20px"></div>
+                <div class="action text-center v-align" data-id="<?php echo $bestSelling->id ?>" >
+                    <div class="col-md-6 buy"><a href=""><i class="fa fa-credit-card"  ng-click="addCart($event)"></i> MUA NGAY</a></div>
+                    <div class="col-md-6 add" ng-click="addCart($event)"><i class="fa fa-cart-plus fa-2x"></i></div>
+                </div>
+            </div>
+        </div>
+        <?php 
+        $sellingProduct = $this->news;
+        $i = 0;
+        $delay = 0.3;
+        foreach ($sellingProduct as $selling) :
+         ?>
+        <div class="col-md-3 col-xs-6 wow fadeInUp p5 " data-wow-delay="<?php echo $delay; ?>s" >
+            <div class="col-md-12 thumbnail product">
+                <div class="view col-md-10 col-md-offset-1 text-center">
+                    <i class="fa fa-eye"> <?php echo $selling->view ?></i>
+                </div>
+                <a href="<?php echo HTP::$baseUrl . '/product/' . $selling->id ?>">
+                    <img src="<?=HTP::$resourceUrl . '/' . $selling->image?>">
+                    <div class="caption">
+                        <p class="name"><?php echo $selling->name; ?></p>
+                        <p class="price"><?php echo $selling->price; ?> VNĐ</p>
+                    </div>
+                </a>
+                <div class="action text-center v-align" data-id="<?php echo $selling->id ?>">
+                    <div class="col-md-6 buy">
+                        <a href=""><i class="fa fa-credit-card"  ng-click="addCart($event)"></i> MUA NGAY</a>
+                    </div>
+                    <div class="col-md-6 add" ng-click="addCart($event)">
+                        <i class="fa fa-cart-plus fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php
+            if ($i == 1):
+                $delay = 0;
+            ?>
+        <div class="clearfix"></div>
+             <?php   
+            endif;
+            $i++;
+            $delay += 0.3;
+        endforeach; 
+        ?>
+    </div>
+    <!-- end hot -->
+    <!-- hot -->
+    <div class="hot container">
+        <div class="title"><a href="">Sản phẩm giảm giá <i class="fa fa-sign-in none"></i></a></div>
+        <?php 
+        $bestSelling = $this->biggestDiscount;
+         ?>
+        <div class="col-md-6 col-xs-6 wow fadeInLeft p5" data-wow-delay="0.3s">
+            <div class="col-md-12 thumbnail product">
+                <div class="view col-md-6 col-md-offset-3  text-center">
+                    <i class="fa fa-eye"></i> <?php echo $bestSelling->view; ?>
+                </div>
+                <a href="<?php echo HTP::$baseUrl.'/product/'.$bestSelling->id ?>" class="detail">
+                    <div class="row top" style="margin: 15px;">
+                        <div class="col-md-5" style="padding: 0"><img src="<?=HTP::$resourceUrl . '/' . $bestSelling->image?>" class="img-responsive"></div>
+                        <div class="col-md-7">
+                            <div class="caption">
+                                <p class="name"><?php echo $bestSelling->name ?></p>
+                                <p class="price"><?php echo $bestSelling->price ?> VNĐ</p>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="col-md-12 bottom">
+                        <p class="label label-info out"><i class="glyphicon glyphicon-align-left"></i></p>
+                        <?php echo $bestSelling->description ?>
+                    </div>
+                </a>
+                <div class="clearfix" style="margin-bottom: 20px"></div>
+                <div class="action text-center v-align" data-id="<?php echo $bestSelling->id ?>" >
+                    <div class="col-md-6 buy"><a href=""><i class="fa fa-credit-card"  ng-click="addCart($event)"></i> MUA NGAY</a></div>
+                    <div class="col-md-6 add" ng-click="addCart($event)"><i class="fa fa-cart-plus fa-2x"></i></div>
+                </div>
+            </div>
+        </div>
+        <?php 
+        $sellingProduct = $this->discounts;
+        $i = 0;
+        $delay = 0.3;
+        foreach ($sellingProduct as $selling) :
+         ?>
+        <div class="col-md-3 col-xs-6 wow fadeInUp p5 " data-wow-delay="<?php echo $delay; ?>s" >
+            <div class="col-md-12 thumbnail product">
+                <div class="view col-md-10 col-md-offset-1 text-center">
+                    <i class="fa fa-eye"> <?php echo $selling->view ?></i>
+                </div>
+                <a href="<?php echo HTP::$baseUrl . '/product/' . $selling->id ?>">
+                    <img src="<?=HTP::$resourceUrl . '/' . $selling->image?>">
+                    <div class="caption">
+                        <p class="name"><?php echo $selling->name; ?></p>
+                        <p class="price"><?php echo $selling->price; ?> VNĐ</p>
+                    </div>
+                </a>
+                <div class="action text-center v-align" data-id="<?php echo $selling->id ?>">
+                    <div class="col-md-6 buy">
+                        <a href=""><i class="fa fa-credit-card" ng-click="addCart($event)"></i> MUA NGAY</a>
                     </div>
                     <div class="col-md-6 add" ng-click="addCart($event)">
                         <i class="fa fa-cart-plus fa-2x"></i>

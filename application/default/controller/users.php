@@ -89,10 +89,15 @@ class Default_Controller_Users extends Default_Controller_Base{
             //scenario : kịch bản để check rules khi validate model
             $user = new User();
             $user->load(HTP_Request::post('User'));
+            if(isset($user->password))
+                $user->password = sha1($user->password);
+
+
             if($user->validate())
             {
                 $user->name = Helper::strip_tags_content($user->name);
                 $user->address = Helper::strip_tags_content($user->address);
+
 
                 $user->update('id = :id', array(':id'=>$user->id));
                 echo json_encode($user, JSON_UNESCAPED_UNICODE);
@@ -107,15 +112,14 @@ class Default_Controller_Users extends Default_Controller_Base{
     }
 
 
-    public function resetPassword()
+    public function resetPassword($param)
     {
 //        echo  HTP_Request::post('email') . HTP_Request::post('captcha') . HTP_Session::get("security_code");
 //        return;
-        if(HTP_Request::post('email') && HTP_Request::post('captcha'))
+        if($param[0])
         {
-            $email = HTP_Request::post('email');
-            if(HTP_Request::post('captcha') == HTP_Session::get("security_code"))
-            {
+            $email = $param[0];
+            
                 if(Helper::checkMailExists($email))
                 {
                     $md5_hash = md5(rand(0, 999));
@@ -146,12 +150,6 @@ class Default_Controller_Users extends Default_Controller_Base{
                     echo json_encode(array('code'=>'fail', 'message'=>'Email không tồn tại, vui lòng nhập email đúng!'), JSON_UNESCAPED_UNICODE);
                     return;
                 }
-            }
-            else
-            {
-                echo json_encode(array('code'=>'error', 'message'=>'Mã bảo mật không đúng!'), JSON_UNESCAPED_UNICODE);
-                return;
-            }
         }
         else
             $this->redirect(HTP::$baseUrl);
@@ -167,6 +165,7 @@ class Default_Controller_Users extends Default_Controller_Base{
             {
                 $user->name = Helper::strip_tags_content($user->name);
                 $user->address = Helper::strip_tags_content($user->address);
+                $user->password = sha1($user->password);
                 try
                 {
                     $id = $user->insert();

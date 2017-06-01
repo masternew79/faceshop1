@@ -35,6 +35,17 @@ $(document).ready(function() {
 	});
 
 	//hide show button
+	//
+	var email = $('[name=email]').val();
+	var captcha = $('[name=captcha]').val();
+
+	$('button.forgot').click(function() {
+		$.get(baseUrl + '/users/resetPassword/'+ email, function(result) {
+			console.log(result);
+			console.log(email);
+			console.log(captcha);
+		})
+	});
 	
 	$('button.updatepass').click(function() {
 		$('.form-update-pass').toggleClass('hide');
@@ -66,6 +77,7 @@ $(document).ready(function() {
 		$('button.confirm').toggleClass('hide');
 		Disable(true);	
 	});
+
 	$('button.confirm').click(function() {
 		$('button.updatepass').toggleClass('hide');
 		$('button.updateinfo').toggleClass('hide');
@@ -87,6 +99,7 @@ $(document).ready(function() {
 		var ward = $('[name=ward]').val();
 
 		$.post(baseUrl+'/users/updateInfo',{'User[id]': loginID, 'User[name]': name, 'User[mobile]': mobile, 'User[dob]': dob, 'User[address]': address, 'User[gender]': gender, 'User[province]': province, 'User[district]': district, 'User[ward]': ward}, function(result) {
+
 			console.log(result);
 		});
 	});
@@ -175,4 +188,3 @@ function loadUserInfo() {
 		$('[name=ward]').val(result.ward);
 	});
 }
-

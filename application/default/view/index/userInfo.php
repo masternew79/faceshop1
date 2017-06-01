@@ -101,19 +101,19 @@
 				<div class="form-group">
 					<label class="control-label col-md-2">Mật khẩu hiện tại </label>
 					<div class="col-md-10">
-						<input type="text" class="form-control" id="name" name="current-password" value="">
+						<input type="password" class="form-control" id="name" name="current-password" value="">
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="control-label col-md-2">Mật khẩu mới </label>
 					<div class="col-md-10">
-						<input type="text" class="form-control" id="price" name="new-password" value="">
+						<input type="password" class="form-control" id="price" name="new-password" value="">
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="control-label col-md-2">Nhập lại mật khẩu </label>
 					<div class="col-md-10">
-						<input type="text" class="form-control" id="price" name="re-enter" value="">
+						<input type="password" class="form-control" id="price" name="re-enter" value="">
 					</div>
 				</div>
 				<div class="text-right">
