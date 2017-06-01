@@ -44,7 +44,7 @@ $(document).ready(function() {
 			console.log(result);
 			console.log(email);
 			console.log(captcha);
-		})
+		});
 	});
 	
 	$('button.updatepass').click(function() {
