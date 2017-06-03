@@ -58,10 +58,10 @@
     <!-- hot -->
     <div class="new container">
         <div class="title"><a href="">Sản phẩm bán chạy<i class="fa fa-sign-in none"></i></a></div>
-        <div class="col-md-6 col-xs-6 wow fadeInLeft p5" data-wow-delay="0.3s">
+        <div class="col-md-6 col-xs-6 wow fadeInLeft p5" data-wow-delay="0.5s" ng-cloak>
             <div class="col-md-12 thumbnail product">
                 <a class="detail" href="<?php echo HTP::$baseUrl . '/product/'?>{{bestSelling.id}}" ng-click="increaseView(bestSelling.id)">
-                    <div class="discount-label tag" ng-show="bestSelling.sale_off === 0"> <span>-{{bestSelling.sale_off}}%</span> </div>
+                    <div class="discount-label tag" ng-if="bestSelling.sale_off !== '0'"> <span>-{{bestSelling.sale_off}}%</span> </div>
                     <div class="row top" style="margin: 15px;">
                         <div class="col-md-5" style="padding: 0">
                             <img src="<?=HTP::$resourceUrl . '/'?>{{bestSelling.img}}" class="img-responsive">
@@ -85,7 +85,7 @@
             </div>
         </div>
         
-        <div class="col-md-3 col-xs-6 wow fadeInUp p5 " data-wow-delay="0.3" ng-repeat-start="selling in sellings">
+        <div class="col-md-3 col-xs-6 wow fadeInUp p5 " data-wow-delay="0.3" ng-repeat-start="selling in sellings" ng-cloak>
             <div class="col-md-12 thumbnail product">
                 <a href="<?php echo HTP::$baseUrl . '/product/'?>{{selling.id}}" ng-click="increaseView(selling.id)">
                     <div class="discount-label tag" ng-if="selling.sale_off !== '0'"> <span>-{{selling.sale_off}}%</span> </div>
@@ -112,10 +112,10 @@
     <!-- new -->
     <div class="new container">
         <div class="title"><a href="">Sản phẩm mới nhất <i class="fa fa-sign-in none"></i></a></div>
-        <div class="col-md-6 col-xs-6 wow fadeInLeft p5" data-wow-delay="0.3s">
+        <div class="col-md-6 col-xs-6 wow fadeInLeft p5" data-wow-delay="0.5s" ng-cloak>
             <div class="col-md-12 thumbnail product">
                 <a class="detail" href="<?php echo HTP::$baseUrl . '/product/'?>{{newest.id}}" ng-click="increaseView(newest.id)">
-                    <div class="discount-label tag" ng-show="newest.sale_off === 0"> <span>-{{newest.sale_off}}%</span> </div>
+                    <div class="discount-label tag" ng-if="newest.sale_off !== '0'"> <span>-{{newest.sale_off}}%</span> </div>
                     <div class="row top" style="margin: 15px;">
                         <div class="col-md-5" style="padding: 0">
                             <img src="<?=HTP::$resourceUrl . '/'?>{{newest.img}}" class="img-responsive">
@@ -139,7 +139,7 @@
             </div>
         </div>
         
-        <div class="col-md-3 col-xs-6 wow fadeInUp p5 " data-wow-delay="0.3" ng-repeat-start="new in news">
+        <div class="col-md-3 col-xs-6 wow fadeInUp p5 " data-wow-delay="0.3" ng-repeat-start="new in news" ng-cloak>
             <div class="col-md-12 thumbnail product">
                 <a href="<?php echo HTP::$baseUrl . '/product/'?>{{new.id}}" ng-click="increaseView(bestnew.id)">
                     <div class="discount-label tag" ng-if="new.sale_off !== '0'"> <span>-{{new.sale_off}}%</span> </div>
@@ -162,10 +162,61 @@
         
         <div class="clearfix" ng-repeat-end ng-show="new.count === 1"></div>
     </div>
-    <!-- end hot -->
-    <!-- hot -->
-    
-    <!-- end hot -->
+    <!-- end new -->
+    <!-- disc -->
+    <div class="new container">
+        <div class="title"><a href="">Sản phẩm giảm giá <i class="fa fa-sign-in none"></i></a></div>
+        <div class="col-md-6 col-xs-6 wow fadeInLeft p5" data-wow-delay="0.5s" ng-cloak>
+            <div class="col-md-12 thumbnail product">
+                <a class="detail" href="<?php echo HTP::$baseUrl . '/product/'?>{{biggestDiscount.id}}" ng-click="increaseView(biggestDiscount.id)">
+                    <div class="discount-label tag" ng-if="biggestDiscount.sale_off !== '0'"> <span>-{{biggestDiscount.sale_off}}%</span> </div>
+                    <div class="row top" style="margin: 15px;">
+                        <div class="col-md-5" style="padding: 0">
+                            <img src="<?=HTP::$resourceUrl . '/'?>{{biggestDiscount.img}}" class="img-responsive">
+                            <div class="caption">
+                                <p class="name">{{biggestDiscount.name}}</p>
+                                <p class="price">{{biggestDiscount.salePrice | currency : '' : 0}} VNĐ</p>
+                            </div>
+                        </div>
+                        <div class="col-md-7">
+                            
+                            <div class="bottom" ng-bind-html="biggestDiscount.description"></div>
+                        </div>
+                    </div>
+                    
+                </a>
+                <div class="clearfix" style="margin-bottom: 20px"></div>
+                <div class="action text-center v-align">
+                    <div class="col-md-6 buy"><a href=""><i class="fa fa-credit-card"  ng-click="buyNow(biggestDiscount.id)"></i> MUA NGAY</a></div>
+                    <div class="col-md-6 add" ng-click="pushCart(biggestDiscount.id)"><i class="fa fa-cart-plus fa-2x"></i></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3 col-xs-6 wow fadeInUp p5 " data-wow-delay="0.3" ng-repeat-start="discount in discounts" ng-cloak>
+            <div class="col-md-12 thumbnail product">
+                <a href="<?php echo HTP::$baseUrl . '/product/'?>{{discount.id}}" ng-click="increaseView(bestdiscount.id)">
+                    <div class="discount-label tag" ng-if="discount.sale_off !== '0'"> <span>-{{discount.sale_off}}%</span> </div>
+                    <img src="<?=HTP::$resourceUrl . '/'?>{{discount.img}}">
+                    <div class="caption">
+                        <p class="name">{{discount.name}}</p>
+                        <p class="price"> {{discount.salePrice | currency : '' : 0}} VNĐ</p>
+                    </div>
+                </a>
+                <div class="action text-center v-align">
+                    <div class="col-md-6 buy">
+                        <a href=""  ng-click="pushCart(discount.id)"><i class="fa fa-credit-card"></i> MUA NGAY</a>
+                    </div>
+                    <div class="col-md-6 add" ng-click="pushCart(discount.id)">
+                        <i class="fa fa-cart-plus fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="clearfix" ng-repeat-end ng-show="discount.count === 1"></div>
+    </div>
+    <!-- end disc -->
     
 </div>
 <!-- end wrapper -->

@@ -980,12 +980,11 @@ a.detail {
   top: 75px;
   z-index: 2;
   border-radius: 0;
-  background-color: #4caf50;
+  background-color: #c0392b;
   padding: 10px;
   color: #fff;
   font-size: 14px;
   text-transform: uppercase;
-  box-shadow: 0 2px 2px 0 rgba(76, 175, 80, 0.14), 0 3px 1px -2px rgba(76, 175, 80, 0.2), 0 1px 5px 0 rgba(76, 175, 80, 0.12);
 }
 .message.alert.alert-warning {
   padding: 8px;
@@ -1184,6 +1183,7 @@ button.btn.btn-link.updatepass:focus {
 }
 
 .tag {
+  z-index: 3;
   background: #c0392b;
   border-radius: 3px 0 0 3px;
   color: #fff;
@@ -1227,4 +1227,17 @@ button.btn.btn-link.updatepass:focus {
 
 .tag:hover::after {
    border-left-color: #c0392b; 
+}
+
+#back-to-top {
+  background-color: #c0392b;
+  width: 50px;
+  height: 50px;
+  color: #fff;
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  line-height: 50px;
+  font-size: 2em;
+  display: none;
 }

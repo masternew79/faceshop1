@@ -1,7 +1,5 @@
 var frontApp = angular.module('frontApp', ['ngStorage']);
 
-
-
 frontApp.controller('cartController', function($scope,  $localStorage, $http, $sessionStorage, $window, $location){
 
 	$scope.cart = $localStorage.cart || [];
@@ -52,51 +50,51 @@ frontApp.controller('cartController', function($scope,  $localStorage, $http, $s
 
 	$scope.register = function() {
 		$http.get(baseUrl + '/users/register', {params: {'User[name]': $scope.regName, 'User[email]': $scope.regEmail, 'User[password]': $scope.regPass, 'User[mobile]':$scope.regMobile}}).success(function(result) {
-	        console.log(result);
-	        
-	        if (result.code !== 1 && result.code !==2) {
-		        login($scope.regEmail, $scope.regPass, $scope.regCaptcha);
-	        	
-	        }
-        });
+			console.log(result);
+
+			if (result.code !== 1 && result.code !==2) {
+				login($scope.regEmail, $scope.regPass, $scope.regCaptcha);
+
+			}
+		});
 	};
 
 	$scope.login = function() {
-        login($scope.email, $scope.password, $scope.captcha);
-    };
+		login($scope.email, $scope.password, $scope.captcha);
+	};
 
-    function login(email, password, captcha) {
-    	$http.post(baseUrl + '/users/login/' + email + '/' + password + '/' + captcha).success(function(result) {
-        	console.log(result);
-	        $scope.id = result.id;
-	        $scope.userName = result.name;
-	        $scope.email = result.email;
-	        $scope.mobile = result.mobile;
-	        $scope.dob = result.dob;
-	        $scope.address = result.address;
-	        $scope.ward = result.ward;
-	        $scope.district = result.district;
-	        $scope.province = result.province;
-	        $scope.gender = result.gender;
-	        if (result.code == 1) {
-	        	angular.element('.modal').modal('toggle');
-	        }
-	        if (result.code != 1) {
-		        messageModel(result.message);
-	        }
-        });
-    }
-
-    $scope.logout = function() {
-    	delete $scope.userName;
-    	delete $localStorage.userName;
-    	$scope.userName = '';
-
-    	$http.get(baseUrl + '/logout').success(function(result) {
+	function login(email, password, captcha) {
+		$http.post(baseUrl + '/users/login/' + email + '/' + password + '/' + captcha).success(function(result) {
 			console.log(result);
-	    	window.location = baseUrl;
+			$scope.id = result.id;
+			$scope.userName = result.name;
+			$scope.email = result.email;
+			$scope.mobile = result.mobile;
+			$scope.dob = result.dob;
+			$scope.address = result.address;
+			$scope.ward = result.ward;
+			$scope.district = result.district;
+			$scope.province = result.province;
+			$scope.gender = result.gender;
+			if (result.code == 1) {
+				angular.element('.modal').modal('toggle');
+			}
+			if (result.code != 1) {
+				messageModel(result.message);
+			}
 		});
-    };
+	}
+
+	$scope.logout = function() {
+		delete $scope.userName;
+		delete $localStorage.userName;
+		$scope.userName = '';
+
+		$http.get(baseUrl + '/logout').success(function(result) {
+			console.log(result);
+			window.location = baseUrl;
+		});
+	};
 
 	$scope.checkout = function() {
 		console.log(1);
@@ -158,18 +156,18 @@ frontApp.controller('cartController', function($scope,  $localStorage, $http, $s
 
 	$scope.$watch(function() {
 		$localStorage.userName = $scope.userName;
-        $localStorage.cart = $scope.cart;
+		$localStorage.cart = $scope.cart;
 	});
 
 	$scope.$watch(function() {
-    return angular.toJson($localStorage);
+		return angular.toJson($localStorage);
 	}, function() {
-	    $scope.name = $localStorage.name;
-        $scope.cart = $localStorage.cart;
+		$scope.name = $localStorage.name;
+		$scope.cart = $localStorage.cart;
 	});
 });
 
-frontApp.controller('indexController', function($scope,  $localStorage, $http, $sessionStorage, $window, $location, $sce){
+frontApp.controller('indexController', function($scope, $http, $sce){
 	//bestSelling
 	$http.get(baseUrl + '/products/get1stBy/sold').success(function(result) {
 		$scope.bestSelling = result;
@@ -211,6 +209,7 @@ frontApp.controller('indexController', function($scope,  $localStorage, $http, $
 	});
 
 	$scope.increaseView = function(item) {
+
 	};
 });
 
@@ -223,83 +222,43 @@ frontApp.controller('categoryController', function($scope, $http, $location){
 	var id = splitedUrl[countSplited - 1];
 
 	$scope.propertyName = 'creat_at';
-	$scope.products = [];
 	$scope.currentPage = 1;
 	$scope.reverse = true;
-	var products = [];
 
 	$http.post(baseUrl + '/products/getPage/' + id + '/' + $scope.propertyName + '/DESC').success(function(result) {
+		$scope.products = result;
 		for (var i = 0; i < result.length; i++) {
-			var obj = {};
-			obj.id = result[i].id;
-			obj.name = result[i].name;
-			obj.price = result[i].price;
-			obj.img = result[i].img;
-			obj.view = result[i].view;
-			obj.description = result[i].description;
-			obj.sold = result[i].sold;
-			obj.sale_off = result[i].sale_off;
-			obj.salePrice = result[i].salePrice;
-			obj.create_at = result[i].create_at;
-			obj.count = i;
-			products.push(obj);
+			$scope.products[i].count = i;
 		}
-		});
-	$scope.products = products;
-	console.log($scope.products);
+	});
 
 	$scope.sortBy = function(propertyName) {
 		$scope.reverse = ($scope.propertyName === propertyName) ? !$scope.reverse : false;
-    	$scope.propertyName = propertyName;
-    	let sort = '';
-    	if ($scope.reverse) {
-    		sort = 'DESC';
-    	} else {
-    		sort = 'ASC';
-    	}
-    	$http.post(baseUrl + '/products/getPage/' + id + '/' + $scope.propertyName + '/' + sort + '/' + $scope.currentPage).success(function(result) {
-    	let products = [];
-		for (var i = 0; i < result.length; i++) {
-			var obj = {};
-			obj.id = result[i].id;
-			obj.name = result[i].name;
-			obj.price = result[i].price;
-			obj.img = result[i].img;
-			obj.view = result[i].view;
-			obj.description = result[i].description;
-			obj.sold = result[i].sold;
-			obj.sale_off = result[i].sale_off;
-			obj.salePrice = result[i].salePrice;
-			obj.count = i;
-			products.push(obj);
+		$scope.propertyName = propertyName;
+		var sort = '';
+		if ($scope.reverse) {
+			sort = 'DESC';
+		} else {
+			sort = 'ASC';
 		}
-		$scope.products = products;
+		$http.post(baseUrl + '/products/getPage/' + id + '/' + $scope.propertyName + '/' + sort + '/' + $scope.currentPage).success(function(result) {
+			$scope.products = result;
+			for (var i = 0; i < result.length; i++) {
+				$scope.products[i].count = i;
+			}
 		});
 	};
 
 	$scope.changePage = function($index) {
 		$scope.currentPage = $index;
-		console.log($scope.currentPage);
-		let products = [];
 		$http.post(baseUrl + '/products/getPage/' + id + '/' + $scope.propertyName + '/DESC/' + $scope.currentPage).success(function(result) {
-		for (var i = 0; i < result.length; i++) {
-			var obj = {};
-			obj.id = result[i].id;
-			obj.name = result[i].name;
-			obj.price = result[i].price;
-			obj.img = result[i].img;
-			obj.view = result[i].view;
-			obj.description = result[i].description;
-			obj.sold = result[i].sold;
-			obj.sale_off = result[i].sale_off;
-			obj.create_at = result[i].create_at;
-			obj.salePrice = result[i].salePrice;
-			obj.count = i;
-			products.push(obj);
-		}P
+			$scope.products = result;
+			for (var i = 0; i < result.length; i++) {
+				$scope.products[i].count = i;
+			}
 		});
-		$scope.products = products;
-		console.log($scope.products);
+		$scope.paging[$index].active = true;
+		console.log($scope.paging[$index].active);
 	};
 
 
@@ -331,6 +290,7 @@ frontApp.controller('categoryController', function($scope, $http, $location){
 			for (var i = begin; i <= end; i++) {
 				var page = {};
 				page.link = i;
+				page.active = false;
 				$scope.paging.push(page);
 			}
 		});
@@ -361,7 +321,7 @@ frontApp.controller('categoryController', function($scope, $http, $location){
 // 		$scope.bills = result;
 // 		console.log(result);
 // 	});
-	
+
 // 	$scope.cancelBill = function(id) {
 // 		console.log(id);
 // 	};

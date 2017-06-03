@@ -200,10 +200,13 @@
 </div>
 <!-- .cart -->
 <!-- add success -->
-<div class="add-success col-md-2 col-md-offset-5 text-center alert alert-success hidden animated ">
-    
+<div class="add-success col-md-2 col-md-offset-5 text-center alert alert-danger hidden animated ">
 </div>
 <!-- .add success -->
+
+<!-- back-top -->
+<div id="back-to-top" class="v-align text-center"><i class="fa fa-angle-up"></i></div>
+<!-- .back-top -->
 
 <?=$this->placeholder();?>
 

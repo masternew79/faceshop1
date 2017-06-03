@@ -81,6 +81,20 @@ $(document).ready(function() {
 		input.val(value);
 	});
 
+	$(window).scroll(function(){ 
+		if ($(this).scrollTop() > 100) { 
+			$('#back-to-top').fadeIn(); 
+		} else { 
+			$('#back-to-top').fadeOut(); 
+		} 
+	});
+	
+	$('#back-to-top').on('click', function (e) {
+		e.preventDefault();
+		$('html,body').animate({
+			scrollTop: 0
+		}, 700);
+	});
 });
 
 function scrollNavbar() {
