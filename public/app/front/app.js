@@ -1,13 +1,42 @@
-var frontApp = angular.module('frontApp', ['ngStorage', 'ngRoute']);
+var frontApp = angular.module('frontApp', ['ngStorage']);
 
 
 
-frontApp.controller('cartController', ['$scope',  '$localStorage', '$http', '$sessionStorage', '$window', function($scope,  $localStorage, $http, $sessionStorage, $window ){
+frontApp.controller('cartController', function($scope,  $localStorage, $http, $sessionStorage, $window, $location){
 
 	$scope.cart = $localStorage.cart || [];
-	$scope.name = $localStorage.name || '';
-    $scope.ship = 50000;
-    $scope.thanhtien = $scope.total + $scope.ship;
+	$scope.userName = $localStorage.userName || '';
+
+	$scope.pushCart = function(item) {
+		var product = {};
+
+		product.qty = 1;
+		product.id = item;
+
+		if ($scope.checkExist(product.id)) {
+			$http.post(baseUrl + '/products/get/' + product.id).success(function(result) {
+				product.name = result.name;
+				product.price = result.price;
+				product.img = result.img;
+			});
+
+			$scope.cart.push(product);
+			alertSuccess('THÊM THÀNH CÔNG');
+		} else {
+			alertSuccess('SẢN PHẨM ĐÃ CÓ TRONG GIỎ HÀNG');
+		}
+	};
+
+	$scope.spliceCart = function(item) {
+		var id = item.target.parentNode.parentNode.getAttribute('data-id');
+		
+		for (var i = $scope.cart.length - 1; i >= 0; i--) {
+			if ($scope.cart[i].id == id) {
+				$scope.cart.splice(i, 1);
+			}
+		}
+	};
+
 	$scope.checkExist = function(id) {
 		if ($scope.cart.length !== 0) {
 			for (var i = 0; i < $scope.cart.length; i++) {
@@ -21,62 +50,26 @@ frontApp.controller('cartController', ['$scope',  '$localStorage', '$http', '$se
 		}
 	};
 
-
-
-	// $scope.forget = function() {
-	// 	$http.post(baseUrl + '/users/resetPassword', {email: $scope.email, captcha: $scope.captcha}).success(function(result) {
-	// 		console.log(result);
-	// 		console.log($scope.email);
-	// 		console.log($scope.captcha);
-	// 	})
-	// }
-
-	$scope.checkout = function() {
-		if ($scope.name == '') {
-			angular.element('.modal').modal('toggle');
-			messageModel('Vui lòng đăng nhập');
-		} else {
-			$window.location.href = baseUrl + '/checkout';
-		}
-	};
-
-	$scope.addCart = function(item) {
-		var obj = {};
-
-		obj.id = item.target.parentNode.getAttribute("data-id") === null ? item.target.parentNode.parentNode.getAttribute("data-id") : item.target.parentNode.getAttribute("data-id");
-
-		obj.qty = 1;
-
-		$http.post(baseUrl + '/products/get/' + obj.id).success(function(result) {
-			obj.name = result.name;
-			obj.price = result.price;
-			obj.img = result.img;
-		});
-		if ($scope.checkExist(obj.id)) {
-			$scope.cart.push(obj);
-			alertSuccess('THÊM THÀNH CÔNG');
-		} else {
-			alertSuccess('SẢN PHẨM ĐÃ CÓ TRONG GIỎ HÀNG');
-		}
-	};
-
 	$scope.register = function() {
-		$http.post(baseUrl + '/users/register', {'User[name]': $scope.regName, 'User[email]': $scope.regEmail, 'User[password]': $scope.regPass, 'User[mobile]':$scope.regMobile}).success(function(result) {
+		$http.get(baseUrl + '/users/register', {params: {'User[name]': $scope.regName, 'User[email]': $scope.regEmail, 'User[password]': $scope.regPass, 'User[mobile]':$scope.regMobile}}).success(function(result) {
 	        console.log(result);
-	        // if (result.code == 1) {
-	        // 	angular.element('.modal').modal('toggle');
-	        // }
-	        // if (result.code != 1) {
-		       //  messageModel(result.message);
+	        
+	        if (result.code !== 1 && result.code !==2) {
+		        login($scope.regEmail, $scope.regPass, $scope.regCaptcha);
 	        	
-	        // }
+	        }
         });
-	}
+	};
 
 	$scope.login = function() {
-        $http.post(baseUrl + '/users/login/' + $scope.email + '/' + $scope.password + '/' + $scope.captcha).success(function(result) {
+        login($scope.email, $scope.password, $scope.captcha);
+    };
+
+    function login(email, password, captcha) {
+    	$http.post(baseUrl + '/users/login/' + email + '/' + password + '/' + captcha).success(function(result) {
+        	console.log(result);
 	        $scope.id = result.id;
-	        $scope.name = result.name;
+	        $scope.userName = result.name;
 	        $scope.email = result.email;
 	        $scope.mobile = result.mobile;
 	        $scope.dob = result.dob;
@@ -92,28 +85,27 @@ frontApp.controller('cartController', ['$scope',  '$localStorage', '$http', '$se
 		        messageModel(result.message);
 	        }
         });
-    };
-
+    }
 
     $scope.logout = function() {
-    	$localStorage.$reset();
-    	$scope.name = '';
+    	delete $scope.userName;
+    	delete $localStorage.userName;
+    	$scope.userName = '';
+
+    	$http.get(baseUrl + '/logout').success(function(result) {
+			console.log(result);
+	    	window.location = baseUrl;
+		});
     };
 
-	$scope.count = $scope.cart.forEach(function(product) {
-		var i = 0;
-		i++;
-		return i;
-	});
-
-	$scope.remove = function(item) {
-		var id = item.target.parentNode.parentNode.getAttribute('data-id');
-		for (var i = $scope.cart.length - 1; i >= 0; i--) {
-			if ($scope.cart[i].id == id) {
-				$scope.cart.splice(i, 1);
-			}
+	$scope.checkout = function() {
+		console.log(1);
+		if ($scope.userName === '') {
+			angular.element('.modal').modal('toggle');
+			messageModel('Vui lòng đăng nhập');
+		} else {
+			$window.location.href = baseUrl + '/checkout';
 		}
-
 	};
 
 	$scope.plus = function(item) {
@@ -162,38 +154,68 @@ frontApp.controller('cartController', ['$scope',  '$localStorage', '$http', '$se
 			product.push(pro);
 		}
 		console.log(product);
-	}
+	};
 
 	$scope.$watch(function() {
-		$localStorage.id = $scope.id;
-		$localStorage.name = $scope.name;
+		$localStorage.userName = $scope.userName;
         $localStorage.cart = $scope.cart;
-        // $localStorage.mobile = $scope.mobile;
-        // $localStorage.dob = $scope.dob;
-        // $localStorage.address = $scope.address;
-        // $localStorage.ward = $scope.ward;
-        // $localStorage.district = $scope.district;
-        // $localStorage.province = $scope.province;
-        // $localStorage.gender = $scope.gender;
 	});
 
 	$scope.$watch(function() {
     return angular.toJson($localStorage);
 	}, function() {
-	    $scope.id = $localStorage.id;
 	    $scope.name = $localStorage.name;
         $scope.cart = $localStorage.cart;
-       //  $scope.mobile = $localStorage.mobile;
-       //  $scope.dob = $localStorage.dob;
-      	// $scope.address = $localStorage.address;
-       //  $scope.ward = $localStorage.ward;
-       //  $scope.district = $localStorage.district;
-       //  $scope.province = $localStorage.province;
-       //  $scope.gender = $localStorage.gender;
 	});
-}]);
+});
 
-frontApp.controller('categoryController', ['$scope', '$http', '$location', 'orderByFilter', function($scope, $http, $location, orderBy){
+frontApp.controller('indexController', function($scope,  $localStorage, $http, $sessionStorage, $window, $location, $sce){
+	//bestSelling
+	$http.get(baseUrl + '/products/get1stBy/sold').success(function(result) {
+		$scope.bestSelling = result;
+		$scope.bestSelling.description = $sce.trustAsHtml(result.description);
+	});
+	//newest
+	$http.get(baseUrl + '/products/get1stBy/creat_at').success(function(result) {
+		$scope.newest = result;
+		$scope.newest.description = $sce.trustAsHtml(result.description);
+	});
+	//biggestdiscount
+	$http.get(baseUrl + '/products/get1stBy/sale_off').success(function(result) {
+		$scope.biggestDiscount = result;
+		$scope.biggestDiscount.description = $sce.trustAsHtml(result.description);
+	});
+	//top2-7 selling
+	$http.get(baseUrl + '/products/getTop2To7/sold').success(function(result) {
+		$scope.sellings = result;
+		for (var i = 0; i < $scope.sellings.length; i++) {
+			$scope.sellings[i].description = $sce.trustAsHtml(result[i].description);
+			$scope.sellings[i].count = i;
+		}
+	});
+	//top2-7 new
+	$http.get(baseUrl + '/products/getTop2To7/creat_at').success(function(result) {
+		$scope.news = result;
+		for (var i = 0; i < $scope.news.length; i++) {
+			$scope.news[i].description = $sce.trustAsHtml(result[i].description);
+			$scope.news[i].count = i;
+		}
+	});
+	//top2-7 discount
+	$http.get(baseUrl + '/products/getTop2To7/sale_off').success(function(result) {
+		$scope.discounts = result;
+		for (var i = 0; i < $scope.discounts.length; i++) {
+			$scope.discounts[i].description = $sce.trustAsHtml(result[i].description);
+			$scope.discounts[i].count = i;
+		}
+	});
+
+	$scope.increaseView = function(item) {
+	};
+});
+
+
+frontApp.controller('categoryController', function($scope, $http, $location){
 	var url = $location.absUrl();
 	var splitedUrl = url.split('/');
 	var countSplited = splitedUrl.length;
@@ -204,10 +226,7 @@ frontApp.controller('categoryController', ['$scope', '$http', '$location', 'orde
 	$scope.products = [];
 	$scope.currentPage = 1;
 	$scope.reverse = true;
-	let products = [];
-
-	console.log($scope.name);
-
+	var products = [];
 
 	$http.post(baseUrl + '/products/getPage/' + id + '/' + $scope.propertyName + '/DESC').success(function(result) {
 		for (var i = 0; i < result.length; i++) {
@@ -331,22 +350,22 @@ frontApp.controller('categoryController', ['$scope', '$http', '$location', 'orde
 	$scope.changePass = function () {
 		$scope.updatePass = !$scope.updatePass;
 	};
-}]);
+});
 
 
 
 
-frontApp.controller('billController', ['$scope', '$localStorage', '$http',function($scope, $localStorage, $http){
+// frontApp.controller('billController', ['$scope', '$localStorage', '$http',function($scope, $localStorage, $http){
 
-	$http.get(baseUrl + '/order/getOrder', {params: {user_id: loginID}}).success(function(result) {
-		$scope.bills = result;
-		console.log(result);
-	});
+// 	$http.get(baseUrl + '/order/getOrder', {params: {user_id: loginID}}).success(function(result) {
+// 		$scope.bills = result;
+// 		console.log(result);
+// 	});
 	
-	$scope.cancelBill = function(id) {
-		console.log(id);
-	};
-}]);
+// 	$scope.cancelBill = function(id) {
+// 		console.log(id);
+// 	};
+// }]);
 
 
 

@@ -157,10 +157,10 @@ class Default_Controller_Users extends Default_Controller_Base{
 
     public function register()
     {
-        if(HTP_Request::post('User')){
+        if(HTP_Request::get('User')){
             //scenario : kịch bản để check rules khi validate model
             $user = new User('register');
-            $user->load(HTP_Request::post('User'));
+            $user->load(HTP_Request::get('User'));
             if($user->validate())
             {
                 $user->name = Helper::strip_tags_content($user->name);
@@ -175,7 +175,7 @@ class Default_Controller_Users extends Default_Controller_Base{
                 }
                 catch (Exception $ex)
                 {
-                    echo json_encode(array('code'=>1, 'message'=>'Đăng ký thất bại'), JSON_UNESCAPED_UNICODE);
+                    echo json_encode(array('code'=>2, 'message'=>'Đăng ký thất bại'), JSON_UNESCAPED_UNICODE);
                     return;
                 }
             }

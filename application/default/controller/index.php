@@ -86,9 +86,6 @@ class Default_Controller_Index extends Default_Controller_Base{
                 echo json_encode($result , JSON_UNESCAPED_UNICODE);
             }
         }
-        // else{
-        //     $this->redirect(HTP::$baseUrl);
-        // }
     }
 
     public function search($param)
@@ -114,14 +111,12 @@ class Default_Controller_Index extends Default_Controller_Base{
         }
         else
             $this->redirect(HTP::$baseUrl);
-
-
     }
-
-
 
     public function logout() {
         HTP_Session::delete('ID');
+        $result = array('message' => 'Đăng xuât thành công');
+        echo json_encode($result , JSON_UNESCAPED_UNICODE);
         $this->redirect(HTP::$baseUrl);
     }
 }

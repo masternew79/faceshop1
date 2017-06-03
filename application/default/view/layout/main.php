@@ -110,7 +110,7 @@
                                     <div class="message reg-message-capt alert alert-warning hide"></div>
                                     <br>
                                     <div class="text-right">
-                                        <button type="submit" class="btn btn-success btn-register" ng-click="">Đăng kí</button>
+                                        <button type="submit" class="btn btn-success btn-register" ng-click="register()">Đăng kí</button>
                                     </div>
                                 </form>
                             </div>
@@ -141,15 +141,15 @@
                 <?php endforeach; ?>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown nav-logout" ng-cloak ng-if="name !== ''">
-                    <a class="dropdown-toggle" data-toggle="dropdown">{{name}} <b class="caret"></b></a>
+                <li class="dropdown nav-logout" ng-cloak ng-if="userName !== ''">
+                    <a class="dropdown-toggle" data-toggle="dropdown">{{userName}} <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="<?php echo HTP::$baseUrl . '/userInfo/' ?>">Thông tin cá nhân</a></li>
                         <li><a href="<?php echo HTP::$baseUrl . '/userBill/' ?>">Danh sách hóa đơn</a></li>
-                        <li><a href="<?php echo HTP::$baseUrl .'/logout'; ?>" class="navbar-btn btn-logout" ng-click="logout()" >Đăng xuất</a></li>
+                        <li><a class="navbar-btn btn-logout" ng-click="logout()" >Đăng xuất</a></li>
                     </ul>
                 </li>
-                <li><a data-toggle="modal" data-target="#myModal" class="navbar-btn nav-login" ng-if="name == ''">Đăng nhập</a></li>
+                <li><a data-toggle="modal" data-target="#myModal" class="navbar-btn nav-login" ng-if="userName === ''">Đăng nhập</a></li>
                 <li>
                     <div class="cart v-align" ng-cloak>
                         <i class="glyphicon glyphicon-shopping-cart"></i>  <span class="badge">{{filtered.length}}</span>
@@ -183,19 +183,19 @@
                     <div class="row cart-item-name">
                         <a href="">{{product.name}}</a>
                     </div>
-                    <div class="row cart-item-price">{{product.price}} VNĐ</div>
+                    <div class="row cart-item-price">{{product.price | currency : '' : 0}} VNĐ</div>
                 </div>
                 <div class="col-md-4 quantity">
                     <button type="button" class="minus" ng-click=minus($event)><i class="fa fa-minus"></i></button>
                     <input type="text" name="quantity"  ng-model="product.qty" class="text-center" size="5">
                     <button type="button" class="plus" ng-click="plus($event)"><i class="fa fa-plus"></i></button>
                 </div>
-                <div class="col-md-1 cart-item-delete" ng-click="remove($event)"><i class="fa fa-close"></i></div>
+                <div class="col-md-1 cart-item-delete" ng-click="spliceCart($event)"><i class="fa fa-close"></i></div>
             </div>
         </li>
         
     </ul>
-    <div class="total-price text-center">Tổng tiền: {{total}} VNĐ</div>
+    <div class="total-price text-center">Tổng tiền: {{total | currency : '' : 0}} VNĐ</div>
     <div class="text-center"><a href="" class="btn btn-danger" ng-click="checkout()">Đặt hàng</a></div>
 </div>
 <!-- .cart -->
@@ -250,15 +250,11 @@
     <script src="<?=HTP::$resourceUrl?>/assets/js/script.js"></script>
     <script src="<?=HTP::$resourceUrl?>/assets/js/data-tranfer.js"></script>
     <script src="<?=HTP::$resourceUrl?>/assets/js/validate.js"></script>
-    <script src="<?=HTP::$resourceUrl?>/assets/js/user.js"></script>
+    <!-- <script src="<?=HTP::$resourceUrl?>/assets/js/user.js"></script> -->
     <!-- angular -->
-    <!-- <script src="<?=HTP::$resourceUrl?>/assets/js/angular/angular.min.js" type="text/javascript"></script> -->
-    <script src="https://code.angularjs.org/1.4.9/angular.min.js" type="text/javascript"></script>
+    <script src="<?= HTP::$resourceUrl ?>/node_modules/angular/angular.min.js"></script>
 
-    <!-- <script src="<?=HTP::$resourceUrl?>/assets/js/angular/angular-route.min.js" type="text/javascript"></script> -->
-    <script src="https://code.angularjs.org/1.4.9/angular-route.min.js" type="text/javascript"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.6/ngStorage.min.js"></script>
-
+    <script src="<?=HTP::$resourceUrl?>/node_modules/ng-storage/ngStorage.min.js" type="text/javascript"></script>
     <script src="<?=HTP::$resourceUrl?>/app/front/app.js" type="text/javascript"></script>
 </body>
 </html>

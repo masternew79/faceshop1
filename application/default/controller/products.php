@@ -18,6 +18,27 @@ class Default_Controller_Products extends Default_Controller_Base{
             $this->redirect(HTP::$baseUrl);
     }
 
+    public function get1stBy($param) {
+        if (isset($param)) {
+            $type = $param[0];
+            $product = Product::model()->findBySql("SELECT * FROM product ORDER BY $type DESC LIMIT 1");
+            $result = resultArray($product);
+            echo json_encode($result , JSON_UNESCAPED_UNICODE);
+        }
+    }
+
+    public function getTop2To7($param) {
+        if (isset($param[0])) {
+            $type = $param[0];
+            $products = Product::model()->findAllBySql("SELECT * FROM product ORDER BY $type DESC LIMIT 2, 6");
+            foreach ($products as $product) {
+                $result[] = resultArray($product);
+            }
+            echo json_encode($result , JSON_UNESCAPED_UNICODE);
+        }
+    }
+    
+
     public function getPage($param) {
     	$where = '';
     	$order = '';
@@ -65,3 +86,8 @@ class Default_Controller_Products extends Default_Controller_Base{
         echo json_encode($result , JSON_UNESCAPED_UNICODE);
     } 
 }
+
+function resultArray($product) {
+        $salePrice = $product->price - ($product->price * $product->sale_off / 100);
+        return array('id' => intval($product->id), 'name' => $product->name, 'price' => intval($product->price), 'img' => $product->image, 'salePrice' => intval($salePrice), 'description' => $product->description, 'view' => $product->view, 'sale_off' => $product->sale_off);
+    }
