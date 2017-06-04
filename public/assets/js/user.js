@@ -8,120 +8,123 @@ function range(min, max) {
 
 $(document).ready(function() {
 	//load info user
-	var user = loadUserInfo();	
-
-
+	// var user = loadUserInfo();	
 	//load provinces, district, ward
-	loadProvide();
 
-		console.log(1);
-	$('.select-province').change(function() {
-		console.log(2);
-		console.log($(this).val());
-		loadDistrict($(this).val());
-	});
+	// $('[name=receiver-province]').change(function() {
+	// 	console.log(2);
+	// 	console.log($(this).val());
+	// 	loadDistrict($(this).val());
+	// });
+	// $('.select-province').on('change', function(event) {
+	// 	event.preventDefault();
+	// 	console.log(1);
+	// });
 
-	$('[name=district]').change(function() {
-		loadWard($(this).val());
-	});
+	$('.select-province').change(function(){console.log($(this).val())})
 
-	$('.btn-register').click(function() {
-		var Name = $('[ng-model=regName]').val();
-		var Email = $('[ng-model=regEmail]').val();
-		var Mobile = $('[ng-model=regMobile]').val();
-		var Pass = $('[ng-model=regPass]').val();
-		$.post(baseUrl+'/users/register',{'User[name]': Name, 'User[mobile]': Mobile,  'User[email]': Email, 'User[password]': Pass}, function(result) {
-			if (result.code == 1) {
+	// $('select').change(function() {
 
-			}
-		});
-	});
+	// 	loadWard($(this).val());
+	// });
+
+	// $('.btn-register').click(function() {
+	// 	var Name = $('[ng-model=regName]').val();
+	// 	var Email = $('[ng-model=regEmail]').val();
+	// 	var Mobile = $('[ng-model=regMobile]').val();
+	// 	var Pass = $('[ng-model=regPass]').val();
+	// 	$.post(baseUrl+'/users/register',{'User[name]': Name, 'User[mobile]': Mobile,  'User[email]': Email, 'User[password]': Pass}, function(result) {
+	// 		if (result.code == 1) {
+
+	// 		}
+	// 	});
+	// });
 
 	//hide show button
-	//
-	var email = $('[name=email]').val();
-	var captcha = $('[name=captcha]').val();
+	// //
+	// var email = $('[name=email]').val();
+	// var captcha = $('[name=captcha]').val();
 
-	$('button.forgot').click(function() {
-		$.get(baseUrl + '/users/resetPassword/'+ email, function(result) {
-			console.log(result);
-			console.log(email);
-			console.log(captcha);
-		});
-	});
+	// $('button.forgot').click(function() {
+	// 	$.get(baseUrl + '/users/resetPassword/'+ email, function(result) {
+	// 		console.log(result);
+	// 		console.log(email);
+	// 		console.log(captcha);
+	// 	});
+	// });
 	
-	$('button.updatepass').click(function() {
-		$('.form-update-pass').toggleClass('hide');
-		$(this).toggleClass('hide');
-		$('button.updateinfo').toggleClass('hide');
-	});
-	$('button.cancelpass').click(function() {
-		$('.form-update-pass').toggleClass('hide');
-		$('button.updatepass').toggleClass('hide');
-		$('button.updateinfo').toggleClass('hide');
+	// $('button.updatepass').click(function() {
+	// 	$('.form-update-pass').toggleClass('hide');
+	// 	$(this).toggleClass('hide');
+	// 	$('button.updateinfo').toggleClass('hide');
+	// });
+	// $('button.cancelpass').click(function() {
+	// 	$('.form-update-pass').toggleClass('hide');
+	// 	$('button.updatepass').toggleClass('hide');
+	// 	$('button.updateinfo').toggleClass('hide');
 
-	});
-	$('button.confirmpass').click(function() {
-		$('.form-update-pass').toggleClass('hide');
-		$('button.updatepass').toggleClass('hide');
-		$('button.updateinfo').toggleClass('hide');
-	});
-	$('button.updateinfo').click(function() {
-		$('button.cancel').toggleClass('hide');
-		$('button.confirm').toggleClass('hide');
-		$(this).toggleClass('hide');
-		$('button.updatepass').toggleClass('hide');
-		Disable(false);		
-	});
-	$('button.cancel').click(function() {
-		$('button.updatepass').toggleClass('hide');
-		$('button.updateinfo').toggleClass('hide');
-		$(this).toggleClass('hide');
-		$('button.confirm').toggleClass('hide');
-		Disable(true);	
-	});
+	// });
+	// $('button.confirmpass').click(function() {
+	// 	$('.form-update-pass').toggleClass('hide');
+	// 	$('button.updatepass').toggleClass('hide');
+	// 	$('button.updateinfo').toggleClass('hide');
+	// });
+	// $('button.updateinfo').click(function() {
+	// 	$('button.cancel').toggleClass('hide');
+	// 	$('button.confirm').toggleClass('hide');
+	// 	$(this).toggleClass('hide');
+	// 	$('button.updatepass').toggleClass('hide');
+	// 	Disable(false);		
+	// });
+	// $('button.cancel').click(function() {
+	// 	$('button.updatepass').toggleClass('hide');
+	// 	$('button.updateinfo').toggleClass('hide');
+	// 	$(this).toggleClass('hide');
+	// 	$('button.confirm').toggleClass('hide');
+	// 	Disable(true);	
+	// });
 
-	$('button.confirm').click(function() {
-		$('button.updatepass').toggleClass('hide');
-		$('button.updateinfo').toggleClass('hide');
-		$(this).toggleClass('hide');
-		$('button.cancel').toggleClass('hide');
-		Disable(true);	
+	// $('button.confirm').click(function() {
+	// 	$('button.updatepass').toggleClass('hide');
+	// 	$('button.updateinfo').toggleClass('hide');
+	// 	$(this).toggleClass('hide');
+	// 	$('button.cancel').toggleClass('hide');
+	// 	Disable(true);	
 
 
-		var name = $('[name=name]').val();
-		var mobile = $('[name=mobile]').val();
-		var day = $('[name=day]').val();
-		var month = $('[name=month]').val();
-		var year = $('[name=year]').val();
-		var dob = year+'-'+month+'-'+day;
-		var address = $('[name=address]').val();
-		var gender = $('[name=gender]').val();
-		var province = $('[name=province]').val();
-		var district = $('[name=district]').val();
-		var ward = $('[name=ward]').val();
+	// 	var name = $('[name=name]').val();
+	// 	var mobile = $('[name=mobile]').val();
+	// 	var day = $('[name=day]').val();
+	// 	var month = $('[name=month]').val();
+	// 	var year = $('[name=year]').val();
+	// 	var dob = year+'-'+month+'-'+day;
+	// 	var address = $('[name=address]').val();
+	// 	var gender = $('[name=gender]').val();
+	// 	var province = $('[name=province]').val();
+	// 	var district = $('[name=district]').val();
+	// 	var ward = $('[name=ward]').val();
 
-		$.post(baseUrl+'/users/updateInfo',{'User[id]': loginID, 'User[name]': name, 'User[mobile]': mobile, 'User[dob]': dob, 'User[address]': address, 'User[gender]': gender, 'User[province]': province, 'User[district]': district, 'User[ward]': ward}, function(result) {
+	// 	$.post(baseUrl+'/users/updateInfo',{'User[id]': loginID, 'User[name]': name, 'User[mobile]': mobile, 'User[dob]': dob, 'User[address]': address, 'User[gender]': gender, 'User[province]': province, 'User[district]': district, 'User[ward]': ward}, function(result) {
 
-			console.log(result);
-		});
-	});
+	// 		console.log(result);
+	// 	});
+	// });
 
-	$('button.confirmpass').click(function() {
-		var currentPass = $('[name=current-password]').val();
-		var newPass = $('[name=new-password]').val();
-		var reEnter = $('[name=re-enter]').val();
+	// $('button.confirmpass').click(function() {
+	// 	var currentPass = $('[name=current-password]').val();
+	// 	var newPass = $('[name=new-password]').val();
+	// 	var reEnter = $('[name=re-enter]').val();
 
-		if (newPass == reEnter) {
-			$.post(baseUrl+'/users/checkPassword',{'password': currentPass, 'id': loginID}, function(result) {
-				if (result) {
-					$.post(baseUrl+'/users/updateInfo',{'User[password]': newPass}, function(result) {
-						console.log(result);
-					});
-				}
-			});
-		}
-	});
+	// 	if (newPass == reEnter) {
+	// 		$.post(baseUrl+'/users/checkPassword',{'password': currentPass, 'id': loginID}, function(result) {
+	// 			if (result) {
+	// 				$.post(baseUrl+'/users/updateInfo',{'User[password]': newPass}, function(result) {
+	// 					console.log(result);
+	// 				});
+	// 			}
+	// 		});
+	// 	}
+	// });
 
 });
 
@@ -137,8 +140,6 @@ function Disable(bool) {
 	$('[name=district]').prop("disabled", bool);
 	$('[name=ward]').prop("disabled", bool);
 }
-
-
 
 function loadProvide() {
 	$.getJSON(baseUrl + '/address/getProvince', {menu: 1}, function(result) {
@@ -185,6 +186,8 @@ function loadUserInfo() {
 		$('[name=address]').val(result.address);
 		$('[name=gender]').val(parseInt(result.gender));
 		$('[name=province]').val(result.province);
+		loadProvide();
+
 		loadDistrict(result.province);
 		$('[name=district]').val(result.district);
 		loadWard(result.district);

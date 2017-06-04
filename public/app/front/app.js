@@ -4,6 +4,7 @@ frontApp.controller('cartController', function($scope,  $localStorage, $http, $s
 
 	$scope.cart = $localStorage.cart || [];
 	$scope.userName = $localStorage.userName || '';
+	$scope.user = $localStorage.user || {};
 
 	$scope.pushCart = function(item) {
 		var product = {};
@@ -66,6 +67,7 @@ frontApp.controller('cartController', function($scope,  $localStorage, $http, $s
 		$http.post(baseUrl + '/users/login/' + email + '/' + password + '/' + captcha).success(function(result) {
 			console.log(result);
 			$scope.user = result;
+			$scope.userName = result.name;
 			if (result.code == 1) {
 				angular.element('.modal').modal('toggle');
 			}
@@ -140,13 +142,15 @@ frontApp.controller('cartController', function($scope,  $localStorage, $http, $s
 	$scope.$watch(function() {
 		$localStorage.userName = $scope.userName;
 		$localStorage.cart = $scope.cart;
+		$localStorage.user = $scope.user;
 	});
 
 	$scope.$watch(function() {
 		return angular.toJson($localStorage);
 	}, function() {
-		$scope.name = $localStorage.name;
+		$scope.userName = $localStorage.userName;
 		$scope.cart = $localStorage.cart;
+		$scope.user = $localStorage.user;
 	});
 });
 
@@ -254,7 +258,6 @@ frontApp.controller('categoryController', function($scope, $http, $location, $an
 	$scope.search = $scope.$parent.search;
 
 	$scope.$parent.$watch('search', function(newValue, oldValue, scope) {
-		console.log(newValue);
 	});
 
 	$scope.$watch('currentPage', function(newValue, oldValue, scope) {
@@ -287,14 +290,11 @@ frontApp.controller('categoryController', function($scope, $http, $location, $an
 				page.link = i;
 				if (i == $scope.currentPage) {
 					page.active = true;
-					console.log(123123);
 				} else {
 					page.active = false;
 				}
-
 				$scope.paging.push(page);
 			}
-			console.log($scope.paging);
 		});
 	});
 
@@ -311,7 +311,38 @@ frontApp.controller('categoryController', function($scope, $http, $location, $an
 });
 
 frontApp.controller('checkoutController', function($scope, $http, $location){
-	
+	console.log($scope.user);
+
+	$scope.receiverDistrict = {};
+	$http.get(baseUrl + '/address/getProvince').success(function(result) {
+		$scope.provinces = result;
+		console.log(result);
+		for (var i = 0; i < result.length; i++) {
+			if (result[i].id == $scope.user.province) {
+				console.log(result[i].name);
+				$scope.defaultProvices = result[i];
+				console.log($scope.defaultProvices);
+			}
+		}
+	});
+
+	$http.get(baseUrl + '/address/getDistrict/' + $scope.user.province).success(function(result) {
+		$scope.districts = result;
+	});
+
+	$http.get(baseUrl + '/address/getWard/' + $scope.user.district).success(function(result) {
+		$scope.wards = result;
+	});
+
+	$scope.changePro = function() {
+		console.log($scope.defaultProvices);
+	}
+
+
+	// $scope.$watch('watchExpression', function(newValue, oldValue, scope) {
+		
+	// }, objectEquality);
+
 });
 
 
