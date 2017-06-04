@@ -44,10 +44,14 @@ class Default_Controller_Products extends Default_Controller_Base{
     	$order = '';
     	$sort = '';
         $start = 0;
+        $and = '';
         if(isset($param[0]))
         {
             if (isset($param[0])) {
                 $where = "WHERE cate_id = " . $param[0];
+            }
+            if (isset($param[4])) {
+                $and = "AND name LIKE '%$param[4]%'";
             }
             if (isset($param[1])) {
                 $order = "ORDER BY $param[1] ";
@@ -55,10 +59,11 @@ class Default_Controller_Products extends Default_Controller_Base{
             if (isset($param[2])) {
                 $sort = $param[2];
             }
+
             if (isset($param[3])) {
                 $start = ($param[3] -1) * 28;
             }
-            $products = Product::model()->findAllBySql("SELECT * FROM product $where $order $sort LIMIT $start, 28");
+            $products = Product::model()->findAllBySql("SELECT * FROM product $where $and $order $sort LIMIT $start, 28");
             $result = array();
             foreach ($products as $product) {
                 $salePrice = $product->price - ($product->price * $product->sale_off / 100);

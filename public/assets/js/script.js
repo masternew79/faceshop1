@@ -11,75 +11,38 @@ $(document).ready(function() {
 	
 	// open cart list
 	$('.cart').click(function() {
-		$('.cart-list').removeClass('hidden').addClass('fadeInRight');
+		$('#cart-list').removeClass('hidden').addClass('fadeInRight');
+		
 	});
 	//close cart list
 	$('.btn-close').click(function() {
-		var cartList = $('.cart-list');
+
+		var cartList = $('#cart-list');
 		
 		cartList.removeClass('fadeInRight').addClass('fadeOutRight');
 		
 		setTimeout(function() {
 			cartList.toggleClass('hidden fadeOutRight');
-		}, 1000);
+		}, 0);
 	});
 	//close cart-list
 	$(document).mouseup(function(event) {
-		var cart = $('.cart-list');
+		var cart = $('#cart-list');
 		if (!cart.is(event.target) && cart.has(event.target).length ===0 && !cart.hasClass('hidden')) {
-			var cartList = $('.cart-list');
-			cartList.removeClass('fadeInRight').addClass('fadeOutRight');
+			cart.removeClass('fadeInRight').addClass('fadeOutRight');
 			setTimeout(function() {
-				cartList.toggleClass('hidden fadeOutRight');
+				cart.toggleClass('hidden fadeOutRight');
 			}, 1000);
 		}
 	});
 	
-	//tooltipster
-	$('.tooltipleft').tooltipster({
-		side: 'left',
-		animation: 'grow',
-		contentCloning: true,
-		theme: 'tooltipster-shadow',
-		contentAsHTML: true,
-
-	});
-	$('.tooltipright').tooltipster({
-		side: 'right',
-		animation: 'grow',
-		contentAsHTML: true,
-		theme: 'tooltipster-shadow',
-		contentCloning: true
-	});
 	//owl.carousel
 	$('.owl-carousel').owlCarousel({
 		loop: true,
 		autoWidth: true,
 		item: 2
 	});
-	//sort click button
-	$('.sort button').click(function() {
-		var i = $(this).children('i');
-		if (i.hasClass('fa-caret-down')) {
-			i.removeClass('fa-caret-down');
-			i.addClass('fa-caret-up');
-		} else {
-			i.removeClass('fa-caret-up');
-			i.addClass('fa-caret-down');
-		}
-	});
-	//plus and minus quantity
-	$('.quantity').on('click', 'button', function() {
-		var input = $(this).closest('div').find('input');
-		var value = parseInt(input.val());
-		var btn = $(this).context.className;
-		if (btn === 'minus') {
-			value = value > 1 ? value - 1 : 1;
-		} else {
-			value = value < 100 ? value + 1 : 100;
-		}
-		input.val(value);
-	});
+
 
 	$(window).scroll(function(){ 
 		if ($(this).scrollTop() > 100) { 
@@ -108,6 +71,7 @@ function scrollNavbar() {
 		}
 	});
 }
+
 function confirmPosition() {
 	var positionOfWrapper = $('.wrapper').offset().top;
 	var positionWindow = $(window).scrollTop();
@@ -152,6 +116,7 @@ function onloadFuncs() {
 	changeBGColorNavbar();
 	cssClickButton();
 }
+
 function alertSuccess(str) {
 	var success = $('.add-success');
 	success.html('<span>'+ str + '</span><i class="fa fa-check"></i>');
@@ -164,4 +129,3 @@ function alertSuccess(str) {
 	}, 1500);
 }
 window.onload = onloadFuncs;
-

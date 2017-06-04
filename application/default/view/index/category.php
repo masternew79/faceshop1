@@ -1,32 +1,14 @@
 <div class="wrapper container-fluid" style="margin-top: 70px" ng-controller="categoryController">
     <div class="row">
-        <div class="col-md-2 sidebar">
-            <div class="panel panel-danger">
-                <div class="panel-heading">Tùy chọn</div>
-                <div class="panel-body">
-                    <h4><span class="label label-danger">Hãng</span></h4>
-                    <?php 
-                    $trademarks = $this->trademarks;
-                    foreach ($trademarks as $trademark):
-                       ?>
-                   <div class="radio">
-                      <label><input type="checkbox" name="trademark" value="<?php echo $trademark->id; ?>"> <?php echo ucfirst($trademark->name) ?></label>
-                  </div>
-                  <?php 
-                  endforeach;
-                  ?>
-              </div>
-          </div>
-      </div>
-      <div class="col-md-10 list">
+      <div class="col-md-10 col-md-offset-1 list">
         <ol class="breadcrumb">
             <li><a href="<?php echo HTP::$baseUrl; ?>">Trang chủ</a></li>
             <li><a href="">Máy tính</a></li>
             <div class="row text-right sort pull-right">
                 <span class="">SẮP XẾP: </span>
-                <button type="button" class="btn btn-default btn-black btn-xs" ng-click="sortBy('price')">Giá <i ng-show="propertyName === 'price'" class="fa fa-caret-down"></i></button>
-                <button type="button" class="btn btn-default btn-black btn-xs" ng-click="sortBy('sale_off')">Giảm giá <i ng-show="propertyName ==='sale_off'" class="fa fa-caret-down"></i></button>
-                <button type="button" class="btn btn-default btn-black btn-xs" ng-click="sortBy('sold')">Số lượng bán <i ng-show="propertyName === 'sold'" class="fa fa-caret-down"></i></button>
+                <button type="button" class="btn btn-default btn-black btn-xs" ng-click="sortBy('price')">Giá <i ng-show="propertyName === 'price'" ng-class="{'fa fa-caret-down' : reverse, 'fa fa-caret-up' : !reverse}"></i></button>
+                <button type="button" class="btn btn-default btn-black btn-xs" ng-click="sortBy('sale_off')">Giảm giá <i ng-show="propertyName ==='sale_off'" ng-class="{'fa fa-caret-down' : reverse, 'fa fa-caret-up' : !reverse}"></i></button>
+                <button type="button" class="btn btn-default btn-black btn-xs" ng-click="sortBy('sold')">Số lượng bán <i ng-show="propertyName === 'sold'" ng-class="{'fa fa-caret-down' : reverse, 'fa fa-caret-up' : !reverse}"></i></button>
             </div>
         </ol>
 

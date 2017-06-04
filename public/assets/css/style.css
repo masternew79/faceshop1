@@ -37,7 +37,7 @@ a:visited {
 .with-nav-tabs.panel-success .nav-tabs > .open > a:focus,
 .with-nav-tabs.panel-success .nav-tabs > li > a:hover,
 .with-nav-tabs.panel-success .nav-tabs > li > a:focus {
-  color: #444;
+  color: black;
   background-color: #999;
   border-color: transparent;
 }
@@ -450,28 +450,7 @@ a:visited {
   font-family: 'Oswald', sans-serif;
   background-color: url(assets/img/slide1.jpg);
 }
-.with-nav-tabs.panel-success .nav-tabs > li > a,
-.with-nav-tabs.panel-success .nav-tabs > li > a:hover,
-.with-nav-tabs.panel-success .nav-tabs > li > a:focus {
-  color: #fff;
-}
-.with-nav-tabs.panel-success .nav-tabs > .open > a,
-.with-nav-tabs.panel-success .nav-tabs > .open > a:hover,
-.with-nav-tabs.panel-success .nav-tabs > .open > a:focus,
-.with-nav-tabs.panel-success .nav-tabs > li > a:hover,
-.with-nav-tabs.panel-success .nav-tabs > li > a:focus {
-  color: #444;
-  background-color: #999;
-  border-color: transparent;
-}
-.with-nav-tabs.panel-success .nav-tabs > li.active > a,
-.with-nav-tabs.panel-success .nav-tabs > li.active > a:hover,
-.with-nav-tabs.panel-success .nav-tabs > li.active > a:focus {
-  color: #444444;
-  background-color: #fff;
-  border-color: #d6e9c6;
-  border-bottom-color: transparent;
-}
+
 .nav-tabs {
   border-bottom: none;
 }
@@ -1162,6 +1141,7 @@ button.btn.btn-link.updatepass:focus {
   color: #ccc;
 }
 .checkout {
+  min-height: 500px;
   margin-top: 30px;
   border-left: 1px solid #ddd;
 }

@@ -1,7 +1,54 @@
 <div class="wrapper container-fluid" style="margin-top: 70px">
     <div class="row">
-        
-        <div class="col-md-10 col-md-offset-1 detail">
+        <div class="col-md-3 relative">
+            <ul class="list-group">
+                <li class="list-group-item clearfix">
+                    <div class="col-md-12">
+                        <a href="">
+                            <div class="col-md-6"><img src="<?=HTP::$resourceUrl?>/assets/img/acer1.png" alt="" class="img-responsive"></div>
+                            <div class="col-md-6 tag">
+                                <div class="name">Lorem ipsum dolor sit amet.</div>
+                                <div class="price">111000 VND</div>
+                            </div>
+                        </a>
+                    </div>
+                </li>
+                <li class="list-group-item clearfix">
+                    <div class="col-md-12">
+                        <a href="">
+                            <div class="col-md-6"><img src="<?=HTP::$resourceUrl?>/assets/img/acer1.png" alt="" class="img-responsive"></div>
+                            <div class="col-md-6 tag">
+                                <div class="name">Lorem ipsum dolor sit amet.</div>
+                                <div class="price">111000 VND</div>
+                            </div>
+                        </a>
+                    </div>
+                </li>
+                <li class="list-group-item clearfix">
+                    <div class="col-md-12">
+                        <a href="">
+                            <div class="col-md-6"><img src="<?=HTP::$resourceUrl?>/assets/img/acer1.png" alt="" class="img-responsive"></div>
+                            <div class="col-md-6 tag">
+                                <div class="name">Lorem ipsum dolor sit amet.</div>
+                                <div class="price">111000 VND</div>
+                            </div>
+                        </a>
+                    </div>
+                </li>
+                <li class="list-group-item clearfix">
+                    <div class="col-md-12">
+                        <a href="">
+                            <div class="col-md-6"><img src="<?=HTP::$resourceUrl?>/assets/img/acer1.png" alt="" class="img-responsive"></div>
+                            <div class="col-md-6 tag">
+                                <div class="name">Lorem ipsum dolor sit amet.</div>
+                                <div class="price">111000 VND</div>
+                            </div>
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-9 detail">
             <ol class="breadcrumb">
                     <li><a href="">Trang chủ</a></li>
                     <li><a href="#">Máy tính</a></li>

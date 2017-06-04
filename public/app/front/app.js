@@ -7,14 +7,14 @@ frontApp.controller('cartController', function($scope,  $localStorage, $http, $s
 
 	$scope.pushCart = function(item) {
 		var product = {};
-
+		$scope.alertCart = false;
 		product.qty = 1;
 		product.id = item;
 
 		if ($scope.checkExist(product.id)) {
 			$http.post(baseUrl + '/products/get/' + product.id).success(function(result) {
 				product.name = result.name;
-				product.price = result.price;
+				product.salePrice = result.salePrice;
 				product.img = result.img;
 			});
 
@@ -23,6 +23,7 @@ frontApp.controller('cartController', function($scope,  $localStorage, $http, $s
 		} else {
 			alertSuccess('SẢN PHẨM ĐÃ CÓ TRONG GIỎ HÀNG');
 		}
+		console.log($scope.cart);
 	};
 
 	$scope.spliceCart = function(item) {
@@ -50,11 +51,9 @@ frontApp.controller('cartController', function($scope,  $localStorage, $http, $s
 
 	$scope.register = function() {
 		$http.get(baseUrl + '/users/register', {params: {'User[name]': $scope.regName, 'User[email]': $scope.regEmail, 'User[password]': $scope.regPass, 'User[mobile]':$scope.regMobile}}).success(function(result) {
-			console.log(result);
 
 			if (result.code !== 1 && result.code !==2) {
 				login($scope.regEmail, $scope.regPass, $scope.regCaptcha);
-
 			}
 		});
 	};
@@ -66,16 +65,7 @@ frontApp.controller('cartController', function($scope,  $localStorage, $http, $s
 	function login(email, password, captcha) {
 		$http.post(baseUrl + '/users/login/' + email + '/' + password + '/' + captcha).success(function(result) {
 			console.log(result);
-			$scope.id = result.id;
-			$scope.userName = result.name;
-			$scope.email = result.email;
-			$scope.mobile = result.mobile;
-			$scope.dob = result.dob;
-			$scope.address = result.address;
-			$scope.ward = result.ward;
-			$scope.district = result.district;
-			$scope.province = result.province;
-			$scope.gender = result.gender;
+			$scope.user = result;
 			if (result.code == 1) {
 				angular.element('.modal').modal('toggle');
 			}
@@ -96,13 +86,18 @@ frontApp.controller('cartController', function($scope,  $localStorage, $http, $s
 		});
 	};
 
+	$scope.alertCart = false;
 	$scope.checkout = function() {
-		console.log(1);
-		if ($scope.userName === '') {
-			angular.element('.modal').modal('toggle');
-			messageModel('Vui lòng đăng nhập');
+		if ($scope.cart.length === 0) {
+			$scope.alertCart = true;
 		} else {
-			$window.location.href = baseUrl + '/checkout';
+			if ($scope.userName === '') {
+				angular.element('.modal').modal('toggle');
+				messageModel('Vui lòng đăng nhập');
+			} else {
+				window.location = baseUrl + '/checkout';
+			}
+			
 		}
 	};
 
@@ -131,7 +126,7 @@ frontApp.controller('cartController', function($scope,  $localStorage, $http, $s
 	$scope.$watch('cart', function(newValue, oldValue, scope) {
 		var total = 0;
 		$scope.cart.forEach(function(item) {
-			total += item.price * item.qty;
+			total += item.salePrice * item.qty;
 		});
 		$scope.total = total;
 		if ($scope.total > 500000) {
@@ -139,20 +134,8 @@ frontApp.controller('cartController', function($scope,  $localStorage, $http, $s
 		} else {
 			$scope.ship = 50000;
 		}
-		$scope.thanhtien = $scope.total + $scope.ship;
+		$scope.lastPrice = $scope.total + $scope.ship;
 	}, true);
-
-	$scope.checkout = function() {
-		var product = [];
-		for (var i = 0; i < $scope.cart.length; i++) {
-			var pro = {};
-			pro.id = $scope.cart[i].id;
-			pro.price = $scope.cart[i].price;
-			pro.qty = $scope.cart[i].qty;
-			product.push(pro);
-		}
-		console.log(product);
-	};
 
 	$scope.$watch(function() {
 		$localStorage.userName = $scope.userName;
@@ -214,7 +197,7 @@ frontApp.controller('indexController', function($scope, $http, $sce){
 });
 
 
-frontApp.controller('categoryController', function($scope, $http, $location){
+frontApp.controller('categoryController', function($scope, $http, $location, $anchorScroll){
 	var url = $location.absUrl();
 	var splitedUrl = url.split('/');
 	var countSplited = splitedUrl.length;
@@ -233,6 +216,7 @@ frontApp.controller('categoryController', function($scope, $http, $location){
 	});
 
 	$scope.sortBy = function(propertyName) {
+		console.log($scope.reverse);
 		$scope.reverse = ($scope.propertyName === propertyName) ? !$scope.reverse : false;
 		$scope.propertyName = propertyName;
 		var sort = '';
@@ -251,16 +235,27 @@ frontApp.controller('categoryController', function($scope, $http, $location){
 
 	$scope.changePage = function($index) {
 		$scope.currentPage = $index;
-		$http.post(baseUrl + '/products/getPage/' + id + '/' + $scope.propertyName + '/DESC/' + $scope.currentPage).success(function(result) {
+		var sort = '';
+		if ($scope.reverse) {
+			sort = 'DESC';
+		} else {
+			sort = 'ASC';
+		}
+		$http.post(baseUrl + '/products/getPage/' + id + '/' + $scope.propertyName + '/' + sort+ '/' + $scope.currentPage).success(function(result) {
 			$scope.products = result;
 			for (var i = 0; i < result.length; i++) {
 				$scope.products[i].count = i;
 			}
 		});
-		$scope.paging[$index].active = true;
-		console.log($scope.paging[$index].active);
+		
+		$anchorScroll();
 	};
 
+	$scope.search = $scope.$parent.search;
+
+	$scope.$parent.$watch('search', function(newValue, oldValue, scope) {
+		console.log(newValue);
+	});
 
 	$scope.$watch('currentPage', function(newValue, oldValue, scope) {
 		$scope.itemPerPage= 28;
@@ -290,15 +285,18 @@ frontApp.controller('categoryController', function($scope, $http, $location){
 			for (var i = begin; i <= end; i++) {
 				var page = {};
 				page.link = i;
-				page.active = false;
+				if (i == $scope.currentPage) {
+					page.active = true;
+					console.log(123123);
+				} else {
+					page.active = false;
+				}
+
 				$scope.paging.push(page);
 			}
+			console.log($scope.paging);
 		});
 	});
-
-
-
-
 
 	$scope.updateInfo = false;
 	$scope.updatePass = false;
@@ -312,7 +310,9 @@ frontApp.controller('categoryController', function($scope, $http, $location){
 	};
 });
 
-
+frontApp.controller('checkoutController', function($scope, $http, $location){
+	
+});
 
 
 // frontApp.controller('billController', ['$scope', '$localStorage', '$http',function($scope, $localStorage, $http){

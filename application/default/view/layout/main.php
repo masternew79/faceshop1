@@ -158,7 +158,7 @@
             </ul>
             <form class="navbar-form" role="search" action="<?=HTP::$baseUrl.'/search'?>" method="get">
                 <div class="form-group">
-                    <input type="text" class="form-control" name="search" placeholder="Tìm kiếm" size="40">
+                    <input type="text" class="form-control" name="search" placeholder="Tìm kiếm" size="40" ng-model="search">
                 </div>
                 <button type="submit" class="btn btn-danger"><b class="glyphicon glyphicon-search"></b></button>
             </form>
@@ -167,13 +167,15 @@
 </nav>
 
 <!-- cart list -->
-<div class="cart-list hidden animated">
+<div class="cart-list hidden animated" id="cart-list">
     <div>
         <div class="col-md-11 text-center">
             <h4 class="cart-title text-center">Giỏ hàng</h4>
         </div>
         <div class="col-md-1 text-right btn-close"><i class="fa fa-close"></i></div>
     </div>
+    <div class="clearfix"></div>
+    <div class="alert alert-info text-center" ng-if="alertCart">VUI LÒNG THÊM SẢN PHẨM VÀO GIỎ HÀNG</div>
     <div class="clearfix"></div>
     <ul class="list-group">
         <li class="list-group-item clearfix" ng-repeat="product in cart | filter:query as filtered">
@@ -193,7 +195,6 @@
                 <div class="col-md-1 cart-item-delete" ng-click="spliceCart($event)"><i class="fa fa-close"></i></div>
             </div>
         </li>
-        
     </ul>
     <div class="total-price text-center">Tổng tiền: {{total | currency : '' : 0}} VNĐ</div>
     <div class="text-center"><a href="" class="btn btn-danger" ng-click="checkout()">Đặt hàng</a></div>
@@ -253,7 +254,7 @@
     <script src="<?=HTP::$resourceUrl?>/assets/js/script.js"></script>
     <script src="<?=HTP::$resourceUrl?>/assets/js/data-tranfer.js"></script>
     <script src="<?=HTP::$resourceUrl?>/assets/js/validate.js"></script>
-    <!-- <script src="<?=HTP::$resourceUrl?>/assets/js/user.js"></script> -->
+    <script src="<?=HTP::$resourceUrl?>/assets/js/user.js"></script>
     <!-- angular -->
     <script src="<?= HTP::$resourceUrl ?>/node_modules/angular/angular.min.js"></script>
 

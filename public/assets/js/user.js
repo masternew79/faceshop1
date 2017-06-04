@@ -14,7 +14,10 @@ $(document).ready(function() {
 	//load provinces, district, ward
 	loadProvide();
 
-	$('[name=province]').change(function() {
+		console.log(1);
+	$('.select-province').change(function() {
+		console.log(2);
+		console.log($(this).val());
 		loadDistrict($(this).val());
 	});
 
