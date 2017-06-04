@@ -69,45 +69,12 @@
                             <div class="col-md-9">
                                 <input type="text" class="form-control text-center" id="address" name="receiver-address" placeholder="Tên đường, số nhà, ..." value="{{user.address}}">
                                 <div style="margin: 5px"></div>
-                                <div class="col-md-4">
-                                    Thành phố:
-                                    <select class="select-province" name="receiver-province">
-                                        <option ng-repeat="province in provinces" value={{province.id}} ng-selected="{{province.id == user.province}}">
-                                            {{province.name}}
-                                        </option>
-                                    </select>
-                                    <select ng-model="defaultProvices" ng-options="province.id as province.name for province in provinces track by province.id" ng-change="changePro()">
-                                        <option value="" style="display: none"></option>
-                                    </select>
-                                </div>
-                                <div class="col-md-4">
-                                    Quận/Huyện:
-                                    <select class="select-district" name="receiver-district">
-                                        <option ng-repeat="district in districts" value={{district.id}} ng-selected="{{district.id == user.district}}">
-                                            {{district.name}}
-                                        </option>
-                                    </select>
-                                </div>
-                                <div class="col-md-4">
-                                    Phường/Xã: 
-                                    <select class="select-ward" name="receiver-ward">
-                                        <option ng-repeat="ward in wards" value={{ward.id}} ng-selected="{{ward.id == user.ward}}">
-                                            {{ward.name}}
-                                        </option>
-                                    </select>
-                                </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-md-3">Thanh toán </label>
-                            <div class="col-md-9">
-                                <div class="col-md-6">
-                                    <input type="radio" name="payment" value="1"> Tiền mặt (trực tiếp)
-                                </div>
-                                <div class="col-md-6">
-                                    <input type="radio" name="payment" value="2"> Trực tuyến (online)
-                                </div>
-                            </div>
+                            <label class="radio-inline"><input type="radio" name="payment">Tiền mặt (trực tiếp)</label>
+                            <label class="radio-inline"><input type="radio" name="payment">Trực tuyến (online)</label>
                         </div>
                     </form>
                 </div>

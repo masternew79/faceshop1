@@ -1,4 +1,4 @@
-<div class="wrapper container-fluid user" style="margin-top: 70px; background-image: url(<?php echo HTP::$resourceUrl; ?>/assets/img/admin-back.jpg);">
+<div class="wrapper container-fluid user" style="margin-top: 70px; background-image: url(<?php echo HTP::$resourceUrl; ?>/assets/img/admin-back.jpg);" ng-controller="userInfoController">
 	<div class="row sub-wrap" style="background: rgba(0, 0, 0, 0.5)">
 		<div class="col-md-8 col-md-offset-2 feature">
 			<div class="alert alert-danger user-title"><i class="fa fa-address-book"></i> Thông tin cá nhân</div>
@@ -6,13 +6,13 @@
 				<div class="form-group">
 					<label class="control-label col-md-2">Họ Tên</label>
 					<div class="col-md-10">
-						<input type="text" class="form-control name" id="name" name="name" value="" disabled>
+						<input type="text" class="form-control name" id="name" name="name" value="" ng-model="userName" disabled>
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="control-label col-md-2">Số điện thoại </label>
 					<div class="col-md-10">
-						<input type="text" class="form-control mobile text-center" id="mobile" name="mobile" value="" disabled>
+						<input type="text" class="form-control mobile text-center" id="mobile" name="mobile" ng-model="user.mobile" value="" disabled>
 					</div>
 				</div>
 				<div class="form-group text-center">

@@ -313,36 +313,13 @@ frontApp.controller('categoryController', function($scope, $http, $location, $an
 frontApp.controller('checkoutController', function($scope, $http, $location){
 	console.log($scope.user);
 
-	$scope.receiverDistrict = {};
-	$http.get(baseUrl + '/address/getProvince').success(function(result) {
-		$scope.provinces = result;
-		console.log(result);
-		for (var i = 0; i < result.length; i++) {
-			if (result[i].id == $scope.user.province) {
-				console.log(result[i].name);
-				$scope.defaultProvices = result[i];
-				console.log($scope.defaultProvices);
-			}
-		}
-	});
-
-	$http.get(baseUrl + '/address/getDistrict/' + $scope.user.province).success(function(result) {
-		$scope.districts = result;
-	});
-
-	$http.get(baseUrl + '/address/getWard/' + $scope.user.district).success(function(result) {
-		$scope.wards = result;
-	});
-
-	$scope.changePro = function() {
-		console.log($scope.defaultProvices);
-	}
+	
 
 
-	// $scope.$watch('watchExpression', function(newValue, oldValue, scope) {
-		
-	// }, objectEquality);
+});
 
+frontApp.controller('userInfoController', function($scope){
+	console.log($scope.user);
 });
 
 
