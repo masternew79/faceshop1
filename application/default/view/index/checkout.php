@@ -73,7 +73,7 @@
                         </div>
                         <div class="form-group">
                             <label class="control-label col-md-3">Thanh toán </label>
-                            <label class="radio-inline"><input type="radio" name="payment">Tiền mặt (trực tiếp)</label>
+                            <label class="radio-inline"><input type="radio" name="payment" checked>Tiền mặt (trực tiếp)</label>
                             <label class="radio-inline"><input type="radio" name="payment">Trực tuyến (online)</label>
                         </div>
                     </form>

@@ -2,13 +2,6 @@
 header('Content-Type', 'application/json');
 class Default_Controller_Index extends Default_Controller_Base{
     public function index(){
-        $this->view->bestSelling = Product::model()->findBySql('SELECT * FROM product ORDER BY sold DESC LIMIT 1');
-        $this->view->sellings = Product::model()->findAllBySql('SELECT * FROM product ORDER BY sold DESC LIMIT 2, 6');
-        $this->view->newest = Product::model()->findBySql('SELECT * FROM product ORDER BY creat_at DESC LIMIT 1');
-        $this->view->news = Product::model()->findAllBySql('SELECT * FROM product ORDER BY creat_at DESC LIMIT 2, 6');
-        $this->view->biggestDiscount = Product::model()->findBySql('SELECT * FROM product ORDER BY sale_off DESC LIMIT 1');
-        $this->view->discounts = Product::model()->findAllBySql('SELECT * FROM product ORDER BY sale_off DESC LIMIT 2, 6');
-        $this->view->category = Category::model()->findAllBySql("SELECT * FROM category");
         $this->view->render('index');
     }
 

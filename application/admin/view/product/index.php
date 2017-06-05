@@ -1,4 +1,4 @@
-<div class="col-md-10 feature" xmlns:font-size="http://www.w3.org/1999/xhtml">
+<div class="col-md-12 feature" xmlns:font-size="http://www.w3.org/1999/xhtml" ng-controller="productController">
     <div class="col-md-12">
         <div class="col-md-8 text-right">
             <form class="navbar-form" role="search">
@@ -23,8 +23,6 @@
         </tr>
         </thead>
         <tbody>
-
-
 
         <?php
         $stt = 1;

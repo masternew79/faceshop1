@@ -32,6 +32,7 @@ class Default_Controller_Order extends Default_Controller_Base
                 $listProductName = array();
             }
             echo json_encode($result, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) ;
+            return;
         }
         else
             $this->redirect(HTP::$baseUrl);

@@ -313,27 +313,45 @@ frontApp.controller('categoryController', function($scope, $http, $location, $an
 frontApp.controller('checkoutController', function($scope, $http, $location){
 	console.log($scope.user);
 
-	
 
 
 });
 
 frontApp.controller('userInfoController', function($scope){
 	console.log($scope.user);
+	var DOB = $scope.user.dob.split('-');
+	console.log(DOB);
+	$scope.Day = DOB[2];
+	$scope.Month = DOB[1];
+	$scope.Year = DOB[0];
+	$scope.days = range(1, 31);
+	$scope.months = range(1, 12);
+	$scope.years = range(1950, 2017);
+
+	$scope.updateInfo = false;
+	$scope.changeInfo = function() {
+		$scope.updateInfo = !$scope.updateInfo;
+	};
+	$scope.updatePass = false;
+	$scope.changePass = function() {
+		$scope.updatePass = !$scope.updatePass;
+	};
+
+
 });
 
 
-// frontApp.controller('billController', ['$scope', '$localStorage', '$http',function($scope, $localStorage, $http){
+frontApp.controller('billController', function($scope, $http){
 
-// 	$http.get(baseUrl + '/order/getOrder', {params: {user_id: loginID}}).success(function(result) {
-// 		$scope.bills = result;
-// 		console.log(result);
-// 	});
-
-// 	$scope.cancelBill = function(id) {
-// 		console.log(id);
-// 	};
-// }]);
+	$http.get(baseUrl + '/order/getOrder', {params: {user_id: loginID}}).success(function(result) {
+		$scope.bills = result;
+		console.log(result);
+	});
+	
+	$scope.cancelBill = function(id) {
+		console.log(id);
+	};
+});
 
 
 

@@ -6,51 +6,32 @@
 				<div class="form-group">
 					<label class="control-label col-md-2">Họ Tên</label>
 					<div class="col-md-10">
-						<input type="text" class="form-control name" id="name" name="name" value="" ng-model="userName" disabled>
+						<input type="text" class="form-control name" id="name" name="name" value="" ng-model="userName" ng-disabled="!updateInfo">
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="control-label col-md-2">Số điện thoại </label>
 					<div class="col-md-10">
-						<input type="text" class="form-control mobile text-center" id="mobile" name="mobile" ng-model="user.mobile" value="" disabled>
+						<input type="text" class="form-control mobile text-center" id="mobile" name="mobile" ng-model="user.mobile" value="" ng-disabled="!updateInfo">
 					</div>
 				</div>
 				<div class="form-group text-center">
 					<label class="control-label col-md-2">Ngày sinh</label>
 					<div class="col-md-6 col-md-offset-2">
 						<div class="col-md-4">
-							<select name="day" disabled>
-								<?php
-								for($i = 1; $i <= 31; $i++):
-									?>
-								<option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-								<?php 
-								endfor;
-								?>
+							<select name="day" ng-disabled="!updateInfo">
+								<option ng-repeat="day in days" ng-value="{{day}}" ng-selected="day == Day">{{day}}</option>
 							</select>
 						</div>
 						<div class="col-md-4">
-							<select name="month" disabled>
-								<?php
-								for($i = 1; $i <= 12; $i++):
-									?>
-								<option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-								<?php 
-								endfor;
-								?>
+							<select name="day" ng-disabled="!updateInfo">
+								<option ng-repeat="month in months" ng-value="{{month}}" ng-selected="month == Month">{{month}}</option>
 							</select>
 						</div>
 						<div class="col-md-4">
-							<select name="year" disabled>
-								<?php
-								for($i = 1990; $i <= 2017; $i++):
-									?>
-								<option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-								<?php 
-								endfor;
-								?>
+							<select name="day" ng-disabled="!updateInfo">
+								<option ng-repeat="year in years" ng-value="{{year}}" ng-selected="year == Year">{{year}}</option>
 							</select>
-
 						</div>
 					</div>
 				</div>
@@ -58,9 +39,9 @@
 					<label class="control-label col-md-2">Giới tính </label>
 					<div class="col-md-3 col-md-offset-2">
 						<div class="col-md-12">
-							<select name="gender" disabled>
-								<option value="1" ng-selected="gender == 1">Nam</option>
-								<option value="0" ng-selected="gender == 0">Nữ</option>
+							<select name="gender" ng-disabled="!updateInfo">
+								<option value="1" ng-selected="user.gender == 1">Nam</option>
+								<option value="0" ng-selected="user.gender == 0">Nữ</option>
 							</select>
 						</div>
 					</div>
@@ -68,36 +49,18 @@
 				<div class="form-group">
 					<label class="control-label col-md-2" >Địa chỉ </label>
 					<div class="col-md-10">
-						<input type="text" class="form-control text-center" id="address" name="address" placeholder="Tên đường, số nhà, ..." disabled>
-						<div style="margin: 5px"></div>
-						<div class="col-md-12">
-							<div class="col-md-4">
-								Tỉnh/Thành phố:
-								<select class="select-province" name="province" disabled>
-								</select>
-							</div>
-							<div class="col-md-4">
-								Quận/Huyện:
-								<select class="select-district" name="district" disabled>
-								</select>
-							</div>
-							<div class="col-md-4" disabled>
-								Phường/Xã: 
-								<select class="select-ward" name="ward" disabled>
-								</select>
-							</div>
-						</div>
+						<input type="text" class="form-control text-center" id="address" name="address" placeholder="Tên đường, số nhà, ..." ng-model="user.address" ng-disabled="!updateInfo">
 					</div>
 				</div>
 				<br>
 				<div class="text-right">
-					<button type="button" class="btn btn-link updatepass">Thay đổi mật khẩu</button>
-					<button type="button" class="btn btn-success updateinfo">Cập nhật thông tin</button>
-					<button type="button" class="btn btn-danger hide cancel">Hủy</button>
-					<button type="button" class="btn btn-primary hide confirm">Xác nhận</button>
+					<button type="button" class="btn btn-link updatepass" ng-if="!updatePass" ng-click="changePass()" ng-show="!updateInfo">Thay đổi mật khẩu</button>
+					<button type="button" class="btn btn-success updateinfo" ng-if="!updateInfo" ng-show="!updatePass" ng-click="changeInfo()">Cập nhật thông tin</button>
+					<button type="button" class="btn btn-danger cancel" ng-if="updateInfo" ng-click="changeInfo()">Hủy</button>
+					<button type="button" class="btn btn-primary confirm" ng-if="updateInfo" ng-click="changeInfo()">Xác nhận</button>
 				</div>
 			</form>
-			<form method="POST" class="form-horizontal hide form-update-pass">
+			<form method="POST" class="form-horizontal form-update-pass" ng-if="updatePass">
 				<div class="form-group">
 					<label class="control-label col-md-2">Mật khẩu hiện tại </label>
 					<div class="col-md-10">
@@ -117,8 +80,8 @@
 					</div>
 				</div>
 				<div class="text-right">
-					<button type="button" class="btn btn-danger cancelpass" ">Hủy</button>
-					<button type="button" class="btn btn-primary confirmpass ">Xác nhận</button>
+					<button type="button" class="btn btn-danger cancelpass" " ng-click="changePass()">Hủy</button>
+					<button type="button" class="btn btn-primary confirmpass" ng-click="changePass()">Xác nhận</button>
 				</div>
 			</form>
 		</div>

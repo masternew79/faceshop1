@@ -25,6 +25,16 @@ class Admin_Controller_Product extends Admin_Controller_Base{
         $this->view->render('index');
     }
 
+    public function getProducts() {
+        $result = array();
+        $products = Product::model()->findAllBySql("SELECT * FROM product ORDER BY id DESC");
+        
+        foreach ($products as $product) {
+            $result[] = resultArray($product);
+        }
+        echo json_encode($result , JSON_UNESCAPED_UNICODE);
+    }
+
     public function add(){
         if(HTP_Request::post('Product'))
         {
@@ -34,7 +44,7 @@ class Admin_Controller_Product extends Admin_Controller_Base{
             $this->redirect(HTP::$baseUrl);
         }
         else
-        $this->view->render('add');
+            $this->view->render('add');
     }
 
     public function delete($param)
@@ -66,4 +76,9 @@ class Admin_Controller_Product extends Admin_Controller_Base{
         else
             $this->redirect(HTP::$baseUrl);
     }
+}
+
+function resultArray($product) {
+    $salePrice = $product->price - ($product->price * $product->sale_off / 100);
+    return array('id' => intval($product->id), 'name' => $product->name, 'price' => intval($product->price), 'img' => $product->image, 'salePrice' => intval($salePrice), 'description' => $product->description, 'view' => $product->view, 'sale_off' => $product->sale_off);
 }

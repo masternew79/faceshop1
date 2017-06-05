@@ -29,12 +29,9 @@
 <script src="<?=HTP::$resourceUrl?>/assets/js/jquery.min.js"></script>
 <script src="<?=HTP::$resourceUrl?>/assets/bootstrap/js/bootstrap.min.js"></script>
 <script src="<?=HTP::$resourceUrl?>/assets/js/wow.min.js"></script>
-
-<script src="<?=HTP::$resourceUrl?>/assets/js/angular/angular.min.js"></script>
-<script src="<?=HTP::$resourceUrl?>/assets/js/angular/angular-route.min.js"></script>
+<script src="<?= HTP::$resourceUrl ?>/node_modules/angular/angular.min.js"></script>
+<script src="<?=HTP::$resourceUrl?>/node_modules/ng-storage/ngStorage.min.js" type="text/javascript"></script>
 <script src="<?=HTP::$resourceUrl?>/assets/js/admin-script.js"></script>
-<script src="<?=HTP::$resourceUrl?>/public/app/back/app.js"></script>
-<script src="<?=HTP::$resourceUrl?>/public/app/back/config.js"></script>
-<script src="<?=HTP::$resourceUrl?>/public/app/back/controller.js"></script>
+<script src="<?=HTP::$resourceUrl?>/app/back/app.js"></script>
 </body>
 </html>
