@@ -7,9 +7,7 @@ class Default_Controller_Index extends Default_Controller_Base{
     }
 
     public function category($param) {
-        if (isset($param[0])) {
-            $cateId = $param[0];
-        }
+    	$cateId = isset($param[0]) ? $param[0] : 1;
         $this->view->delay = 0.2;
         $this->view->category = Category::model()->findAllBySql("SELECT * FROM category");
         $this->view->trademarks = Trademark::model()->findAllBySql("SELECT * FROM trademark WHERE cate_id = $cateId");
@@ -17,12 +15,7 @@ class Default_Controller_Index extends Default_Controller_Base{
     }
 
     public function product($param) {
-        $id = 1;
-        if (isset($param[0])) {
-            $id = $param[0];
-        }
-        $this->view->category = Category::model()->findAllBySql("SELECT * FROM category");
-        $this->view->product = Product::model()->findAllBySql("SELECT * FROM product where id = $id");
+        $id = isset($param[0]) ? $param[0] : 1;
         $this->view->render('product');
     }
 
