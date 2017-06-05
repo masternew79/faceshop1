@@ -81,12 +81,14 @@ frontApp.controller('cartController', function($scope,  $localStorage, $http, $s
 		delete $scope.userName;
 		delete $localStorage.userName;
 		$scope.userName = '';
-
+		
 		$http.get(baseUrl + '/logout').success(function(result) {
 			console.log(result);
 			window.location = baseUrl;
 		});
+	// console.log($scope.userName);
 	};
+
 
 	$scope.alertCart = false;
 	$scope.checkout = function() {
