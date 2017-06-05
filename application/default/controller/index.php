@@ -109,8 +109,8 @@ class Default_Controller_Index extends Default_Controller_Base{
 
     public function logout() {
         HTP_Session::delete('ID');
-        $result = array('message' => 'Đăng xuât thành công');
-        echo json_encode($result , JSON_UNESCAPED_UNICODE);
+        // $result = array('message' => 'Đăng xuât thành công');
+        // echo json_encode($result , JSON_UNESCAPED_UNICODE);
         $this->redirect(HTP::$baseUrl);
     }
 }

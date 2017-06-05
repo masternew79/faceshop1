@@ -88,7 +88,7 @@ frontApp.controller('cartController', function($scope,  $localStorage, $http, $s
 		
 		// $http.get(baseUrl + '/logout').success(function(result) {
 		// 	console.log(result);
-			$window.location.href = baseUrl + '/logout';
+			// $window.location.href = baseUrl + '/logout';
 		// });
 	// console.log($scope.userName);
 	};
