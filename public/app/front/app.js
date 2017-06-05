@@ -4,7 +4,7 @@ frontApp.controller('cartController', function($scope,  $localStorage, $http, $s
 
 	$scope.cart = $localStorage.cart || [];
 	$scope.userName = $localStorage.userName || '';
-	$scope.user = $localStorage.user || {};
+	// $scope.user = $localStorage.user || {};
 
 	$scope.pushCart = function(item) {
 		var product = {};
@@ -78,14 +78,18 @@ frontApp.controller('cartController', function($scope,  $localStorage, $http, $s
 	}
 
 	$scope.logout = function() {
+		// $localStorage.$reset();
+		// $scope.user.name = '';
 		delete $scope.userName;
+		delete $scope.user;
 		delete $localStorage.userName;
+		delete $localStorage.user;
 		$scope.userName = '';
 		
-		$http.get(baseUrl + '/logout').success(function(result) {
-			console.log(result);
-			window.location = baseUrl;
-		});
+		// $http.get(baseUrl + '/logout').success(function(result) {
+		// 	console.log(result);
+			$window.location.href = baseUrl + '/logout';
+		// });
 	// console.log($scope.userName);
 	};
 
