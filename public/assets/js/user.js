@@ -5,8 +5,7 @@ function range(min, max) {
 	}
 	return range;
 }
-<<<<<<< HEAD
-=======
+
 
 $(document).ready(function() {
 	//load info user
@@ -73,7 +72,7 @@ $(document).ready(function() {
 		$('button.updateinfo').toggleClass('hide');
 		$(this).toggleClass('hide');
 		$('button.cancel').toggleClass('hide');
-		Disable(true);	
+		Disable(true);
 
 
 		var name = $('[name=name]').val();
@@ -87,17 +86,15 @@ $(document).ready(function() {
 		var province = $('[name=province]').val();
 		var district = $('[name=district]').val();
 		var ward = $('[name=ward]').val();
-<<<<<<< HEAD
 
 		$.post(baseUrl+'/users/updateInfo', {'User[id]': loginID ,'User[name]': name, 'User[mobile]': mobile, 'User[dob]': dob, 'User[address]': address, 'User[gender]': gender, 'User[province]': province, 'User[district]': district, 'User[ward]': ward}, function(result) {
 		console.log(loginID);
 
 		$.post(baseUrl+'/users/updateInfo',{'User[id]': loginID, 'User[name]': name, 'User[mobile]': mobile, 'User[dob]': dob, 'User[address]': address, 'User[gender]': gender, 'User[province]': province, 'User[district]': district, 'User[ward]': ward}, function(result) {
 
-=======
+
 
 		$.post(baseUrl+'/users/updateInfo',{'User[id]': loginID, 'User[name]': name, 'User[mobile]': mobile, 'User[dob]': dob, 'User[address]': address, 'User[gender]': gender, 'User[province]': province, 'User[district]': district, 'User[ward]': ward}, function(result) {
->>>>>>> dev
 			console.log(result);
 		});
 	});
@@ -186,5 +183,3 @@ function loadUserInfo() {
 		$('[name=ward]').val(result.ward);
 	});
 }
-
->>>>>>> 2a9c0fa8b07211229db43e07b2607b4b0b0b2144
