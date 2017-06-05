@@ -185,7 +185,7 @@
                     <div class="row cart-item-name">
                         <a href="">{{product.name}}</a>
                     </div>
-                    <div class="row cart-item-price">{{product.price | currency : '' : 0}} VNĐ</div>
+                    <div class="row cart-item-price">{{product.salePrice | currency : '' : 0}} VNĐ</div>
                 </div>
                 <div class="col-md-4 quantity">
                     <button type="button" class="minus" ng-click=minus($event)><i class="fa fa-minus"></i></button>

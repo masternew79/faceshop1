@@ -201,7 +201,6 @@ frontApp.controller('indexController', function($scope, $http, $sce){
 	};
 });
 
-
 frontApp.controller('categoryController', function($scope, $http, $location, $anchorScroll){
 	var url = $location.absUrl();
 	var splitedUrl = url.split('/');
@@ -336,7 +335,7 @@ frontApp.controller('checkoutController', function($scope, $http, $location){
 		console.log($scope.receiverMobile);
 		console.log($scope.receiverAddress);
 		console.log($scope.payment);
-		console.log($scope.user.id);
+		console.log($scope.$parent.lastPrice);
 
 		var products = [];
 		angular.forEach($scope.cart, function(value, key){
@@ -349,44 +348,82 @@ frontApp.controller('checkoutController', function($scope, $http, $location){
 
 		var detail = {'product' : products};
 		console.log(JSON.stringify(detail));
-		$http.get(baseUrl + '/order/add', {params: {'Order[name]': $scope.receiverName, 'Order[mobile]' : $scope.mobile, 'Order[address]' : $scope.receiverAddress, 'Order[user_id]' : $scope.user.id , 'detail' : detail }}).success(function(result) {
+		$http.get(baseUrl + '/order/add', {params: {'Order[name]': $scope.receiverName, 'Order[mobile]' : $scope.receiverMobile, 'Order[address]' : $scope.receiverAddress, 'Order[user_id]' : $scope.user.id , 'Order[email]': $scope.user.email, 'Order[total]' : $scope.$parent.lastPrice, 'Order[payment_type]' : $scope.payment,  'detail' : detail }}).success(function(result) {
 			console.log(result);
 		});
 	};
 });
 
-frontApp.controller('userInfoController', function($scope){
+frontApp.controller('userInfoController', function($scope, $http){
 	if ($scope.user.dob !== null) {
 		var DOB = $scope.user.dob.split('-');
 		$scope.Day = DOB[2];
 		$scope.Month = DOB[1];
 		$scope.Year = DOB[0];
-		
 	}
 	$scope.days = range(1, 31);
 	$scope.months = range(1, 12);
 	$scope.years = range(1950, 2017);
+	$scope.infoName = $scope.user.name;
+	$scope.infoMobile = $scope.user.mobile;
+	$scope.infoAddress = $scope.user.address;
+	$scope.infoGender = $scope.user.gender;
+
+	$scope.changeName = function(Name) {
+		$scope.infoName = Name;
+	};
+	$scope.changeMobile = function(Mobile) {
+		$scope.infoMobile = Mobile;
+	};
+	$scope.changeAddress = function(Address) {
+		$scope.infoAddress = Address;
+	};
+	$scope.changeGender = function(Gender) {
+		$scope.infoGender = Gender;
+		console.log(Gender);
+	};
 
 	$scope.updateInfo = false;
 	$scope.changeInfo = function() {
 		$scope.updateInfo = !$scope.updateInfo;
+
 	};
 	$scope.updatePass = false;
 	$scope.changePass = function() {
 		$scope.updatePass = !$scope.updatePass;
+	};
+
+	$scope.confirmInfo = function() {
+		$scope.changeInfo();
+		console.log($scope.infoName);
+		console.log($scope.infoMobile);
+		console.log($scope.infoAddress);
+		console.log($scope.infoGender);
+		$http.get(baseUrl + '/users/updateInfo', {params: {'User[name]': $scope.infoName, 'User[mobile]': $scope.infoMobile, 'User[address]': $scope.infoAddress, 'User[gender]': $scope.infoGender}}).success(function(result) {
+			console.log(result);
+		});
 	};
 });
 
 
 frontApp.controller('billController', function($scope, $http){
 
-	$http.get(baseUrl + '/order/getOrder', {params: {user_id: loginID}}).success(function(result) {
+	$http.get(baseUrl + '/order/getOrder', {params: {user_id: $scope.user.id}}).success(function(result) {
 		$scope.bills = result;
 		console.log(result);
 	});
 	
 	$scope.cancelBill = function(id) {
+		angular.forEach($scope.bills, function(value, key){
+			if (value.id === id) {
+				console.log(value);
+				value.status = 2;
+			}
+		});
 		console.log(id);
+		$http.get(baseUrl + '/order/cancel/' + id).success(function(result) {
+			console.log(result);
+		});
 	};
 });
 

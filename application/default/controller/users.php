@@ -84,10 +84,10 @@ class Default_Controller_Users extends Default_Controller_Base{
 
     public function updateInfo()
     {
-        if(HTP_Request::post('User')){
+        if(HTP_Request::get('User')){
             //scenario : kịch bản để check rules khi validate model
             $user = new User();
-            $user->load(HTP_Request::post('User'));
+            $user->load(HTP_Request::get('User'));
             if(isset($user->password))
                 $user->password = sha1($user->password);
 

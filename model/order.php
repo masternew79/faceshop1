@@ -22,7 +22,7 @@ class Order extends HTP_Model{
             'address' => array('address'),
             'create_date' => array('create_date'),
             'payment_type' => array('payment_type'),
-            'delivery_type' => array('delivery_type'),
+            'total' => array('total'),
             'status' => array('status'),
             'hash' => array('hash')
         );

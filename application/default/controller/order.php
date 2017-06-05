@@ -140,4 +140,10 @@ class Default_Controller_Order extends Default_Controller_Base
         else
             $this->redirect(HTP::$baseUrl);
     }
+
+    public function cancel($param) {
+        Order::model()->updateByColumns('status = :status','id = :id', array(':status'=>2,':id'=>$param[0]));
+        echo json_encode(array('code'=>1, 'message'=>'Huy đơn hàng thành công'), JSON_UNESCAPED_UNICODE);
+        return;
+    }
 }

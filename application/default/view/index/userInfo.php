@@ -6,13 +6,13 @@
 				<div class="form-group">
 					<label class="control-label col-md-2">Họ Tên</label>
 					<div class="col-md-10">
-						<input type="text" class="form-control name" id="name" name="name" value="" ng-model="user.name" ng-disabled="!updateInfo">
+						<input type="text" class="form-control name" id="name" name="name" value="" ng-model="infoName" ng-disabled="!updateInfo" ng-change="changeName(infoName)">
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="control-label col-md-2">Số điện thoại </label>
 					<div class="col-md-10">
-						<input type="text" class="form-control mobile text-center" id="mobile" name="mobile" ng-model="user.mobile" value="" ng-disabled="!updateInfo">
+						<input type="text" class="form-control mobile text-center" id="mobile" name="mobile" ng-model="infoMobile" value="" ng-disabled="!updateInfo" ng-change="changeMobile(infoMobile)">
 					</div>
 				</div>
 				<div class="form-group text-center">
@@ -39,7 +39,7 @@
 					<label class="control-label col-md-2">Giới tính </label>
 					<div class="col-md-3 col-md-offset-2">
 						<div class="col-md-12">
-							<select name="gender" ng-disabled="!updateInfo">
+							<select name="gender" ng-disabled="!updateInfo" ng-model="infoGender" ng-change="changeGender(infoGender)">
 								<option value="1" ng-selected="user.gender == 1">Nam</option>
 								<option value="0" ng-selected="user.gender == 0">Nữ</option>
 							</select>
@@ -49,7 +49,7 @@
 				<div class="form-group">
 					<label class="control-label col-md-2" >Địa chỉ </label>
 					<div class="col-md-10">
-						<input type="text" class="form-control text-center" id="address" name="address" placeholder="Tên đường, số nhà, ..." ng-model="user.address" ng-disabled="!updateInfo">
+						<input type="text" class="form-control text-center" id="address" name="address" placeholder="Tên đường, số nhà, ..." ng-model="infoAddress	" ng-disabled="!updateInfo" ng-change="changeAddress(infoAddress)">
 					</div>
 				</div>
 				<br>
@@ -57,7 +57,7 @@
 					<button type="button" class="btn btn-link updatepass" ng-if="!updatePass" ng-click="changePass()" ng-show="!updateInfo">Thay đổi mật khẩu</button>
 					<button type="button" class="btn btn-success updateinfo" ng-if="!updateInfo" ng-show="!updatePass" ng-click="changeInfo()">Cập nhật thông tin</button>
 					<button type="button" class="btn btn-danger cancel" ng-if="updateInfo" ng-click="changeInfo()">Hủy</button>
-					<button type="button" class="btn btn-primary confirm" ng-if="updateInfo" ng-click="changeInfo()">Xác nhận</button>
+					<button type="button" class="btn btn-primary confirm" ng-if="updateInfo" ng-click="confirmInfo()">Xác nhận</button>
 				</div>
 			</form>
 			<form method="POST" class="form-horizontal form-update-pass" ng-if="updatePass">

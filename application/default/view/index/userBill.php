@@ -20,9 +20,11 @@
 								<p ng-repeat="product in bill.name">- {{product.substring(0,30)}}...</p>
 							</td>
 							<td>{{bill.total}}</td>
-							<td>{{bill.status}}</td>
+							<td ng-if="bill.status === '0'">Chưa xác nhân</td>
+							<td ng-if="bill.status === '1'">Xác nhân</td>
+							<td ng-if="bill.status === '2'">Đã hủy </td>
 							<td>
-								<a href="" class="btn btn-default btn-xs" ng-if="bill.status == 1" ng-click="cancelBill(bill.id_bill)">Hủy đơn hàng</a>
+								<a href="" class="btn btn-default btn-xs" ng-if="bill.status === '0'" ng-click="cancelBill(bill.id_bill)">Hủy đơn hàng</a>
 							</td>
 						</tr>
 					</tbody>
