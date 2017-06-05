@@ -23,4 +23,9 @@ class Admin_Controller_User extends Admin_Controller_Base{
             $this->redirect(HTP::$baseUrl.'/user/'. $page);
         }
     }
+
+    public function getUsers() {
+        $user = User::model()->findAll();
+        echo json_encode($user , JSON_UNESCAPED_UNICODE);
+    }
 }

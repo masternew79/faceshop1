@@ -53,43 +53,11 @@ a:hover {
 }
 /*wrapper*/
 .wrapper {
-  margin-top: 65px;
+  margin-top: 50px;
   background-color: rgba(0, 0, 0, 0.5);
   padding-top: 30px;
 }
-.side-bar {
-  padding: 0;
-}
-.side-bar .product:hover,
-.side-bar .product:active {
-  background-color: #e74c3c;
-}
-.side-bar .user:hover,
-.side-bar .user:active {
-  background-color: #1abc9c;
-}
-.side-bar .trademark:hover,
-.side-bar .trademark:active {
-  background-color: #f1c40f;
-}
-.side-bar .affix {
-  width: 230px;
-}
-.side-bar .item {
-  margin: 5px;
-  margin-bottom: 10px;
-  padding-top: 7px;
-  padding-bottom: 0px;
-  font-size: 15px;
-  border: 1px solid #eee;
-}
-.side-bar .item .icon {
-  padding: 0;
-}
-.side-bar .item a {
-  color: white;
-  text-transform: uppercase;
-}
+
 .feature {
   padding-right: 0;
 }

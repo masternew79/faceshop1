@@ -2,6 +2,7 @@
 header('Content-Type', 'application/json');
 class Default_Controller_Index extends Default_Controller_Base{
     public function index(){
+        $this->view->category = Category::model()->findAllBySql("SELECT * FROM category");
         $this->view->render('index');
     }
 

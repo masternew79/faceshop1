@@ -1,4 +1,4 @@
-<div class="col-md-10 feature">
+<div class="col-md-12 feature" ng-controller="userController">
     <div class="col-md-12">
         <div class="col-md-8 text-right">
             <form class="navbar-form out" role="search">
@@ -22,8 +22,6 @@
         </thead>
         <tbody>
         <?php $stt = 1;foreach ($this->user as $item){?>
-
-
         <tr class="text-center">
             <td><?php $stt++;?></td>
             <td><?php $item->name?></td>
@@ -36,24 +34,7 @@
             </td>
         </tr>
         <?php }?>
-
-
         </tbody>
     </table>
 </div>
-
 </div>
-<script>
-    $(document).ready(function(){
-        $(document).on("click","button",function(){
-            var result = confirm("Bạn có muốn xóa Nhân viên" + this.id);
-            if(result)
-            {
-                $.get("<?=HTP::$baseUrl;?>" + "/user/delete/" + this.id, function(data, status){
-                    alert("Xóa thành công");
-                });
-            }
-        });
-    });
-
-</script>

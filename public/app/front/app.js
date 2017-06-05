@@ -261,7 +261,7 @@ frontApp.controller('categoryController', function($scope, $http, $location, $an
 	});
 
 	$scope.$watch('currentPage', function(newValue, oldValue, scope) {
-		$scope.itemPerPage= 28;
+		$scope.itemPerPage= 50;
 		$scope.totalPage = 0;
 		$scope.paging = [];
 		$http.post(baseUrl + '/products/getTotalPage/' + id).success(function(result) {

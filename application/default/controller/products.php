@@ -43,7 +43,7 @@ class Default_Controller_Products extends Default_Controller_Base{
     	$where = '';
     	$order = '';
     	$sort = '';
-        $start = 0;
+        $start = 1;
         $and = '';
         if(isset($param[0]))
         {
@@ -61,7 +61,7 @@ class Default_Controller_Products extends Default_Controller_Base{
             }
 
             if (isset($param[3])) {
-                $start = ($param[3] -1) * 28;
+                $start = ($param[3] - 1) * 28;
             }
             $products = Product::model()->findAllBySql("SELECT * FROM product $where $and $order $sort LIMIT $start, 28");
             $result = array();

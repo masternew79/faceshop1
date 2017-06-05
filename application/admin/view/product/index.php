@@ -1,127 +1,51 @@
 <div class="col-md-12 feature" xmlns:font-size="http://www.w3.org/1999/xhtml" ng-controller="productController">
-    <div class="col-md-12">
-        <div class="col-md-8 text-right">
-            <form class="navbar-form" role="search">
-                <div class="form-group out">
-                    <input type="text" class="form-control" placeholder="Tìm kiếm sản phẩm" size="40">
+    <div class="col-md-12" style="margin-bottom: 20px">
+        <div class="col-md-5 text-right col-md-offset-3">
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon1"><i class="fa fa-search"></i></span>
+                    <div class="form-group out">
+                        <input type="text" class="form-control" placeholder="Tìm kiếm sản phẩm" size="40" ng-model="search" ng-keyup="typing(search)">
+                    </div>
                 </div>
-                <button type="submit" class="btn btn-info"><b class="glyphicon glyphicon-search"></b></button>
-            </form>
         </div>
         <div class="col-md-4 text-right"><a href="<?=HTP::$baseUrl .'/product/add'?>" class="btn btn-success"><i class="fa fa-plus-square-o"></i> Thêm sản phẩm</a></div>
     </div>
     <table class="table table-responsive">
         <thead>
-        <tr>
-            <th>STT</th>
-            <th>Hình</th>
-            <th>Tên</th>
-            <th>Giá</th>
-            <th>Giảm giá</th>
-            <th>Lượt xem</th>
-            <th>Tùy chọn</th>
-        </tr>
+            <tr>
+                <th><button type="button" class="btn btn-default btn-black btn-xs" ng-click="sortBy('id')">Mã sản phẩm <i ng-show="propertyName === 'id'" ng-class="{'fa fa-caret-down' : reverse, 'fa fa-caret-up' : !reverse}"></i></button></th>
+                <th>Hình</th>
+                <th><button type="button" class="btn btn-default btn-black btn-xs" ng-click="sortBy('name')">Tên <i ng-show="propertyName === 'name'" ng-class="{'fa fa-caret-down' : reverse, 'fa fa-caret-up' : !reverse}"></i></button></th>
+                <th><button type="button" class="btn btn-default btn-black btn-xs" ng-click="sortBy('price')">Giá <i ng-show="propertyName === 'price'" ng-class="{'fa fa-caret-down' : reverse, 'fa fa-caret-up' : !reverse}"></i></button></th>
+                <th><button type="button" class="btn btn-default btn-black btn-xs" ng-click="sortBy('sale_off')">Giảm giá <i ng-show="propertyName === 'sale_off'" ng-class="{'fa fa-caret-down' : reverse, 'fa fa-caret-up' : !reverse}"></i></button></th>
+                <th><button type="button" class="btn btn-default btn-black btn-xs" ng-click="sortBy('view')">Xem <i ng-show="propertyName === 'view'" ng-class="{'fa fa-caret-down' : reverse, 'fa fa-caret-up' : !reverse}"></i></button></th>
+                <th><button type="button" class="btn btn-default btn-black btn-xs" ng-click="sortBy('sold')">Bán ra <i ng-show="propertyName === 'sold'" ng-class="{'fa fa-caret-down' : reverse, 'fa fa-caret-up' : !reverse}"></i></button></th>
+                <th>Tùy chọn</th>
+            </tr>
         </thead>
         <tbody>
-
-        <?php
-        $stt = 1;
-        foreach ($this->products as $item){ ?>
-        <tr class="text-center" ng-hide="appear1">
-            <td><?php echo $stt++;?></td>
-            <td class="image"><img src="<?=HTP::$resourceUrl .'/' .$item->image;?>" alt="" class="img-responsive"></td>
-            <td><?php echo $item->name;?></td>
-            <td><?php echo $item->price;?></td>
-            <td><?php echo $item->sale_off;?></td>
-            <td><?php echo $item->view?></td>
-            <td>
-                <button class="btn btn-default btn-xs" id="<?php echo $item->id?>">Xóa</button>
-                <a href="<?=HTP::$baseUrl .'/product/update/'. $item->id?>" class="btn btn-warning btn-xs">Sửa</a>
-                <a href="<?=HTP::$baseUrl .'/product/detail/'. $item->id?>" class="btn btn-info btn-xs">Chi tiết</a>
-            </td>
-        </tr>
-        <?php }?>
+            <tr class="text-center" ng-repeat="product in products">
+                <td>{{product.id}}</td>
+                <td class="image"><img src="<?=HTP::$resourceUrl . '/'?>{{product.img}}" alt="" class="img-responsive"></td>
+                <td>{{product.name}}</td>
+                <td>{{product.price | currency : '' : 0}} VNĐ</td>
+                <td>{{product.sale_off}} %</td>
+                <td>{{product.view}}</td>
+                <td>{{product.sold}}</td>
+                <td>
+                    <button class="btn btn-default btn-xs">Xóa</button>
+                    <a href="" class="btn btn-warning btn-xs">Sửa</a>
+                    <a href="" class="btn btn-info btn-xs">Chi tiết</a>
+                </td>
+            </tr>
         </tbody>
     </table>
-    <?php
-        $sodong = $this->sodong;
-        $tongsotrang = ceil($this->totalPage/$sodong);
-        $nhom = 5;
-        $p = $this->page;
-        if($nhom % 2 == 0)
-        {
-            $dau = $p - ($nhom / 2);
-            $cuoi = $p + ($nhom / 2 -1);
-        }
-        else
-        {
-            $dau = $p - floor($nhom / 2);
-            $cuoi = $p + floor($nhom / 2);
-        }
-        if($dau < 1)
-        {
-            $dau = 1;
-            $cuoi = $dau + $nhom - 1;
-        }
-
-        if($cuoi > $tongsotrang)
-        {
-            $cuoi = $tongsotrang;
-            $dau = $cuoi - $nhom + 1;
-        }
-        if($nhom > $tongsotrang)
-        {
-            $dau = 1;
-            $cuoi = $tongsotrang;
-        }
-    ?>
-
-
-    <nav aria-label="Page navigation" class="text-center">
+    <div class="clearfix"></div>
+    <div class="row text-center" ng-if="search === '' || search === undefined">
         <ul class="pagination">
-            <li>
-                <a href="<?=HTP::$baseUrl. '/product/1'?>" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                </a>
-            </li>
-            <?php
-                for($i = $dau; $i <= $cuoi; $i++)
-                {
-                    if ($i == $p)
-                    {?>
-                        <li><a href="#"><?php echo $i;?></a></li>
-                   <?php }
-                    else
-                    {
-                        ?>
-                        <li><a href="<?=HTP::$baseUrl. '/product/'. $i; ?>"><?php echo $i;?></a></li>
-                        <?php
-                    }
-                }
-            ?>
-            <li>
-                <a href="<?=HTP::$baseUrl. '/product/'.  $tongsotrang;?>" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                </a>
-            </li>
+            <li ng-click="changePage(1)"><a>&laquo;</a></li>
+            <li ng-repeat="page in paging" ng-model="page.link" ng-click="changePage(page.link)" ng-class="{active: page.active}"><a>{{page.link}}</a></li>
+            <li ng-click="changePage(groups)"><a>&raquo;</a></li>
         </ul>
-    </nav>
-
+    </div>
 </div>
-
-
-
-<script>
-    $(document).ready(function(){
-        $(document).on("click","button",function(){
-            var result = confirm("Bạn có muốn xóa sản phẩm" + this.id);
-            if(result)
-            {
-                $.get("<?=HTP::$baseUrl?>" + "/product/delete/" + this.id, function(data, status){
-                    alert("Xóa thành công");
-                });
-            }
-        });
-    });
-
-</script>

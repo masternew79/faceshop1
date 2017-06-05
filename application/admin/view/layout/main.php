@@ -20,13 +20,13 @@
                 <ul class="nav navbar-nav">
                 
                 <li role="presentation">
-                    <a href>Sản phẩm</a>
+                    <a href="<?php echo HTP::$baseUrl?>/product">Sản phẩm</a>
                 </li>
                 <li role="presentation">
-                    <a href>Thành viên</a>
+                    <a href="<?php echo HTP::$baseUrl?>/user">Thành viên</a>
                 </li>
                 <li role="presentation">
-                    <a href>Hóa đơn</a>
+                    <a href="<?php echo HTP::$baseUrl?>/bill">Hóa đơn</a>
                 </li>
             </ul>
                 <ul class="nav navbar-nav navbar-right">
@@ -73,10 +73,17 @@
 
         </div>
     </div>
+
+    <!-- core -->
+    <script>
+        var baseUrl = "<?=HTP::$baseUrl?>";  
+        var resourceUrl = "<?=HTP::$resourceUrl?>";
+    </script>
     <script src="<?=HTP::$resourceUrl?>/assets/js/jquery.min.js"></script>
 
     <script src="<?=HTP::$resourceUrl?>/assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="<?=HTP::$resourceUrl?>/assets/js/wow.min.js"></script>
+    <script src="<?=HTP::$resourceUrl?>/assets/js/admin-script.js"></script>
 
     <script src="<?= HTP::$resourceUrl ?>/node_modules/angular/angular.min.js"></script>
     <script src="<?=HTP::$resourceUrl?>/node_modules/ng-storage/ngStorage.min.js" type="text/javascript"></script>
