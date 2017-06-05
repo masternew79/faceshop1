@@ -124,7 +124,7 @@ class Default_Controller_Users extends Default_Controller_Base{
                     $pass = substr($md5_hash, 0, 10);
 
                     $body = '<h1>FaceShop - Reset pasword</h1><br>';
-                    $body .= '<p>Quý khách đã cầu reset mật khẩu, hệ thống đã tự động đổi mật khẩu mới cho quý khách</p>';
+                    $body .= '<p>Quý khách đã yêu cầu reset mật khẩu, hệ thống đã tự động đổi mật khẩu mới cho quý khách</p>';
                     $body .= '<p>Vui lòng sử dụng mật khẩu:  <b>' .$pass . '</b>  để đăng nhập hệ thống</p>';
                     $body .= '<p>Để đảm bảo an toàn, sau khi đăng nhập hệ thống, quý khách vui lòng cập nhật mật khẩu của mình.</p>';
 
