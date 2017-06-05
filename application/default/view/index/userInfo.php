@@ -6,7 +6,7 @@
 				<div class="form-group">
 					<label class="control-label col-md-2">Họ Tên</label>
 					<div class="col-md-10">
-						<input type="text" class="form-control name" id="name" name="name" value="" ng-model="userName" ng-disabled="!updateInfo">
+						<input type="text" class="form-control name" id="name" name="name" value="" ng-model="user.name" ng-disabled="!updateInfo">
 					</div>
 				</div>
 				<div class="form-group">

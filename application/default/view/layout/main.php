@@ -146,7 +146,7 @@
                     <ul class="dropdown-menu">
                         <li><a href="<?php echo HTP::$baseUrl . '/userInfo/' ?>">Thông tin cá nhân</a></li>
                         <li><a href="<?php echo HTP::$baseUrl . '/userBill/' ?>">Danh sách hóa đơn</a></li>
-                        <li><a href="<?php echo HTP::$baseUrl ?>/logout" class="navbar-btn btn-logout" ng-click="logout()" >Đăng xuất</a></li>
+                        <li><a class="navbar-btn btn-logout" ng-click="logout()" >Đăng xuất</a></li>
                     </ul>
                 </li>
                 <li><a data-toggle="modal" data-target="#myModal" class="navbar-btn nav-login" ng-if="userName === ''">Đăng nhập</a></li>

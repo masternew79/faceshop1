@@ -78,19 +78,20 @@ frontApp.controller('cartController', function($scope,  $localStorage, $http, $s
 	}
 
 	$scope.logout = function() {
-		// $localStorage.$reset();
 		// $scope.user.name = '';
+		$localStorage.$reset();
 		delete $scope.userName;
 		delete $scope.user;
 		delete $localStorage.userName;
 		delete $localStorage.user;
 		$scope.userName = '';
+		$localStorage.userName = '';
 		
-		// $http.get(baseUrl + '/logout').success(function(result) {
-		// 	console.log(result);
-			// $window.location.href = baseUrl + '/logout';
-		// });
-	// console.log($scope.userName);
+		$http.get(baseUrl + '/logout').success(function(result) {
+			console.log(result);
+			$window.location.href = baseUrl;
+		});
+	console.log($scope.userName);
 	};
 
 
@@ -316,84 +317,84 @@ frontApp.controller('categoryController', function($scope, $http, $location, $an
 	};
 });
 
-frontApp.controller('checkoutController', function($scope, $http, $location){
-	$scope.receiverName = $scope.user.name;
-	$scope.receiverMobile = $scope.user.mobile;
-	$scope.receiverAddress = $scope.user.address;
-	$scope.payment = 0;
+// frontApp.controller('checkoutController', function($scope, $http, $location){
+// 	$scope.receiverName = $scope.user.name;
+// 	$scope.receiverMobile = $scope.user.mobile;
+// 	$scope.receiverAddress = $scope.user.address;
+// 	$scope.payment = 0;
 
-	$scope.changeReceiverName = function(name) {
-		$scope.receiverName = name;
-	};
-	$scope.changeReceiverMobile = function(Mobile) {
-		$scope.receiverMobile = Mobile;
-	};
-	$scope.changeReceiverAddress = function(Address) {
-		$scope.receiverAddress = Address;
-	};
-	$scope.changePayment = function(pay) {
-		$scope.payment = pay;
-	};
+// 	$scope.changeReceiverName = function(name) {
+// 		$scope.receiverName = name;
+// 	};
+// 	$scope.changeReceiverMobile = function(Mobile) {
+// 		$scope.receiverMobile = Mobile;
+// 	};
+// 	$scope.changeReceiverAddress = function(Address) {
+// 		$scope.receiverAddress = Address;
+// 	};
+// 	$scope.changePayment = function(pay) {
+// 		$scope.payment = pay;
+// 	};
 
-	$scope.checkout = function() {
-		console.log($scope.cart);
-		console.log($scope.receiverName);
-		console.log($scope.receiverMobile);
-		console.log($scope.receiverAddress);
-		console.log($scope.payment);
-		console.log($scope.user.id);
+// 	$scope.checkout = function() {
+// 		console.log($scope.cart);
+// 		console.log($scope.receiverName);
+// 		console.log($scope.receiverMobile);
+// 		console.log($scope.receiverAddress);
+// 		console.log($scope.payment);
+// 		console.log($scope.user.id);
 
-		var products = [];
-		angular.forEach($scope.cart, function(value, key){
-			var product = {};
-			product.product_id = value.id;
-			product.count = value.qty;
-			product.price = value.salePrice;
-			products.push(product);
-		});
+// 		var products = [];
+// 		angular.forEach($scope.cart, function(value, key){
+// 			var product = {};
+// 			product.product_id = value.id;
+// 			product.count = value.qty;
+// 			product.price = value.salePrice;
+// 			products.push(product);
+// 		});
 
-		var detail = {'product' : products};
-		console.log(JSON.stringify(detail));
-		$http.get(baseUrl + '/order/add', {params: {'Order[name]': $scope.receiverName, 'Order[mobile]' : $scope.mobile, 'Order[address]' : $scope.receiverAddress, 'detail' : detail }}).success(function(result) {
-			console.log(result);
-		});
-	};
-});
+// 		var detail = {'product' : products};
+// 		console.log(JSON.stringify(detail));
+// 		$http.get(baseUrl + '/order/add', {params: {'Order[name]': $scope.receiverName, 'Order[mobile]' : $scope.mobile, 'Order[address]' : $scope.receiverAddress, 'detail' : detail }}).success(function(result) {
+// 			console.log(result);
+// 		});
+// 	};
+// });
 
-frontApp.controller('userInfoController', function($scope){
-	if ($scope.user.dob !== null) {
-		var DOB = $scope.user.dob.split('-');
-		$scope.Day = DOB[2];
-		$scope.Month = DOB[1];
-		$scope.Year = DOB[0];
+// frontApp.controller('userInfoController', function($scope){
+// 	if ($scope.user.dob !== null) {
+// 		var DOB = $scope.user.dob.split('-');
+// 		$scope.Day = DOB[2];
+// 		$scope.Month = DOB[1];
+// 		$scope.Year = DOB[0];
 		
-	}
-	$scope.days = range(1, 31);
-	$scope.months = range(1, 12);
-	$scope.years = range(1950, 2017);
+// 	}
+// 	$scope.days = range(1, 31);
+// 	$scope.months = range(1, 12);
+// 	$scope.years = range(1950, 2017);
 
-	$scope.updateInfo = false;
-	$scope.changeInfo = function() {
-		$scope.updateInfo = !$scope.updateInfo;
-	};
-	$scope.updatePass = false;
-	$scope.changePass = function() {
-		$scope.updatePass = !$scope.updatePass;
-	};
-});
+// 	$scope.updateInfo = false;
+// 	$scope.changeInfo = function() {
+// 		$scope.updateInfo = !$scope.updateInfo;
+// 	};
+// 	$scope.updatePass = false;
+// 	$scope.changePass = function() {
+// 		$scope.updatePass = !$scope.updatePass;
+// 	};
+// });
 
 
-frontApp.controller('billController', function($scope, $http){
+// frontApp.controller('billController', function($scope, $http){
 
-	$http.get(baseUrl + '/order/getOrder', {params: {user_id: loginID}}).success(function(result) {
-		$scope.bills = result;
-		console.log(result);
-	});
+// 	$http.get(baseUrl + '/order/getOrder', {params: {user_id: loginID}}).success(function(result) {
+// 		$scope.bills = result;
+// 		console.log(result);
+// 	});
 	
-	$scope.cancelBill = function(id) {
-		console.log(id);
-	};
-});
+// 	$scope.cancelBill = function(id) {
+// 		console.log(id);
+// 	};
+// });
 
 
 
