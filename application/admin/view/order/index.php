@@ -1,4 +1,4 @@
-<div class="col-md-10 feature">
+<div class="col-md-12 feature">
     <div class="col-md-12">
         <div class="col-md-8 text-right">
             <form class="navbar-form" role="search">
@@ -63,18 +63,4 @@
         </tbody>
     </table>
 </div>
-<script>
-    $(document).ready(function(){
-        $(document).on("click","button",function(){
-            var result = confirm("Bạn có muốn xóa Hóa Đơn" + this.id);
-            if(result)
-            {
-                $.get("<?=HTP::$baseUrl;?>" + "/order/delete/" + this.id, function(data, status){
-                    alert("Xóa thành công");
-                });
-            }
-        });
-    });
-
-</script>
 

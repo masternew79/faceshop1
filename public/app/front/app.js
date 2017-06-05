@@ -51,8 +51,10 @@ frontApp.controller('cartController', function($scope,  $localStorage, $http, $s
 	};
 
 	$scope.register = function() {
+		console.log(1);
 		$http.get(baseUrl + '/users/register', {params: {'User[name]': $scope.regName, 'User[email]': $scope.regEmail, 'User[password]': $scope.regPass, 'User[mobile]':$scope.regMobile}}).success(function(result) {
-
+			// console.log($);
+			console.log(result);
 			if (result.code !== 1 && result.code !==2) {
 				login($scope.regEmail, $scope.regPass, $scope.regCaptcha);
 			}
@@ -311,19 +313,56 @@ frontApp.controller('categoryController', function($scope, $http, $location, $an
 });
 
 frontApp.controller('checkoutController', function($scope, $http, $location){
-	console.log($scope.user);
+	$scope.receiverName = $scope.user.name;
+	$scope.receiverMobile = $scope.user.mobile;
+	$scope.receiverAddress = $scope.user.address;
+	$scope.payment = 0;
 
+	$scope.changeReceiverName = function(name) {
+		$scope.receiverName = name;
+	};
+	$scope.changeReceiverMobile = function(Mobile) {
+		$scope.receiverMobile = Mobile;
+	};
+	$scope.changeReceiverAddress = function(Address) {
+		$scope.receiverAddress = Address;
+	};
+	$scope.changePayment = function(pay) {
+		$scope.payment = pay;
+	};
 
+	$scope.checkout = function() {
+		console.log($scope.cart);
+		console.log($scope.receiverName);
+		console.log($scope.receiverMobile);
+		console.log($scope.receiverAddress);
+		console.log($scope.payment);
 
+		var products = [];
+		angular.forEach($scope.cart, function(value, key){
+			var product = {};
+			product.product_id = value.id;
+			product.count = value.qty;
+			product.price = value.salePrice;
+			products.push(product);
+		});
+
+		var detail = {'product' : products};
+		console.log(JSON.stringify(detail));
+		$http.post(baseUrl + '/order/add', {params: {'Order[name]': $scope.receiverName, 'Order[mobile]' : $scope.mobile, 'Order[address]' : $scope.receiverAddress, 'detail' : detail }}).success(function(result) {
+			console.log(result);
+		});
+	};
 });
 
 frontApp.controller('userInfoController', function($scope){
-	console.log($scope.user);
-	var DOB = $scope.user.dob.split('-');
-	console.log(DOB);
-	$scope.Day = DOB[2];
-	$scope.Month = DOB[1];
-	$scope.Year = DOB[0];
+	if ($scope.user.dob !== null) {
+		var DOB = $scope.user.dob.split('-');
+		$scope.Day = DOB[2];
+		$scope.Month = DOB[1];
+		$scope.Year = DOB[0];
+		
+	}
 	$scope.days = range(1, 31);
 	$scope.months = range(1, 12);
 	$scope.years = range(1950, 2017);
@@ -336,8 +375,6 @@ frontApp.controller('userInfoController', function($scope){
 	$scope.changePass = function() {
 		$scope.updatePass = !$scope.updatePass;
 	};
-
-
 });
 
 

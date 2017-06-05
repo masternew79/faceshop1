@@ -26,7 +26,7 @@
                     <a href="<?php echo HTP::$baseUrl?>/user">Thành viên</a>
                 </li>
                 <li role="presentation">
-                    <a href="<?php echo HTP::$baseUrl?>/bill">Hóa đơn</a>
+                    <a href="<?php echo HTP::$baseUrl?>/order">Hóa đơn</a>
                 </li>
             </ul>
                 <ul class="nav navbar-nav navbar-right">

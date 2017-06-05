@@ -93,6 +93,6 @@ adminApp.controller('productController', function($scope, $http, $location, $anc
 
 adminApp.controller('userController', function($scope, $http, $location, $anchorScroll){
 	$http.get(baseUrl + '/user/getUsers').success(function(result) {
-		console.log(result);
+		$scope.users = result;
 	});
 });

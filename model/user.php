@@ -40,10 +40,7 @@ class User extends HTP_Model{
             'address' => array('address'),
             'mobile' => array('mobile'),
             'dob' => array('dob'),
-            'gender' => array('gender'),
-            'province' => array('province'),
-            'district' => array('district'),
-            'ward' => array('ward')
+            'gender' => array('gender')
         );
     }
 

@@ -55,26 +55,25 @@
                         <div class="form-group">
                             <label class="control-label col-md-3">Họ Tên</label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control name" id="name" name="receiver-name" value="{{user.name}}">
+                                <input type="text" class="form-control name" id="name" name="receiver-name"  ng-model="receiverName" ng-change="changeReceiverName(receiverName)">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-md-3">Số điện thoại </label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control mobile text-center" id="mobile" name="receiver-mobile" value="{{user.mobile}}">
+                                <input type="text" class="form-control mobile text-center" id="mobile" name="receiver-mobile" value="{{user.mobile}}"  ng-model="receiverMobile" ng-change="changeReceiverMobile(receiverMobile)">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-md-3" >Địa chỉ </label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control text-center" id="address" name="receiver-address" placeholder="Tên đường, số nhà, ..." value="{{user.address}}">
-                                <div style="margin: 5px"></div>
+                                <input type="text" class="form-control text-center" id="address" name="receiver-address" placeholder="Tên đường, số nhà, ..." value="{{user.address}}" ng-model="receiverAddress" ng-change="changeReceiverAddress(receiverAddress)">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-md-3">Thanh toán </label>
-                            <label class="radio-inline"><input type="radio" name="payment" checked>Tiền mặt (trực tiếp)</label>
-                            <label class="radio-inline"><input type="radio" name="payment">Trực tuyến (online)</label>
+                            <label class="radio-inline"><input type="radio" name="payment" ng-model="payment" value="0" ng-change="changePayment(payment)">Tiền mặt (trực tiếp)</label>
+                            <label class="radio-inline"><input type="radio" name="payment" ng-model="payment" value="1" ng-change="changePayment(payment)">Trực tuyến (online)</label>
                         </div>
                     </form>
                 </div>

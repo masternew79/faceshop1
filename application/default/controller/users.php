@@ -38,10 +38,8 @@ class Default_Controller_Users extends Default_Controller_Base{
                         'address' => $model->address, 
                         'mobile' => $model->mobile, 
                         'dob' => $model->dob, 
-                        'gender' => $model->gender,
-                        'ward' => $model->ward,
-                        'district' => $model->district,
-                        'province' => $model->province );
+                        'gender' => $model->gender
+                        );
                     echo json_encode($result , JSON_UNESCAPED_UNICODE);
                 }else{
                     $result = array('code' => 2, 'message' => $user->errorLogin);
