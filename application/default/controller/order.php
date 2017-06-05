@@ -70,15 +70,15 @@ class Default_Controller_Order extends Default_Controller_Base
 
     public function add()
     {
-        if(HTP_Request::post('Order') && HTP_Request::post('detail'))
+        if(HTP_Request::get('Order') && HTP_Request::get('detail'))
         {
             $order = new Order();
-            $order->load(HTP_Request::post('Order'));
+            $order->load(HTP_Request::get('Order'));
             $order->status = 0;
             $order->hash = md5(rand(1, 1000000));
             $order->id = $order->insert();
 
-            $data = json_decode(HTP_Request::post('detail'), true);
+            $data = json_decode(HTP_Request::get('detail'), true);
             $data1 = $data['product'];
             foreach ($data1 as $a) {
                 $orderDetail = new OrderDetail();

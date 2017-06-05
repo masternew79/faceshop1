@@ -33,6 +33,7 @@ class Default_Controller_Users extends Default_Controller_Base{
                     $result = array(
                         'code' => 1, 
                         'message' => 'Đăng nhập thành công', 
+                        'id' => $model->id,
                         'name' => $model->name, 
                         'email' => $model->email, 
                         'address' => $model->address, 

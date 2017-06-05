@@ -51,10 +51,8 @@ frontApp.controller('cartController', function($scope,  $localStorage, $http, $s
 	};
 
 	$scope.register = function() {
-		console.log(1);
 		$http.get(baseUrl + '/users/register', {params: {'User[name]': $scope.regName, 'User[email]': $scope.regEmail, 'User[password]': $scope.regPass, 'User[mobile]':$scope.regMobile}}).success(function(result) {
 			// console.log($);
-			console.log(result);
 			if (result.code !== 1 && result.code !==2) {
 				login($scope.regEmail, $scope.regPass, $scope.regCaptcha);
 			}
@@ -337,6 +335,7 @@ frontApp.controller('checkoutController', function($scope, $http, $location){
 		console.log($scope.receiverMobile);
 		console.log($scope.receiverAddress);
 		console.log($scope.payment);
+		console.log($scope.user.id);
 
 		var products = [];
 		angular.forEach($scope.cart, function(value, key){
@@ -349,7 +348,7 @@ frontApp.controller('checkoutController', function($scope, $http, $location){
 
 		var detail = {'product' : products};
 		console.log(JSON.stringify(detail));
-		$http.post(baseUrl + '/order/add', {params: {'Order[name]': $scope.receiverName, 'Order[mobile]' : $scope.mobile, 'Order[address]' : $scope.receiverAddress, 'detail' : detail }}).success(function(result) {
+		$http.get(baseUrl + '/order/add', {params: {'Order[name]': $scope.receiverName, 'Order[mobile]' : $scope.mobile, 'Order[address]' : $scope.receiverAddress, 'detail' : detail }}).success(function(result) {
 			console.log(result);
 		});
 	};
